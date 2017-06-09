@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Roboto-Medium"; 
+    src: local("?"), url("/fonts/Roboto-Medium.ttf") format("truetype");
+
+    font-family: "Roboto-Light"; 
+    src: local("?"), url("/fonts/Roboto-Light.ttf") format("truetype");
+}
+
+.precio{
+	font-family: arial;
+	font-size: 23px;
+	text-align: right;
+}
+
+.texto_blanco{  
+	color: #BDC3C7;
+	font-family: Roboto-Medium, Segoe UI;
+	text-align: justify;
+}
+
+.miTitulo_claro{
+	color: #BDC3C7;
+	font-family: Roboto-Light;
+	text-align: justify;
+	font-size: 20px;
+}
+
+hr{
+	height: 1px;
+	color: #123455;
+	background-color: #123455;
+	border: none;
+}
