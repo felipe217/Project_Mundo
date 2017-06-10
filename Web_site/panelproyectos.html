@@ -3,13 +3,16 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>Administración de proyectos</title>
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
+    <link rel="stylesheet" type="text/css" href="css/datatables.css">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 	<style type="text/css">
 		
@@ -88,6 +91,8 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="#">Configurar cuenta</a></li>
 	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Acerca de</a></li>
+	            <li role="separator" class="divider"></li>
 	            <li><a href="#">Cerrar sesión</a></li>
 	          </ul>
 	        </li>
@@ -97,6 +102,7 @@
 	</nav>
 	<!--Fin de la barra de navegación-->
 
+	<!-- Inicio de contenido-->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-3 grid-margin">
@@ -104,25 +110,46 @@
 					  <div class="panel-heading">
 					  	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>   Mis proyectos
 					  </div>
+					  <!--Inicio de panel izquierso -->
 					  <div class="panel-body">
 					  	<div id="operaciones-proyectos">
 					  		<div class="btn-group" role="group" aria-label="...">
-							  <button type="button" class="btn btn-default"> 
-							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
+							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
 							  </button>
 							  <button type="button" class="btn btn-default">
-							  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar
+							  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 							  </button>
 							  <button type="button" class="btn btn-default">
-							    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar
+							    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
 							  </button>
 							</div>
 					  	</div>
 					  	<br>
 					    Listado de proyectos
+					    <div>
+					    	<table class="table "  id="example">
+					    		<tr>
+					    			<th>Codigo</th>
+					    			<th>Nombre</th>
+					    			<th>Estado</th>
+					    		</tr>
+					    		<tr>
+					    			<td>0000</td>
+					    			<td>Proyecto 1</td>
+					    			<td>En proceso</td>
+					    		</tr>
+					    		<tr>
+					    			<td>0001</td>
+					    			<td>Proyecto 2</td>
+					    			<td>En proceso</td>
+					    		</tr>
+					    	</table>
+					    </div>
 					  </div>
 					</div>	
-			</div>
+			</div> <!-- Final del panel izquierdo-->
+
 			<div>
 				<div class="col-lg-9 grid-margin">
 					<div class="panel panel-default panel-cuadrado">
@@ -215,7 +242,7 @@
 								    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar</button>
 								</div>
 								<br><br>
-								<table class="table table-striped">
+								<table class="table table-striped" id="tabla-tareas">
 							    	<tr>
 							    		<th>No.</th>
 							    		<th>Tarea</th>
@@ -259,26 +286,139 @@
 						</div>
 
 					  </div>
-					  </div>
+					 </div>
 				</div>
 			</div>
 		</div>
 	</div>
 		
 
-	 
-		
+	<!--VENTANAS MODALES -->
+	<!-- Large modal ventana frmNuevoProyecto, es el formulario para registrar un nuevo proyecto-->
+	<div id="frmNuevoProyecto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	     	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<h4 class="modal-title">Registo de nuevo proyecto</h4>
+	     	</div>
+	     	<!-- CONTENIDO DEL FORMULARIO -->
+	     	<div class="modal-body">
+	     	<form class="panel-formularios">
+		     	<div class="row ">
+		     		<div class="col-lg-8 ">
+		     			<div class="row">
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Código de proyecto</label>
+							    <input type="text" class="form-control" id="txtCode" placeholder="Codigo de proyecto" readonly>
+						  	</div>
+						  	<div class="form-group col-lg-4">
+						    	<label for="exampleInputPassword1">Tipo de proyecto</label>
+						    		<select class="form-control" id="selTipoProyecto">
+									    <option>Seleccione uno</option>
+									    <option>Tipo proyecto 1</option>
+									    <option>Tipo proyecto 2</option>
+									    <option>Tipo proyecto 3</option>
+									    <option>Tipo proyecto 4</option>
+								 	</select>	
+						  	</div>
+						  	<div class="form-group col-lg-4">
+						    	<label for="exampleInputPassword1">Estado actual</label>
+							    	<select class="form-control" id="selEstados">
+								    	<option>Seleccione un estado</option>
+								    	<option>Estado 1</option>
+								    	<option>Estado 2</option>
+								    	<option>Estado 3</option>
+								    	<option>Estado 4</option>
+								 	</select>	
+						  	</div>
+					  	</div>
+					  	<div class="row">
+						  	<div class="form-group col-xs-12">
+						    	<label for="exampleInputEmail1">Nombre del proyecto</label>
+						    	<input type="text" class="form-control" id="txtNomProyecto" placeholder="Asigne un nombre a su proyecto">
+						  	</div> 
+					  	</div>
+					  	<div class="row">
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Lugar de ejecución</label>
+							    <input type="text" class="form-control" id="txtLugar" placeholder="Lugar donde se ejecuta">
+						  	</div>
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Fecha de inicio</label>
+							    <input type="date" class="form-control" id="txtFechaInicio" placeholder="dd/mm/aaaa">
+						  	</div>
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Fecha final</label>
+							    <input type="date" class="form-control" id="txtFechaFinal" placeholder="dd/mm/aaaa">
+						  	</div>
+					  	</div>
+					  	<div class="row">
+						  	<div class="form-group col-lg-6">
+							    <label for="exampleInputEmail1">Responsable de proyecto</label>
+							    <input type="text" class="form-control" id="txtResponsable" placeholder="Nombre de responsable de proyecto">
+						  	</div>
+						  	<div class="form-group col-lg-6">
+							    <label for="exampleInputEmail1">Beneficiario directo</label>
+							    <input type="text" class="form-control" id="txtBeneficiario" placeholder="Nombre  de beneficiario directo">
+						  	</div>
+					  	</div>
+					  	
+		     		</div>
+		     		<div class="col-lg-4 ">
+					  	<div class="form-group">
+					  		<label>Costo estimando</label>
+						    <label class="sr-only" for="exampleInputAmount">Amount</label>
+						    <div class="input-group">
+						      	<div class="input-group-addon">L. </div>
+						      	<input type="text" class="form-control" id="txtCosto" placeholder="Cantidad">
+						    </div>
+						 </div>
+					  	<div class="form-group">
+					    	<label for="exampleInputPassword1">Patrocinadores:</label>
+					    		<select  class="form-control   " data-live-search="true" id="selPatrocinadores" multiple>
+								    <option>Patrocinador 0</option>
+								    <option>Patrocinador 1</option>
+								    <option>Patrocinador 2</option>
+								    <option>Patrocinador 3</option>
+								    <option>Patrocinador 4</option>
+							 	</select>	
+					  	</div>
+					  	<div class="row">
+					  		<div class="form-group col-xs-12">
+							  <label for="comment">Descripción:</label>
+							  <textarea class="form-control" rows="3" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
+							</div>
+					  	</div>
+		     		</div>
+		     	</div>
+		    </form>	
+	     	</div>
+	     	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        	<button type="button" class="btn btn-success">Guardar</button>
+	      	</div>
+	    </div>
+	  </div>
 	</div>
-
-
-	
-	 
-
-	
+ 
 
 
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="js/datatables.min.js"></script>
+
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		$('#example').DataTable();
+    		$('#tabla-tareas').DataTable();
+		} );
+    </script>
+
+
+	 
 
 </body>
 </html>

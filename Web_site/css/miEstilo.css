@@ -71,6 +71,16 @@
 
 .panel-cuadrado{
       border-radius: 2px;
+      border-color: #cdcdcd;
+}
+
+.panel-formularios{
+	border-radius: 2px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cdcdcd;
+	padding: 10px;
+	background-color: #F8F9F9;
 }
 
 .grid-margin{
