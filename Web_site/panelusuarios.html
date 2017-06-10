@@ -10,8 +10,8 @@
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
-    <link rel="stylesheet" type="text/css" href="DataTables/datatables.css">
-     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="css/datatables.css">
+    <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 	<style type="text/css">
@@ -44,13 +44,13 @@
 					 Tablero 
 					</a>
 				</li>
-		        <li>
-		        	<a href="panelusuarios.html">
+		        <li class="menu-activo">
+		        	<a href="#">
 		        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 					 Usuarios 
 					</a>
 				</li>
-				<li class="menu-activo">
+				<li>
 		        	<a href="#">
 		        	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 					  Proyectos 
@@ -128,7 +128,7 @@
 					  	<br>
 					    Listado de proyectos
 					    <div>
-					    	<table class="table display"  id="example">
+					    	<table class="table "  id="example">
 					    		<tr>
 					    			<th>Codigo</th>
 					    			<th>Nombre</th>
@@ -173,7 +173,7 @@
 							<div class="tab-pane active" id="1">
 							    <div class="col-lg-6">
 							    	
-							    	<table class="table ">
+							    	<table class="table">
 							    		<tr>
 							    			<td><label>Codigo:</label></td>
 							    			<td>Codigo del proyecto</td>
@@ -249,7 +249,6 @@
 								<br><br>
 								<table class="table table-striped" id="tabla-tareas">
 							    	<tr>
-							    		<th></th>
 							    		<th>No.</th>
 							    		<th>Tarea</th>
 							    		<th>Prioridad</th>
@@ -258,11 +257,6 @@
 							    		<th>Responsables</th>
 							    	</tr>
 							    	<tr>
-							    		<td>
-							    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-							    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    			</button>
-							    		</td>
 							    		<td>1</td>
 							    		<td>Tarea 1</td>
 							    		<td>Urgente</td>
@@ -271,11 +265,6 @@
 							    		<td>Usuario1, usuario2, usuario3</td>
 							    	</tr>
 							    	<tr>
-							    		<td>
-							    			<button class="btn btn-default">
-							    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    			</button>
-							    		</td>
 							    		<td>2</td>
 							    		<td>Tarea 2</td>
 							    		<td>Urgente</td>
@@ -284,11 +273,6 @@
 							    		<td>Usuario1, usuario2, usuario3</td>
 							    	</tr>
 							    	<tr>
-							    		<td>
-							    			<button class="btn btn-default">
-							    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    			</button>
-							    		</td>
 							    		<td>3</td>
 							    		<td>Tarea 3</td>
 							    		<td>Urgente</td>
@@ -422,103 +406,19 @@
 	    </div>
 	  </div>
 	</div>
-
-	<!-- Ventana modal para ver y agregar comentarios -->
-	<div id="frmComentarios" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-  		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
-      			<div class="modal-header">
-        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        				<h4 class="modal-title">Comentarios</h4>
-      			</div>
-      			<div class="caja-comentarios">
-      				<div class="modal-body">
-      				
-        			<ul class="list-group">
-					  <li class="list-group-item">
-						<div class="media">
-						  <div class="media-left">
-						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
-						    </a>
-						  </div>
-						  <div class="media-body">
-						     <h5 class="media-heading">Nombre de persona     <small>     08/06/2017 10:00pm</small></h5>
-						    <h6>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</h6>
-						  </div>
-						</div>
-					  </li>
-					  <li class="list-group-item">
-						<div class="media">
-						  <div class="media-left">
-						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
-						    </a>
-						  </div>
-						  <div class="media-body">
-						     <h5 class="media-heading">Nombre de persona     <small>     08/06/2017 10:00pm</small></h5>
-						    <h6>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</h6>
-						  </div>
-						</div>
-					  </li>
-					  <li class="list-group-item">
-						<div class="media">
-						  <div class="media-left">
-						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
-						    </a>
-						  </div>
-						  <div class="media-body">
-						     <h5 class="media-heading">Nombre de persona     <small>     08/06/2017 10:00pm</small></h5>
-						    <h6>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</h6>
-						  </div>
-						</div>
-					  </li>
-					  <li class="list-group-item panel-formularios">
-						<div class="media">
-						  <div class="media-left">
-						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
-						    </a>
-						  </div>
-						  <div class="media-body">
-						    <form>
-	      						<div class="form-group">
-								    <h5 class="media-heading"><b>Nombre de persona &nbsp;</b><small>&nbsp;08/06/2017 10:00pm</small></h5>
-								     <textarea class="form-control" rows="2" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
-								     <button type=" " class="btn btn-default">Comentar</button>
-								  </div>
-							  	<div class="form-group">
-							  		
-							  	</div>
-      						</form>
-						  </div>
-						</div>
-					  </li>
-
-					</ul>
-      			</div>
-      			
-					
-      			</div>
-      			<div class="modal-footer">
-        			<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>      			
-        		</div>
-    		</div><!-- /.modal-content -->
-  		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
  
 
 
-	<script src="js/jquery.js"></script>
+	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
+    <script src="js/datatables.min.js"></script>
 
     <script type="text/javascript">
     	$(document).ready(function() {
-    		$('#tabla-tareas').DataTable(); 
+    		$('#example').DataTable();
+    		$('#tabla-tareas').DataTable();
 		} );
     </script>
 

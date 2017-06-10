@@ -89,10 +89,31 @@
 }
 
 
+.badge-proceso{
+	background-color: #2ECC71;
+}
+
+.badge-pendiente{
+	background-color: #F1C40F;
+}
+
+.menu-activo{
+	color: #555;
+	background-color: transparent;
+	border-color: #AEB6BF;
+	border-style: solid;
+	border-bottom-width: 3px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+
+	}
 
 
-
-
+.caja-comentarios{
+	height: 350px;
+	overflow-y: scroll;	
+}
 
 
 
