@@ -81,13 +81,11 @@
 	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search
 " aria-hidden="true"></span></button>
 	      </form>
-
-
 	      <ul class="nav navbar-nav navbar-right">
 	        
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	           <img class="small-profile-pic" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
+	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	            <li><a href="#">Configurar cuenta</a></li>
 	            <li role="separator" class="divider"></li>
@@ -117,7 +115,7 @@
 							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
 							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
 							  </button>
-							  <button type="button" class="btn btn-default">
+							  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
 							  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 							  </button>
 							  <button type="button" class="btn btn-default">
@@ -155,19 +153,22 @@
 					</div>	
 			</div> <!-- Final del panel izquierdo-->
 
+			<!-- Panel derecho-->
 			<div>
 				<div class="col-lg-9 grid-margin">
-					<div class="panel panel-default panel-cuadrado">
-					  <div class="panel-heading"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto</div>
-					  <div class="panel-body">
-					    
-					    <ul class="nav nav-tabs">
+					<div class="panel with-nav-tabs panel-default panel-cuadrado">
+					  <div class="panel-heading">
+					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
+  						<ul class="nav nav-tabs">
+  							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="padding: 10px;"></span> Proyecto: Nombre de proyecto &nbsp;&nbsp;&nbsp;&nbsp;</li>
 							<li class="active"><a  href="#1" data-toggle="tab">Datos de proyecto</a></li>
 							<li><a href="#2" data-toggle="tab">Operaciones y actividades</a></li>
 							<li><a href="#3" data-toggle="tab">Materiales</a></li>
 							<li><a href="#4" data-toggle="tab">Colaboradores</a></li>
 						</ul>
 
+					  </div>
+					  <div class="panel-body">
 						<div class="tab-content ">
 						<br>
 							<div class="tab-pane active" id="1">
@@ -238,15 +239,20 @@
 							    </div>
 							</div>
 							<div class="tab-pane" id="2">
-								<div class="btn-group" role="group" aria-label="...">
-								  <button type="button" class="btn btn-default"> 
-								  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</button>
-								  <button type="button" class="btn btn-default">
-								  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar</button>
-								  <button type="button" class="btn btn-default">
-								    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar</button>
-								</div>
-								<br><br>
+								<div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea"> 
+									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva
+									  </button>
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									  <button type="button" class="btn btn-default">
+									    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Comentar
+									  </button>
+									</div>
+							  	</div>
+								<br>
 								<table class="table table-striped" id="tabla-tareas">
 							    	<tr>
 							    		<th></th>
@@ -272,9 +278,25 @@
 							    	</tr>
 							    	<tr>
 							    		<td>
-							    			<button class="btn btn-default">
-							    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    			</button>
+							    			<div class="btn-group">
+											  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											  	<span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+											    </span>
+											  </button>
+											  <ul class="dropdown-menu">
+											    <li>
+											    	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+							    					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+							    					</button>
+
+							    					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+							    					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+							    					</button>
+							    					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+							    					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+							    					</button>
+											  </ul>
+											</div>
 							    		</td>
 							    		<td>2</td>
 							    		<td>Tarea 2</td>
@@ -397,7 +419,7 @@
 						 </div>
 					  	<div class="form-group">
 					    	<label for="exampleInputPassword1">Patrocinadores:</label>
-					    		<select  class="form-control   " data-live-search="true" id="selPatrocinadores" multiple>
+					    		<select  class="form-control  selectpicker " data-live-search="true" id="selPatrocinadores" multiple>
 								    <option>Patrocinador 0</option>
 								    <option>Patrocinador 1</option>
 								    <option>Patrocinador 2</option>
@@ -405,10 +427,20 @@
 								    <option>Patrocinador 4</option>
 							 	</select>	
 					  	</div>
+					  	<div class="form-group">
+					    	<label>Colaboradores:</label>
+					    		<select  class="form-control  selectpicker " data-live-search="true" id="selColaboradores" multiple>
+								    <option>Colaborador 0</option>
+								    <option>Colaborador 1</option>
+								    <option>Colaborador 2</option>
+								    <option>Colaborador 3</option>
+								    <option>Colaborador 4</option>
+							 	</select>	
+					  	</div>
 					  	<div class="row">
 					  		<div class="form-group col-xs-12">
 							  <label for="comment">Descripción:</label>
-							  <textarea class="form-control" rows="3" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
+							  <textarea class="form-control" rows="2" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
 							</div>
 					  	</div>
 		     		</div>
@@ -439,7 +471,7 @@
 						<div class="media">
 						  <div class="media-left">
 						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
+						      <img class="media-object small-profile-pic img-circle img-circle" src="img/userprofile.jpg" alt="...">
 						    </a>
 						  </div>
 						  <div class="media-body">
@@ -452,7 +484,7 @@
 						<div class="media">
 						  <div class="media-left">
 						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
+						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
 						    </a>
 						  </div>
 						  <div class="media-body">
@@ -465,7 +497,7 @@
 						<div class="media">
 						  <div class="media-left">
 						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
+						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
 						    </a>
 						  </div>
 						  <div class="media-body">
@@ -478,7 +510,7 @@
 						<div class="media">
 						  <div class="media-left">
 						    <a href="#">
-						      <img class="media-object small-profile-pic" src="img/userprofile.jpg" alt="...">
+						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
 						    </a>
 						  </div>
 						  <div class="media-body">
@@ -507,8 +539,82 @@
     		</div><!-- /.modal-content -->
   		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
- 
 
+
+	<!-- Ventana modal frmNuevaTarea para registrar nueva tarea-->
+	<div id="frmNuevaTarea" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Registro de nueva tarea</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<form class="panel-formularios">
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-4">
+					    		<label>Código de tarea</label>
+					    		<input type="text" class="form-control" id="txtCodTarea" placeholder="000000" readonly>
+					  		</div>
+					  		<div class="form-group  col-xs-12 col-md-4">
+					    		<label>Código de proyecto</label>
+					    		<input type="text" class="form-control" id="txtTareaCodProyecto" placeholder="000000" readonly>
+					  		</div>
+					  		<div class="form-group col-xs-12 col-md-4">
+					  			<label>Prioridad</label>
+						    		<select class="form-control" id="selPriodidades">
+									    <option>Seleccione una</option>
+									    <option>Prioridad 1</option>
+									    <option>Prioridad 2</option>
+									    <option>Prioridad 3</option>
+									    <option>Prioridad 4</option>
+								 	</select>	
+					  		</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Nombre de tarea</label>
+		        				<input type="text" id="txtNomTarea" class="form-control" placeholder="Nombre de la tarea">
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Fecha de inicio</label>
+		        				<input type="date" id="txtTareaInicio" class="form-control" placeholder="">
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Fecha de entrega</label>
+		        				<input type="date" id="txtTareaEntrega" class="form-control" placeholder="">
+		        			</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-6">
+		        				<label>Descripción</label>
+		        				<textarea class="form-control" id="txtTareaDesc" placeholder="Escriba una descripcion" rows="2"></textarea>
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-6">
+		        				<label>Responsables</label>		 
+		        				<select class="form-control selectpicker" id="selUsuarios" data-live-search="true" multiple>
+		        					<option>Usuario 1</option>
+		        					<option>Usuario 2</option>
+		        					<option>Usuario 3</option>
+		        					<option>Usuario 4</option>
+		        					<option>Usuario 5</option>
+
+		        				</select>       				
+		        			</div>
+		        		</div>
+		        	</form>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        	<button type="button" class="btn btn-success">Guardar</button>
+		      	</div>
+	    	</div><!-- /.modal-content -->
+	  	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+</div>
 
 	<script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -519,6 +625,7 @@
     <script type="text/javascript">
     	$(document).ready(function() {
     		$('#tabla-tareas').DataTable(); 
+    		$('#po1').popover(options)
 		} );
     </script>
 
