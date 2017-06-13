@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/datatables.css">
+</head>
+<body>
+
+	<table id="tbl-Tareas" class=" table ">
+	    <thead>
+	        <tr>
+	            <th>Column 1</th>
+	            <th>Column 2</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>Row 1 Data 1</td>
+	            <td>Row 1 Data 2</td>
+	        </tr>
+	        <tr>
+	            <td>Row 2 Data 1</td>
+	            <td>Row 2 Data 2</td>
+	        </tr>
+	    </tbody>
+	</table>
+	<script src="js/jquery.js"></script>
+	 <script type="text/javascript" src="js/datatables.js"></script> 
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+     
+	<script type="text/javascript">
+		$(document).ready( function () {
+		    $('#tbl-Tareas').DataTable();
+		} );
+	</script>
+</body>
+</html>
