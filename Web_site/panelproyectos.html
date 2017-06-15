@@ -19,7 +19,7 @@
 <body>
 
 	<!--Barra de navegacion -->
-	<nav class="navbar navbar-default ">
+	<nav class="navbar  navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -38,7 +38,7 @@
 		        <li >
 		        	<a href="#">
 		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
-					 Tablero 
+					 Tablero  
 					</a>
 				</li>
 		        <li>
@@ -50,7 +50,7 @@
 				<li class="menu-activo">
 		        	<a href="panelproyectos.html">
 		        	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-					  Proyectos 
+					  Proyectos  
 					</a>
 				</li>
 				<li>
@@ -61,23 +61,6 @@
 				</li>
 	      	</ul> 
 	      
-
-	       <form class="navbar-form navbar-left">
-	       <div class="form-group">
-				  <select class="form-control" id="sel1">
-				    <option>Selecione</option>
-				    <option>Proyectos</option>
-				    <option>Tareas</option>
-				    <option>Usuarios</option>
-				    <option>Patrocinadores</option>
-				  </select>
-				</div>
-	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Buscar">
-	        </div>
-	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search
-" aria-hidden="true"></span></button>
-	      </form>
 	      <ul class="nav navbar-nav navbar-right">
 	        
 	        <li class="dropdown">
@@ -100,12 +83,12 @@
 	<!-- Inicio de contenido-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-3 grid-margin">
+			<div class="col-lg-4 grid-margin">
 				<div class="panel panel-default panel-cuadrado">
 					  <div class="panel-heading">
 					  	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>   Mis proyectos
 					  </div>
-					  <!--Inicio de panel izquierso -->
+						<!--Inicio de panel izquierso -->
 					  <div class="panel-body">
 					  	<div id="operaciones-proyectos">
 					  		<div class="btn-group" role="group" aria-label="...">
@@ -123,36 +106,61 @@
 					  	<br>
 					    Listado de proyectos
 					    <div>
-					    	<table class="table display"  id="example">
-					    		<tr>
-					    			<th>Codigo</th>
-					    			<th>Nombre</th>
-					    			<th>Estado</th>
-					    		</tr>
-					    		<tr>
-					    			<td>0000</td>
-					    			<td>Proyecto 1</td>
-					    			<td><span class="badge badge-proceso">En proceso</span></td>
-					    		</tr>
-					    		<tr>
-					    			<td>0001</td>
-					    			<td>Proyecto 2</td>
-					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-					    		</tr>
-					    		<tr>
-					    			<td>0001</td>
-					    			<td>Proyecto 2</td>
-					    			<td><span class="badge">Terminado</span></td>
-					    		</tr>
+					    	<table class="table table-striped"  id="tabla-proyectos">
+					    		<thead>
+						    		<tr>
+						    			<th>Codigo</th>
+						    			<th>Nombre</th>
+						    			<th>Estado</th>
+						    		</tr>
+						    	</thead>
+						    	<tbody>
+						    		<tr>
+						    			<td>0000</td>
+						    			<td>Proyecto 0</td>
+						    			<td><span class="badge badge-proceso">En proceso</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0001</td>
+						    			<td>Proyecto 1</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0002</td>
+						    			<td>Proyecto 2</td>
+						    			<td><span class="badge">Terminado</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0003</td>
+						    			<td>Proyecto 3</td>
+						    			<td><span class="badge">Terminado</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Proyecto 4</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Proyecto 4</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Proyecto 4</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    	</tbody>
 					    	</table>
 					    </div>
 					  </div>
 					</div>	
-			</div> <!-- Final del panel izquierdo-->
+			</div> 
+			<!-- Final del panel izquierdo-->
 
-			<!-- Panel derecho-->
+			<!-- Panel derecho       -->
 			<div>
-				<div class="col-lg-9 grid-margin">
+				<div class="col-lg-8 grid-margin">
 					<div class="panel with-nav-tabs panel-default panel-cuadrado">
 					  <div class="panel-heading">
 					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
@@ -168,6 +176,7 @@
 					  <div class="panel-body">
 						<div class="tab-content ">
 						<br>
+							<!--Inicio del tab1  +++++++++ -->
 							<div class="tab-pane active" id="1">
 							    <div class="col-lg-6">
 							    	
@@ -235,93 +244,217 @@
 
 							    </div>
 							</div>
+							<!--Inicio del tab2  +++++++++ -->
 							<div class="tab-pane" id="2">
 								<div id="operaciones-proyectos">
 							  		<div class="btn-group" role="group" aria-label="">
 									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea"> 
 									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva
 									  </button>
-									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevaTarea">
 									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-									  </button>
-									  <button type="button" class="btn btn-default">
-									    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Comentar
 									  </button>
 									</div>
 							  	</div>
 								<br>
 								<table class="table table-striped" id="tabla-tareas">
-							    	<tr>
-							    		<th></th>
-							    		<th>No.</th>
-							    		<th>Tarea</th>
-							    		<th>Prioridad</th>
-							    		<th>Fecha inicio</th>
-							    		<th>Fecha final</th>
-							    		<th>Responsables</th>
-							    	</tr>
-							    	<tr>
-							    		<td>
-							    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-							    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    			</button>
-							    		</td>
-							    		<td>1</td>
-							    		<td>Tarea 1</td>
-							    		<td>Urgente</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>Usuario1, usuario2, usuario3</td>
-							    	</tr>
-							    	<tr>
-							    		<td>
-							    			<div class="btn-group">
-											  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											  	<span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
-											    </span>
-											  </button>
-											  <ul class="dropdown-menu">
-											    <li>
-											    	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-							    					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    					</button>
-
-							    					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-							    					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    					</button>
-							    					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-							    					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    					</button>
-											  </ul>
-											</div>
-							    		</td>
-							    		<td>2</td>
-							    		<td>Tarea 2</td>
-							    		<td>Urgente</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>Usuario1, usuario2, usuario3</td>
-							    	</tr>
-							    	<tr>
-							    		<td>
-							    			<button class="btn btn-default">
-							    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-							    			</button>
-							    		</td>
-							    		<td>3</td>
-							    		<td>Tarea 3</td>
-							    		<td>Urgente</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>Usuario1, usuario2, usuario3</td>
-							    	</tr>
+							    	<thead>
+								    	<tr>
+								    		<th>Action</th>
+								    		<th>No.</th>
+								    		<th>Tarea</th>
+								    		<th>Prioridad</th>
+								    		<th>Fecha inicio</th>
+								    		<th>Fecha final</th>
+								    		<th>Responsables</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	<tr>
+								    		<td>
+								    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+								    			</button>
+								    		</td>
+								    		<td>1</td>
+								    		<td>Tarea 1</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>
+								    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+								    			</button>
+								    		</td>
+								    		<td>2</td>
+								    		<td>Tarea 2</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>
+								    			<button class="btn btn-default">
+								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+								    			</button>
+								    		</td>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>
+								    			<button class="btn btn-default">
+								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+								    			</button>
+								    		</td>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>
+								    			<button class="btn btn-default">
+								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+								    			</button>
+								    		</td>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>
+								    			<button class="btn btn-default">
+								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+								    			</button>
+								    		</td>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    </tbody>
 							    </table>
 							</div>
+							<!--Inicio del tab3  +++++++++ -->
 							<div class="tab-pane" id="3">
-							    <h3>Lista de materiales a utilizar</h3>
+							    <div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoMaterial"> 
+									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+									  </button>
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoMaterial">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									</div>
+							  	</div>
+								<br>
+								<table class="table table-striped" id="tabla-materiales">
+							    	<thead>
+								    	<tr>
+								    		<th>Cod</th>
+								    		<th>Proveedor</th>
+								    		<th>Material</th>
+								    		<th>Unidades</th>
+								    		<th>Precio Uni</th>
+								    		<th>Total</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	<tr>
+								    		<td>1</td>
+								    		<td>Material 1</td>
+								    		<td>Proveedor x</td>
+								    		<td>10</td>
+								    		<td>0.00</td>
+								    		<td>0.00</td>
+								    	</tr>
+								    	<tr>
+								    		<td>2</td>
+								    		<td>Material 2</td>
+								    		<td>Proveedor x</td>
+								    		<td>200</td>
+								    		<td>0.00</td>
+								    		<td>0.00</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Material 3</td>
+								    		<td>Proveedor y</td>
+								    		<td>400</td>
+								    		<td>0.00</td>
+								    		<td>0.00</td>
+								    	</tr>
+								    </tbody>
+							    </table>
 							</div>
+							<!--Inicio del tab4  +++++++++ -->
 							<div class="tab-pane" id="4">
-								<h3>Lista de colaboradores</h3>
+								 
+								<div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#"> 
+									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+									  </button>
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									</div>
+							  	</div>
+								<br>
+								<table class="table table-striped" id="tabla-colaboradores">
+							    	<thead>
+								    	<tr>
+								    		<th>Codigo</th>
+								    		<th>Nombre</th>
+								    		<th>Tipo Usuario</th>
+								    		<th>Departamento</th>
+								    		<th>Cargo</th>
+								    		<th>Rol</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	<tr>
+								    		<td>1</td>
+								    		<td>Usuario 1</td>
+								    		<td>Voluntario</td>
+								    		<td>Ninguno</td>
+								    		<td>Ninguno</td>
+								    		<td>Rol 1</td>
+								    	</tr>
+								    	<tr>
+								    		<td>2</td>
+								    		<td>Usuario 2</td>
+								    		<td>Empleado</td>
+								    		<td>Departamento x</td>
+								    		<td>Cargo 1</td>
+								    		<td>Ninguno</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Usuario 3</td>
+								    		<td>Empleado</td>
+								    		<td>Departamento y</td>
+								    		<td>Cargo 2</td>
+								    		<td>Rol 2</td>
+								    	</tr>
+								    </tbody>
+							    </table>
 							</div>
 						</div>
 
@@ -609,19 +742,72 @@
 	  	</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
-
+	<!-- Ventana modal frmNuevoMaterial para registrar nueva tarea-->
+	<div id="frmNuevoMaterial" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		  	<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title">Registro de nuevo material</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<form class="panel-formularios">
+			        		<div class="row">
+			        			<div class="form-group col-xs-12 col-md-4">
+						    		<label>Código de ingreso</label>
+						    		<input type="text" class="form-control" id="txtCodIngreso" placeholder="000000" readonly>
+						  		</div>
+						  		<div class="form-group  col-xs-12 col-md-4">
+						    		<label>Código de proyecto</label>
+						    		<input type="text" class="form-control" id="txtTareaCodProyecto" placeholder="000000" readonly>
+						  		</div>
+						  		<div class="form-group col-xs-12 col-md-4">
+						  			<label>Fecha de asignación</label>
+						    		<input type="date" class="form-control" id="txtMatFecha">
+						  		</div>
+			        		</div>
+			        		<div class="row">
+			        			<div class="form-group col-xs-12 col-md-6">
+			        				<label>Proveedor:</label>
+			        				<input type="text" class="form-control" id="txtProveedor" placeholder="Ingrese nombre de Proveedor">
+			        			</div>
+			        			<div class="form-group col-xs-12 col-md-6">
+			        				  <label>Material:</label>
+			        				<input type="text" class="form-control" id="txtMaterial" placeholder="Ingrese nombre de material">
+			        			</div>
+			        		</div>
+			        		<div class="row">
+			        			<div class="form-group col-xs-12 col-md-4">
+			        				<label>Unidades:</label>
+			        				<input type="text" class="form-control" id="txtMatUnidades" placeholder="Cantidad">
+			        			</div>
+			        			<div class="form-group col-xs-12 col-md-4">
+			        				<label>Precio unidad:</label>
+			        				<input type="text" class="form-control" id="txtPrecioUnidad" placeholder="0.00">
+			        			</div>
+			        			<div class="form-group col-xs-12 col-md-4">
+			        				<label>Total</label>
+			        				<input type="text" class="form-control" id="txtMatTotal" placeholder="0.00">
+			        			</div>
+			        		</div>
+			        	</form>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			        	<button type="button" class="btn btn-success">Guardar</button>
+			      	</div>
+		    	</div><!-- /.modal-content -->
+		  	</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 </div>
 
 	<script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>    
+	<script src="js/datatables.js"></script>     
     <!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
-	  
-	
 	 
-
-	 
+	<script type="text/javascript" src="js/inicializador.js"></script>	 
 
 </body>
 </html>

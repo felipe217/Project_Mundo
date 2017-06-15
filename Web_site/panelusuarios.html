@@ -6,23 +6,19 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-	<title>Administración de proyectos</title>
+	<title>Usuarios</title>
 
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
-    <link rel="stylesheet" type="text/css" href="css/datatables.css">
-    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
+     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
-	<style type="text/css">
-	
-	</style>
-
+ 
 </head>
 <body>
 
 	<!--Barra de navegacion -->
-	<nav class="navbar navbar-default ">
+	<nav class="navbar  navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -38,26 +34,26 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    	<ul class="nav navbar-nav">
-		        <li >
+		        <li  >
 		        	<a href="#">
 		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
-					 Tablero 
+					 Tablero  
 					</a>
 				</li>
 		        <li class="menu-activo">
-		        	<a href="#">
+		        	<a href="panelusuarios.html">
 		        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 					 Usuarios 
 					</a>
 				</li>
-				<li>
-		        	<a href="#">
+				<li >
+		        	<a href="panelproyectos.html">
 		        	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-					  Proyectos 
+					  Proyectos  
 					</a>
 				</li>
 				<li>
-		        	<a href="#">
+		        	<a href="panelrecursos.html">
 		        	<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
 					  Recursos 
 					</a>
@@ -78,16 +74,13 @@
 	        <div class="form-group">
 	          <input type="text" class="form-control" placeholder="Buscar">
 	        </div>
-	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search
-" aria-hidden="true"></span></button>
+	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	      </form>
-
-
 	      <ul class="nav navbar-nav navbar-right">
 	        
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	           <img class="small-profile-pic" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
+	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	            <li><a href="#">Configurar cuenta</a></li>
 	            <li role="separator" class="divider"></li>
@@ -105,324 +98,282 @@
 	<!-- Inicio de contenido-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-3 grid-margin">
+			<div class="col-xs-12 col-lg-5 grid-margin">
 				<div class="panel panel-default panel-cuadrado">
-					  <div class="panel-heading">
-					  	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>   Mis proyectos
-					  </div>
-					  <!--Inicio de panel izquierso -->
-					  <div class="panel-body">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>   Administración de usuarios
+					</div>
+					<!--Inicio de panel izquierso -->
+					<div class="panel-body">
 					  	<div id="operaciones-proyectos">
-					  		<div class="btn-group" role="group" aria-label="...">
-							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
-							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
-							  </button>
-							  <button type="button" class="btn btn-default">
-							  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-							  </button>
-							  <button type="button" class="btn btn-default">
-							    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
-							  </button>
+					  		<div class="btn-group" role="group">
+							  	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+							  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+							 	</button>
+							  	
+							  	<!-- <button type="button" class="btn btn-default">
+							    	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Suspender
+							  	</button> -->
 							</div>
-					  	</div>
+					  	</div> 
 					  	<br>
-					    Listado de proyectos
+						    Listado de usuarios
+						<br><br>
 					    <div>
-					    	<table class="table "  id="example">
-					    		<tr>
-					    			<th>Codigo</th>
-					    			<th>Nombre</th>
-					    			<th>Estado</th>
-					    		</tr>
-					    		<tr>
-					    			<td>0000</td>
-					    			<td>Proyecto 1</td>
-					    			<td><span class="badge badge-proceso">En proceso</span></td>
-					    		</tr>
-					    		<tr>
-					    			<td>0001</td>
-					    			<td>Proyecto 2</td>
-					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-					    		</tr>
-					    		<tr>
-					    			<td>0001</td>
-					    			<td>Proyecto 2</td>
-					    			<td><span class="badge">Terminado</span></td>
-					    		</tr>
+					    	<table class="table table-striped table-hover"  id="tabla-usuarios">
+					    		<thead>
+						    		<tr>
+						    			<th>Codigo</th>
+						    			<th>Nombre</th>
+						    			<th>Tipo Usuario</th>
+						    			<th>Departamento</th>
+						    		</tr>
+						    		</thead>
+					    		<tbody>
+						    		<tr>
+						    			<td>0001</td>
+						    			<td>Nombre 1 Apellido 1</td>
+						    			<td>Empleado</td>
+						    			<td>Departamento x</td>
+						    		</tr>
+						    		<tr>
+						    			<td>0002</td>
+						    			<td>Nombre 2 Apellido 2</td>
+						    			<td>Empleado</td>
+						    			<td>Departamento x</td>
+						    		</tr>
+						    		<tr>
+						    			<td>0003</td>
+						    			<td>Nombre 3 Apellido 3</td>
+						    			<td>Voluntario</td>
+						    			<td>Departamento y</td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Nombre 4 Apellido 4</td>
+						    			<td>Empleado</td>
+						    			<td>Departamento x</td>
+						    		</tr>
+						    		<tr>
+						    			<td>0005</td>
+						    			<td>Nombre 5 Apellido 5</td>
+						    			<td>Voluntario</td>
+						    			<td>Departamento x</td>
+						    		</tr>
+					    		</tbody>
 					    	</table>
 					    </div>
-					  </div>
-					</div>	
-			</div> <!-- Final del panel izquierdo-->
-
-			<div>
-				<div class="col-lg-9 grid-margin">
-					<div class="panel panel-default panel-cuadrado">
-					  <div class="panel-heading"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto</div>
-					  <div class="panel-body">
-					    
-					    <ul class="nav nav-tabs">
-							<li class="active"><a  href="#1" data-toggle="tab">Datos de proyecto</a></li>
-							<li><a href="#2" data-toggle="tab">Operaciones y actividades</a></li>
-							<li><a href="#3" data-toggle="tab">Materiales</a></li>
-							<li><a href="#4" data-toggle="tab">Colaboradores</a></li>
+					</div>
+				</div>	
+			</div>
+			
+			<div class="col-xs-12 col-lg-7 grid-margin">
+					<div class="panel with-nav-tabs panel-default panel-cuadrado">
+					  <div class="panel-heading">
+					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
+  						<ul class="nav nav-tabs">
+  							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="padding: 10px;"></span> Usuario: Nombre del usuario &nbsp;&nbsp;&nbsp;&nbsp;</li>
+							<li class="active"><a  href="#1" data-toggle="tab">Datos generales</a></li>
+							<li><a href="#2" data-toggle="tab">Cuenta</a></li>
+							<li><a href="#3" data-toggle="tab">Proyectos</a></li>
 						</ul>
-
+					  </div>
+					  <div class="panel-body">
 						<div class="tab-content ">
-						<br>
+							<br>
+							<!-- tab 1-->
 							<div class="tab-pane active" id="1">
-							    <div class="col-lg-6">
-							    	
-							    	<table class="table">
-							    		<tr>
-							    			<td><label>Codigo:</label></td>
-							    			<td>Codigo del proyecto</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Nombre:</label></td>
-							    			<td>Nombre del proyecto</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Fecha inicio:</label></td>
-							    			<td>dd/mm/aaaa</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Fecha final:</label></td>
-							    			<td>dd/mm/aaaa</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Lugar de ejecución:</label></td>
-							    			<td>dd/mm/aaaa</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Responsable:</label></td>
-							    			<td>Nombre del responsable</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Beneficiario directo:</label></td>
-							    			<td>Nombre del beneficiario</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Costo estipulado:</label></td>
-							    			<td>0000.00</td>
-							    		</tr>
-							    	</table>	
-							    </div>
-
-							    <div class="col-lg-6">
-							    	<table class="table">
-							    		<tr>
-							    			<td><label>Descripción:</label></td>
-							    			<td>Nombre del proyecto</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Tipo de proyecto:</label></td>
-							    			<td>Tipo de proyecto</td>
-							    		</tr>
-							    		<tr>
-							    			<td><label>Estado actual:</label></td>
-							    			<td>Estado actual de proyecto</td>
-							    		</tr>
-							    		<tr>
-							    			<td class="tr-patrocinadores" colspan="2" size="1">
-							    				<label>Patrocinadores:</label><br>
-							    				Patronicador 1<br>
-							    				Patronicador 2<br>
-							    				Patronicador 3<br>
-							    				Patronicador 4<br>
-							    				Patronicador 5<br>
-							    			</td>
-							    		</tr>
-							    	</table>	
-
-							    </div>
-							</div>
-							<div class="tab-pane" id="2">
-								<div class="btn-group" role="group" aria-label="...">
-								  <button type="button" class="btn btn-default"> 
-								  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</button>
-								  <button type="button" class="btn btn-default">
-								  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar</button>
-								  <button type="button" class="btn btn-default">
-								    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar</button>
-								</div>
+ 								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#">
+								  	 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+								</button>
 								<br><br>
-								<table class="table table-striped" id="tabla-tareas">
-							    	<tr>
-							    		<th>No.</th>
-							    		<th>Tarea</th>
-							    		<th>Prioridad</th>
-							    		<th>Fecha inicio</th>
-							    		<th>Fecha final</th>
-							    		<th>Responsables</th>
-							    	</tr>
-							    	<tr>
-							    		<td>1</td>
-							    		<td>Tarea 1</td>
-							    		<td>Urgente</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>Usuario1, usuario2, usuario3</td>
-							    	</tr>
-							    	<tr>
-							    		<td>2</td>
-							    		<td>Tarea 2</td>
-							    		<td>Urgente</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>Usuario1, usuario2, usuario3</td>
-							    	</tr>
-							    	<tr>
-							    		<td>3</td>
-							    		<td>Tarea 3</td>
-							    		<td>Urgente</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>dd/mm/aaaa</td>
-							    		<td>Usuario1, usuario2, usuario3</td>
-							    	</tr>
-							    </table>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Codigo:</label>
+							    	<p class="col-md-9 control-label">0000</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Numero Identificación:</label>
+							    	<p class="col-md-9 control-label">0000-0000-00000</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Nombres:</label>
+							    	<p class="col-md-9 control-label">Nombres del usuario</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Apellido:</label>
+							    	<p class="col-md-9 control-label">Apellidos del usuario</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Fecha de nacimiento:</label>
+							    	<p class="col-md-9 control-label">dd/mm/aaaa</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Domicilio</label>
+							    	<p class="col-md-9 control-label">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+							    </div>
+							    <hr>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Tipo de usuario:</label>
+							    	<p class="col-md-9 control-label">Tipo de usuario/acceso</p>
+							    </div>
+							     <div class="form-group">
+							    	<label class="col-md-3 control-label">Departamento:</label>
+							    	<p class="col-md-9 control-label">Departamento x</p>
+							    </div>
+							     <div class="form-group">
+							    	<label class="col-md-3 control-label">Cargo:</label>
+							    	<p class="col-md-9 control-label">Cargo x</p>
+							    </div>
+							    <hr><br><br>				   
 							</div>
+							<!-- tab 2-->							
+							<div class="tab-pane" id="2">
+								 <div class="col-xs-12 col-sm-5">
+								 	 <div class="form-group">
+								    	<label class="  control-label">Nombre de usuario:</label>
+								    	<p class="  control-label">Nombre de usuario</p>
+								    </div>
+								 </div>
+								 <div class="col-xs-12 col-sm-7">
+								 	<div class="btn-group" role="group" aria-label="...">
+									  	<button type="button" class="btn btn-default">Reestablecer contraseña</button>
+
+									 	<div class="btn-group" role="group">
+									    	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnCambiaEstado">
+									      	Activo
+									      	<span class="caret"></span>
+									    	</button>
+									    	<ul class="dropdown-menu">
+									      		<li><a id="activar" onclick="activarCuenta();">Activar</a></li>
+									      		<li><a id="suspender" onclick="desactivarCuenta();">Suspender</a></li>
+									    	</ul>
+									    	<script type="text/javascript">
+									    		function activarCuenta(){									    			
+									    			document.getElementById("btnCambiaEstado").textContent = "Activo"
+									    			document.getElementById("btnCambiaEstado").className = "btn btn-success dropdown-toggle"
+									    		}
+
+									    		function desactivarCuenta(){
+									    			document.getElementById("btnCambiaEstado").textContent = "Suspendido"
+									    			document.getElementById("btnCambiaEstado").className = "btn btn-danger dropdown-toggle"
+									    		}
+									    		
+									    	</script>
+									  	</div>
+									</div>
+								 </div>	
+								 <div class="row">
+								 	<div class="col-xs-12 col-md-12">
+								 		<h5>Historial de actividad</h5>
+										<table class="table table-striped" id="tabla-bitacora">
+											<thead>
+												<tr>
+													<th>Fecha</th>
+													<th>Actividad registrada</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>dd/mm/aaaa</td>
+													<td>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</td>
+												</tr>
+												<tr>
+													<td>dd/mm/aaaa</td>
+													<td>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</td>
+												</tr>
+												<tr>
+													<td>dd/mm/aaaa</td>
+													<td>a aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</td>
+												</tr>
+											</tbody>
+										</table>
+								 	</div>								 	
+								 </div>							   
+							</div>
+
+							<!--Tab3-->
 							<div class="tab-pane" id="3">
-							    <h3>Lista de materiales a utilizar</h3>
-							</div>
-							<div class="tab-pane" id="4">
-								<h3>Lista de colaboradores</h3>
+								<!-- <form class="form-inline">
+								    	<select class="form-group selectpicker" data-live-search="true" multiple data-max-options="1" multiple size="3">
+								    		<option>Proyecto 1</option>
+								    		<option>Proyecto 2</option>
+								    		<option>Proyecto 3</option>
+								    		<option>Proyecto 4</option>
+								    	</select>	
+								  	<button type="submit" class="btn btn-success">Asignar</button>
+								</form> -->
+								<table class="table table-striped"  id="tabla-proyectos-designados">
+						    		<thead>
+							    		<tr>
+							    			<th>Codigo</th>
+							    			<th>Nombre</th>
+							    			<th>Tipo Proyecto</th>
+							    			<th>Estado</th>
+							    		</tr>
+							    	</thead>
+							    	<tbody>
+							    		<tr>
+							    			<td>0000</td>
+							    			<td>Proyecto 0</td>
+							    			<td>Tipo x</td>
+							    			<td><span class="badge badge-proceso">En proceso</span></td>
+							    		</tr>
+							    		<tr>
+							    			<td>0001</td>
+							    			<td>Proyecto 1</td>
+							    			<td>Tipo x</td>
+							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+							    		</tr>
+							    		<tr>
+							    			<td>0002</td>
+							    			<td>Proyecto 2</td>
+							    			<td>Tipo x</td>
+							    			<td><span class="badge">Terminado</span></td>
+							    		</tr>
+							    		<tr>
+							    			<td>0003</td>
+							    			<td>Proyecto 3</td>
+							    			<td>Tipo x</td>
+							    			<td><span class="badge">Terminado</span></td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>Proyecto 4</td>
+							    			<td>Tipo x</td>
+							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>Proyecto 4</td>
+							    			<td>Tipo x</td>
+							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>Proyecto 4</td>
+							    			<td>Tipo x</td>
+							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+							    		</tr>
+							    	</tbody>
+						    	</table>
 							</div>
 						</div>
-
 					  </div>
 					 </div>
-				</div>
 			</div>
+			
 		</div>
+
 	</div>
 		
 
-	<!--VENTANAS MODALES -->
-	<!-- Large modal ventana frmNuevoProyecto, es el formulario para registrar un nuevo proyecto-->
-	<div id="frmNuevoProyecto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	     	<div class="modal-header">
-	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        	<h4 class="modal-title">Registo de nuevo proyecto</h4>
-	     	</div>
-	     	<!-- CONTENIDO DEL FORMULARIO -->
-	     	<div class="modal-body">
-	     	<form class="panel-formularios">
-		     	<div class="row ">
-		     		<div class="col-lg-8 ">
-		     			<div class="row">
-						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Código de proyecto</label>
-							    <input type="text" class="form-control" id="txtCode" placeholder="Codigo de proyecto" readonly>
-						  	</div>
-						  	<div class="form-group col-lg-4">
-						    	<label for="exampleInputPassword1">Tipo de proyecto</label>
-						    		<select class="form-control" id="selTipoProyecto">
-									    <option>Seleccione uno</option>
-									    <option>Tipo proyecto 1</option>
-									    <option>Tipo proyecto 2</option>
-									    <option>Tipo proyecto 3</option>
-									    <option>Tipo proyecto 4</option>
-								 	</select>	
-						  	</div>
-						  	<div class="form-group col-lg-4">
-						    	<label for="exampleInputPassword1">Estado actual</label>
-							    	<select class="form-control" id="selEstados">
-								    	<option>Seleccione un estado</option>
-								    	<option>Estado 1</option>
-								    	<option>Estado 2</option>
-								    	<option>Estado 3</option>
-								    	<option>Estado 4</option>
-								 	</select>	
-						  	</div>
-					  	</div>
-					  	<div class="row">
-						  	<div class="form-group col-xs-12">
-						    	<label for="exampleInputEmail1">Nombre del proyecto</label>
-						    	<input type="text" class="form-control" id="txtNomProyecto" placeholder="Asigne un nombre a su proyecto">
-						  	</div> 
-					  	</div>
-					  	<div class="row">
-						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Lugar de ejecución</label>
-							    <input type="text" class="form-control" id="txtLugar" placeholder="Lugar donde se ejecuta">
-						  	</div>
-						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Fecha de inicio</label>
-							    <input type="date" class="form-control" id="txtFechaInicio" placeholder="dd/mm/aaaa">
-						  	</div>
-						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Fecha final</label>
-							    <input type="date" class="form-control" id="txtFechaFinal" placeholder="dd/mm/aaaa">
-						  	</div>
-					  	</div>
-					  	<div class="row">
-						  	<div class="form-group col-lg-6">
-							    <label for="exampleInputEmail1">Responsable de proyecto</label>
-							    <input type="text" class="form-control" id="txtResponsable" placeholder="Nombre de responsable de proyecto">
-						  	</div>
-						  	<div class="form-group col-lg-6">
-							    <label for="exampleInputEmail1">Beneficiario directo</label>
-							    <input type="text" class="form-control" id="txtBeneficiario" placeholder="Nombre  de beneficiario directo">
-						  	</div>
-					  	</div>
-					  	
-		     		</div>
-		     		<div class="col-lg-4 ">
-					  	<div class="form-group">
-					  		<label>Costo estimando</label>
-						    <label class="sr-only" for="exampleInputAmount">Amount</label>
-						    <div class="input-group">
-						      	<div class="input-group-addon">L. </div>
-						      	<input type="text" class="form-control" id="txtCosto" placeholder="Cantidad">
-						    </div>
-						 </div>
-					  	<div class="form-group">
-					    	<label for="exampleInputPassword1">Patrocinadores:</label>
-					    		<select  class="form-control   " data-live-search="true" id="selPatrocinadores" multiple>
-								    <option>Patrocinador 0</option>
-								    <option>Patrocinador 1</option>
-								    <option>Patrocinador 2</option>
-								    <option>Patrocinador 3</option>
-								    <option>Patrocinador 4</option>
-							 	</select>	
-					  	</div>
-					  	<div class="row">
-					  		<div class="form-group col-xs-12">
-							  <label for="comment">Descripción:</label>
-							  <textarea class="form-control" rows="3" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
-							</div>
-					  	</div>
-		     		</div>
-		     	</div>
-		    </form>	
-	     	</div>
-	     	<div class="modal-footer">
-	        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        	<button type="button" class="btn btn-success">Guardar</button>
-	      	</div>
-	    </div>
-	  </div>
-	</div>
- 
+</div>
 
-
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.js"></script> 
     <!-- Latest compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-    <script src="js/datatables.min.js"></script>
-
-    <script type="text/javascript">
-    	$(document).ready(function() {
-    		$('#example').DataTable();
-    		$('#tabla-tareas').DataTable();
-		} );
-    </script>
-
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+	<script type="text/javascript" src="js/datatables.js"></script> 
+		<script type="text/javascript" src="js/inicializador.js"></script>	 
 	 
 
 </body>

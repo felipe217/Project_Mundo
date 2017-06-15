@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Administración de proyectos</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
+     <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+
+ 
+</head>
+<body>
+
+	<!--Barra de navegacion -->
+	<nav class="navbar  navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Un Mundo</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    	<ul class="nav navbar-nav">
+		        <li class="menu-activo" >
+		        	<a href="#">
+		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
+					 Tablero  
+					</a>
+				</li>
+		        <li>
+		        	<a href="panelusuarios.html">
+		        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					 Usuarios 
+					</a>
+				</li>
+				<li >
+		        	<a href="panelproyectos.html">
+		        	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+					  Proyectos  
+					</a>
+				</li>
+				<li>
+		        	<a href="panelrecursos.html">
+		        	<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
+					  Recursos 
+					</a>
+				</li>
+	      	</ul> 
+	      
+
+	        
+	       
+	      <ul class="nav navbar-nav navbar-right">
+	        
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Configurar cuenta</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Acerca de</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Cerrar sesión</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<!--Fin de la barra de navegación-->
+
+	<!-- Inicio de contenido-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-lg-4 grid-margin">
+				<div class="panel panel-default panel-cuadrado">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>   Administración de usuarios
+					</div>
+						<!--Inicio de panel izquierso -->
+					<div class="panel-body">
+					  	<div id="operaciones-proyectos">
+					  		<div class="btn-group" role="group" aria-label="...">
+							  	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+							  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+							 	</button>
+							  	<button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+							  	 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+							  	</button>
+							  	<button type="button" class="btn btn-default">
+							    	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Suspender
+							  	</button>
+							</div>
+					  	</div>
+					  	<br>
+					    Listado de proyectos
+					    <div>
+					    	<table class="table table-striped"  id="example">
+					    		<tr>
+					    			<th>Codigo</th>
+					    			<th>Nombre</th>
+					    			<th>Estado</th>
+					    		</tr>
+					    		<tr>
+					    			<td>0000</td>
+					    			<td>Proyecto 0</td>
+					    			<td><span class="badge badge-proceso">En proceso</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0001</td>
+					    			<td>Proyecto 1</td>
+					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0002</td>
+					    			<td>Proyecto 2</td>
+					    			<td><span class="badge">Terminado</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0003</td>
+					    			<td>Proyecto 3</td>
+					    			<td><span class="badge">Terminado</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0004</td>
+					    			<td>Proyecto 4</td>
+					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+					    		</tr>
+					    	</table>
+					    </div>
+					</div>
+				</div>	
+			</div>
+			<div class="col-xs-12 col-lg-4 grid-margin">
+				<div class="panel panel-default panel-cuadrado">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>   Mis proyectos
+					</div>
+						<!--Inicio de panel izquierso -->
+					<div class="panel-body">
+					  	<div id="operaciones-proyectos">
+					  		<div class="btn-group" role="group" aria-label="...">
+							  	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+							  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+							 	</button>
+							  	<button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+							  	 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+							  	</button>
+							  	<button type="button" class="btn btn-default">
+							    	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
+							  	</button>
+							</div>
+					  	</div>
+					  	<br>
+					    Listado de proyectos
+					    <div>
+					    	<table class="table table-striped"  id="example">
+					    		<tr>
+					    			<th>Codigo</th>
+					    			<th>Nombre</th>
+					    			<th>Estado</th>
+					    		</tr>
+					    		<tr>
+					    			<td>0000</td>
+					    			<td>Proyecto 0</td>
+					    			<td><span class="badge badge-proceso">En proceso</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0001</td>
+					    			<td>Proyecto 1</td>
+					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0002</td>
+					    			<td>Proyecto 2</td>
+					    			<td><span class="badge">Terminado</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0003</td>
+					    			<td>Proyecto 3</td>
+					    			<td><span class="badge">Terminado</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0004</td>
+					    			<td>Proyecto 4</td>
+					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+					    		</tr>
+					    	</table>
+					    </div>
+					</div>
+				</div>	
+			</div>
+			<div class="col-xs-12 col-lg-4 grid-margin">
+				<div class="panel panel-default panel-cuadrado">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;Patrocinadores
+					</div>
+						<!--Inicio de panel izquierso -->
+					<div class="panel-body">
+					  	<div id="operaciones-proyectos">
+					  		<div class="btn-group" role="group" aria-label="...">
+							  	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+							  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+							 	</button>
+							  	<button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+							  	 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+							  	</button>
+							  	<button type="button" class="btn btn-default">
+							    	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
+							  	</button>
+							</div>
+					  	</div>
+					  	<br>
+					    Listado de proyectos
+					    <div>
+					    	<table class="table table-striped"  id="example">
+					    		<tr>
+					    			<th>Codigo</th>
+					    			<th>Nombre</th>
+					    			<th>Estado</th>
+					    		</tr>
+					    		<tr>
+					    			<td>0000</td>
+					    			<td>Proyecto 0</td>
+					    			<td><span class="badge badge-proceso">En proceso</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0001</td>
+					    			<td>Proyecto 1</td>
+					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0002</td>
+					    			<td>Proyecto 2</td>
+					    			<td><span class="badge">Terminado</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0003</td>
+					    			<td>Proyecto 3</td>
+					    			<td><span class="badge">Terminado</span></td>
+					    		</tr>
+					    		<tr>
+					    			<td>0004</td>
+					    			<td>Proyecto 4</td>
+					    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+					    		</tr>
+					    	</table>
+					    </div>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+	</div>
+		
+
+	
+	 
+	
+
+</div>
+
+	<script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>    
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+	  
+	
+	 
+
+	 
+
+</body>
+</html>
