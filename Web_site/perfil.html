@@ -24,74 +24,16 @@
 </head>
 <body>
 
-	<!--Barra de navegacion -->
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">Un Mundo</a>
-	    </div>
-
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    	<ul class="nav navbar-nav">
-		        <li >
-		        	<a href="#">
-		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
-					 Tablero <span class="sr-only">(current)</span>
-					</a>
-				</li>
-		        <li>
-		        	<a href="#">
-		        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-					 Usuarios 
-					</a>
-				</li>
-				<li>
-		        	<a href="#">
-		        	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-					  Proyectos 
-					</a>
-				</li>
-				<li>
-		        	<a href="#">
-		        	<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
-					  Recursos 
-					</a>
-				</li>
-	      	</ul> 
-
-	      <ul class="nav navbar-nav navbar-right">
-	        
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="#">Configurar cuenta</a></li>
-	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Cerrar sesión</a></li>
-	          </ul>
-	        </li>
-	      </ul>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-	<!--Fin de la barra de navegación-->
-
+ 
 	<!--Contenido de la pagina-->
 	 	<!-- Inicio de contenido-->
-	<div class="container">
-
+	<div class="container"> 
 		<div class="row">
+			<br>
 			<div class="col-xs-12 col-md-9 col-lg-10 col-lg-offset-1 grid-margin">
 					<div class="panel with-nav-tabs panel-primary panel-cuadrado">
 					  	<div class="panel-heading">
+
 					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
 					  		<center>	
 					  		<br>
@@ -100,15 +42,17 @@
 							<h3>Nombre del usuario</h3>
 							 <br>
   							<ul class="nav nav-tabs">
+  								<li style="margin-right: 5px;"><a href="panelproyectos.html" type="button" class="btn btn-primary" aria-label="Right Align">
+		 					 		<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver a mis proyectos 
+									</a>
+								</li>
 								<li class="active"><a  href="#1" data-toggle="tab">Mis datos personales</a></li>
-								<li><a href="#2" data-toggle="tab">Mis proyectos</a></li>
-								<li><a href="#3" data-toggle="tab">Mis comentarios</a></li>
-								<li><a href="#4" data-toggle="tab">Actividad reciente</a></li>
+								<li><a href="#2" data-toggle="tab">Actividad reciente</a></li>
 							</ul>
-							</center>
+							</center>							
 					  	</div>
 					  	<div class="panel-body">
-							<div class="tab-content ">
+							<div class="tab-content ">							
 							<br>
 								<div class="tab-pane active" id="1">
 							    <!-- tab 1-->
@@ -160,121 +104,10 @@
 								    
 								    <hr><br><br>
 								</div>
-								<div class="tab-pane" id="2">
-								 <!--tab 2-->
-									<table class="table table-striped"  id="tabla-proyectos-usuario">
-						    		<thead>
-							    		<tr>
-							    			<th>Codigo</th>
-							    			<th>Nombre</th>
-							    			<th>Tipo Proyecto</th>
-							    			<th>Estado</th>
-							    		</tr>
-							    	</thead>
-							    	<tbody>
-							    		<tr>
-							    			<td>0000</td>
-							    			<td>Proyecto 0</td>
-							    			<td>Tipo x</td>
-							    			<td><span class="badge badge-proceso">En proceso</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0001</td>
-							    			<td>Proyecto 1</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0002</td>
-							    			<td>Proyecto 2</td>
-							    			<td>Tipo x</td>
-							    			<td><span class="badge">Terminado</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0003</td>
-							    			<td>Proyecto 3</td>
-							    			<td>Tipo x</td>
-							    			<td><span class="badge">Terminado</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0004</td>
-							    			<td>Proyecto 4</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0004</td>
-							    			<td>Proyecto 4</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0004</td>
-							    			<td>Proyecto 4</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    	</tbody>
-						    	</table>
-								</div>
-								<div class="tab-pane" id="3">
-							   	 <table class="table table-striped"  id="tabla-proyectos-usuario">
-						    		<thead>
-							    		<tr>
-							    			<th>Codigo</th>
-							    			<th>Nombre</th>
-							    			<th>Tipo Proyecto</th>
-							    			<th>Estado</th>
-							    		</tr>
-							    	</thead>
-							    	<tbody>
-							    		<tr>
-							    			<td>0000</td>
-							    			<td>Proyecto 0</td>
-							    			<td>Tipo x</td>
-							    			<td><span class="badge badge-proceso">En proceso</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0001</td>
-							    			<td>Proyecto 1</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0002</td>
-							    			<td>Proyecto 2</td>
-							    			<td>Tipo x</td>
-							    			<td><span class="badge">Terminado</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0003</td>
-							    			<td>Proyecto 3</td>
-							    			<td>Tipo x</td>
-							    			<td><span class="badge">Terminado</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0004</td>
-							    			<td>Proyecto 4</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0004</td>
-							    			<td>Proyecto 4</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    		<tr>
-							    			<td>0004</td>
-							    			<td>Proyecto 4</td>
-							    			<td>Tipo x</td>
-							    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
-							    		</tr>
-							    	</tbody>
-						    	</table>
-								</div>
+								
+								 
 								<!--Tab4-->
-								<div class="tab-pane" id="4">
+								<div class="tab-pane" id="2">
 									<table class="table table-striped"  id="tabla-actividad">
 							    		<thead>
 								    		<tr>

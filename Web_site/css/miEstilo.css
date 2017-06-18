@@ -254,4 +254,13 @@ body{
     float: left;
 }
 
+.mitabla{
+	border-style: none;
+	width: 90%;
+}
+
+.mitabla td{
+	padding: 5px;
+}
+
 table.dataTable tr.group td{font-weight:bold;background-color:#e0e0e0}
