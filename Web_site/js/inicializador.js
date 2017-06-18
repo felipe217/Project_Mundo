@@ -1,21 +1,54 @@
+
+function alerta(){
+	alert("probandp");
+}
+
+
+
 $(document).ready( function () 
 		{
 			//inicializar la pagina proyectos
 			var tblProyectos =
 			    $('#tabla-proyectos').DataTable(
 						{
-					        "scrollY":        "250px",
+					        "scrollY":        "320px",
 					        "scrollCollapse": true,
-					        "paging":         false
-					    },
-
-					    {
-					    	select: {
-			                  style: 'os',
-			                  items: 'cell'
-			              	}
-			         	 }
+					        "paging":         false,
+					        "dom": '<"toolbarx">frtip'
+					    }
 					);
+
+			    $('#tabla-proyectos tbody').on( 'click', 'tr', function () {
+			        if ( $(this).hasClass('selected') ) {
+			            $(this).removeClass('selected');
+			        }
+			        else {
+			            tblProyectos.$('tr.selected').removeClass('selected');
+			            $(this).addClass('selected');
+			        }
+
+			    } );
+
+			    $('#tabla-proyectos tbody').on( 'dblclick', 'tr', function () {
+		            tblProyectos.$('tr.selected').removeClass('selected');
+		            $(this).addClass('selected'); 
+			    } );
+
+
+			    //tblProyectos.row(':eq(1)', { page: 'current' }).select();
+
+			     $('#tabla-proyectos tbody').on( 'dblclick', 'td', function () { 
+			           valor = tblProyectos.cell( this ).data();
+			           if( !isNaN(valor) ) {
+						  alert("El numero es: "+valor); 
+						}
+	                   
+   
+	           } );
+
+
+
+			     
 
 			    $('#tabla-tareas').DataTable(
 						{
@@ -42,10 +75,7 @@ $(document).ready( function ()
 					);
 
 
-			    $('#tabla-proyectos tbody').on( 'click', 'td', function () { 
-					alert(" "+tblProyectos.cell( this ).data());                    
-	                     
-	            } );
+			   
 
 
 	            //Para la página de usuarios
@@ -85,5 +115,7 @@ $(document).ready( function ()
 							+'<option>Proyecto 1</option><option>Proyecto 2</option><option>Proyecto 3</option></select>&nbsp; &nbsp; '	
 						    +'<button type="submit" class="btn btn-success">Asignar</button></form>&nbsp;&nbsp;&nbsp;&nbsp;'
 	            					);
+
 		  // Fin del documento
 		});
+

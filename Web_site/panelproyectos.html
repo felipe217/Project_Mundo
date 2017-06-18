@@ -8,8 +8,10 @@
     <meta name="author" content="">
 	<title>Administración de proyectos</title>
 
+	<link rel="stylesheet" type="text/css" href="css/datatables.css">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
+
      <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
@@ -90,21 +92,10 @@
 					  </div>
 						<!--Inicio de panel izquierso -->
 					  <div class="panel-body">
-					  	<div id="operaciones-proyectos">
-					  		<div class="btn-group" role="group" aria-label="...">
-							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
-							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
-							  </button>
-							  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
-							  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-							  </button>
-							  <button type="button" class="btn btn-default">
-							    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
-							  </button>
-							</div>
-					  	</div>
-					  	<br>
-					    Listado de proyectos
+					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+					  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+					  </button>
+					  	 <br>
 					    <div>
 					    	<table class="table table-striped"  id="tabla-proyectos">
 					    		<thead>
@@ -116,7 +107,7 @@
 						    	</thead>
 						    	<tbody>
 						    		<tr>
-						    			<td>0000</td>
+						    			<td>0000</td></td>
 						    			<td>Proyecto 0</td>
 						    			<td><span class="badge badge-proceso">En proceso</span></td>
 						    		</tr>
@@ -178,6 +169,17 @@
 						<br>
 							<!--Inicio del tab1  +++++++++ -->
 							<div class="tab-pane active" id="1">
+								<div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="...">
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									  <button type="button" class="btn btn-default">
+									    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
+									  </button>
+									</div>
+							  	</div>
+							  	<br>
 							    <div class="col-lg-6">
 							    	
 							    	<table class="table ">
@@ -251,17 +253,19 @@
 									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea"> 
 									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva
 									  </button>
-									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevaTarea">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea">
 									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 									  </button>
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+								    	<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar</button>
+								      </button>
 									</div>
 							  	</div>
 								<br>
 								<table class="table table-striped" id="tabla-tareas">
 							    	<thead>
 								    	<tr>
-								    		<th>Action</th>
-								    		<th>No.</th>
+								    		<th>Código</th>
 								    		<th>Tarea</th>
 								    		<th>Prioridad</th>
 								    		<th>Fecha inicio</th>
@@ -271,11 +275,6 @@
 								    </thead>
 								    <tbody>
 								    	<tr>
-								    		<td>
-								    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-								    			</button>
-								    		</td>
 								    		<td>1</td>
 								    		<td>Tarea 1</td>
 								    		<td>Urgente</td>
@@ -284,11 +283,6 @@
 								    		<td>Usuario1, usuario2, usuario3</td>
 								    	</tr>
 								    	<tr>
-								    		<td>
-								    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
-								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-								    			</button>
-								    		</td>
 								    		<td>2</td>
 								    		<td>Tarea 2</td>
 								    		<td>Urgente</td>
@@ -297,11 +291,6 @@
 								    		<td>Usuario1, usuario2, usuario3</td>
 								    	</tr>
 								    	<tr>
-								    		<td>
-								    			<button class="btn btn-default">
-								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-								    			</button>
-								    		</td>
 								    		<td>3</td>
 								    		<td>Tarea 3</td>
 								    		<td>Urgente</td>
@@ -310,11 +299,6 @@
 								    		<td>Usuario1, usuario2, usuario3</td>
 								    	</tr>
 								    	<tr>
-								    		<td>
-								    			<button class="btn btn-default">
-								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-								    			</button>
-								    		</td>
 								    		<td>3</td>
 								    		<td>Tarea 3</td>
 								    		<td>Urgente</td>
@@ -323,11 +307,6 @@
 								    		<td>Usuario1, usuario2, usuario3</td>
 								    	</tr>
 								    	<tr>
-								    		<td>
-								    			<button class="btn btn-default">
-								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-								    			</button>
-								    		</td>
 								    		<td>3</td>
 								    		<td>Tarea 3</td>
 								    		<td>Urgente</td>
@@ -336,11 +315,6 @@
 								    		<td>Usuario1, usuario2, usuario3</td>
 								    	</tr>
 								    	<tr>
-								    		<td>
-								    			<button class="btn btn-default">
-								    				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-								    			</button>
-								    		</td>
 								    		<td>3</td>
 								    		<td>Tarea 3</td>
 								    		<td>Urgente</td>

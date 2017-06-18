@@ -14,8 +14,10 @@
     <meta name="author" content="">
 	<title>Panel de recursos</title>
 
+	<link rel="stylesheet" type="text/css" href="css/datatables.css">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 	<style type="text/css">
 		
@@ -89,47 +91,44 @@
 	 	<!-- Inicio de contenido-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-3 grid-margin">
+			<div class="col-lg-4 grid-margin">
 				<div class="panel panel-default panel-cuadrado">
 					  <div class="panel-heading">
 					  	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>   Mis Patrocinadores
 					  </div>
 					  <!--Inicio de panel izquierso -->
 					  <div class="panel-body">
-					  	<div id="operaciones-proyectos">
+					  	<div id="operaciones-patrocinadores">
 					  		<div class="btn-group" role="group" aria-label="...">
-							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador"> 
 							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
 							  </button>
-							  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
-							  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-							  </button>
-							  <button type="button" class="btn btn-default">
-							    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
-							  </button>
+							   
 							</div>
 					  	</div>
-					  	<br>
-					    Listado de patrocinadores
-					     
+					  	<br>					     
 					    <div>
-					    	<table class="table display"  id="tblPatrocinadores" onclick="verInfo();">
-					    		<tr>
-					    			<th>Código</th>
-					    			<th>Nombre</th> 
-					    		</tr>
-					    		<tr >
-					    			<td id="000" value="000">0000</td>
-					    			<td>Proyecto 1</td> 
-					    		</tr>
-					    		<tr>
-					    			<td id="001">0001</td>
-					    			<td>Proyecto 2</td> 
-					    		</tr>
-					    		<tr>
-					    			<td id="002">0002</td>
-					    			<td>Proyecto 2</td> 
-					    		</tr>
+					    	<table class="table table-striped"  id="tabla-patrocinadores" onclick="verInfo();">
+					    		<thead>
+						    		<tr>
+						    			<th>Código</th>
+						    			<th>Nombre</th> 
+						    		</tr>
+						    	</thead>
+						    	<tbody>
+						    		<tr >
+						    			<td>0000</td>
+						    			<td>Nombre 1</td> 
+						    		</tr>
+						    		<tr>
+						    			<td>0001</td>
+						    			<td>Nombre 2</td> 
+						    		</tr>
+						    		<tr>
+						    			<td>0003</td>
+						    			<td>Nombre 3</td> 
+						    		</tr>
+						    	</tbody>
 					    	</table>
 					    </div>
 					  </div>
@@ -138,32 +137,206 @@
 
 			<!-- Panel derecho-->
 			<div>
-				<div class="col-lg-9 grid-margin">
+				<div class="col-lg-8 grid-margin">
 					<div class="panel with-nav-tabs panel-default panel-cuadrado">
 					  <div class="panel-heading">
 					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
   						<ul class="nav nav-tabs">
   							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="padding: 10px;"></span> Patrocinador: Nombre del patrocinador &nbsp;&nbsp;&nbsp;&nbsp;</li>
-							<li class="active"><a  href="#1" data-toggle="tab">Datos del patrocinador</a></li>
-							<li><a href="#2" data-toggle="tab">Operaciones y actividades</a></li>
-							<li><a href="#3" data-toggle="tab">Materiales</a></li>
-							<li><a href="#4" data-toggle="tab">Colaboradores</a></li>
+							<li class="active"><a  href="#1" data-toggle="tab">Información general</a></li>
+							<li><a href="#2" data-toggle="tab">Contribuciones</a></li>
+							<li><a href="#3" data-toggle="tab">Desembolsos</a></li>
 						</ul>
 
 					  </div>
 					  <div class="panel-body">
 						<div class="tab-content ">
 						<br>
+						<!-- tab 1-->
 							<div class="tab-pane active" id="1">
-							    <!-- tab 1-->
-							    <h3>Contenido del panel 1</h3>
+							     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#">
+								  	 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+								</button>
+								<br><br>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Codigo:</label>
+							    	<p class="col-md-9 control-label">0000</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Numero Identificación:</label>
+							    	<p class="col-md-9 control-label">0000-0000-00000</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Nombre:</label>
+							    	<p class="col-md-9 control-label">Nombres del patrocinador</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Procedencia:</label>
+							    	<p class="col-md-9 control-label">Lugar de procedencia</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Fecha de nacimiento:</label>
+							    	<p class="col-md-9 control-label">dd/mm/aaaa</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Ubicación o domicilio</label>
+							    	<p class="col-md-9 control-label">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+							    </div>
+							    <hr>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Tipo de patrocinador:</label>
+							    	<p class="col-md-9 control-label">Tipo de patrocinador</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Persona de contacto:</label>
+							    	<p class="col-md-9 control-label">Nombre de persona de contacto</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">e-mail de contacto:</label>
+							    	<p class="col-md-9 control-label">correo.contacto@algo.com</p>
+							    </div>
+							    <div class="form-group">
+							    	<label class="col-md-3 control-label">Telefono de contacto:</label>
+							    	<p class="col-md-9 control-label">2200-0000, 9999-9999</p>
+							    </div>
 							</div>
-							<div class="tab-pane" id="2">
-								 <!--tab 2-->
-								 <h3>Contenido del panel 2</h3>
+
+							<!--tab 2-->
+							<div class="tab-pane" id="2">	 
+								<table class="table table-striped"  id="tabla-patrocinios">
+						    		<thead>
+							    		<tr>
+							    			<th>Codigo</th>
+							    			<th>Fecha</th>
+							    			<th>Tipo </th>
+							    			<th>Valor</th>
+							    			<th>Descripción</th>
+							    		</tr>
+							    	</thead>
+							    	<tbody>
+							    		<tr>
+							    			<td>0000</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0001</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo x</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0002</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo a</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0003</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo x</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo x</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo m</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo x</td>
+							    			<td>00000.00</td>
+							    			<td>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</td>
+							    		</tr>
+							    	</tbody>
+						    	</table>
 							</div>
 							<div class="tab-pane" id="3">
-							    <h3>Lista de materiales a utilizar</h3>
+							    <table class="table table-striped"  id="tabla-desembolsos">
+						    		<thead>
+							    		<tr>
+							    			<th>Codigo</th>
+							    			<th>Fecha</th>
+							    			<th>Tipo </th>
+							    			<th>Valor</th>
+							    			<th>Proyecto</th>
+							    			<th>Patrocinador</th>
+							    		</tr>
+							    	</thead>
+							    	<tbody>
+							    		<tr>
+							    			<td>0000</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto 1</td>
+							    			<td>Patrocinador h</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0001</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto z</td>
+							    			<td>Patrocinador h</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0002</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto 1</td>
+							    			<td>Patrocinador h</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0003</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto 1</td>
+							    			<td>Patrocinador h</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto a</td>
+							    			<td>Patrocinador h</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0004</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo y</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto a</td>
+							    			<td>Patrocinador s</td>
+							    		</tr>
+							    		<tr>
+							    			<td>0007</td>
+							    			<td>dd/mm/aaaa</td>
+							    			<td>Tipo x</td>
+							    			<td>00000.00</td>
+							    			<td>proyecto x</td>
+							    			<td>Patrocinador h</td>
+							    		</tr>
+							    	</tbody>
+						    	</table>
 							</div>
 							<div class="tab-pane" id="4">
 								<h3>Lista de colaboradores</h3>
@@ -177,12 +350,135 @@
 		</div>
 	</div>
 	 
+	<!-- ******************* VENTANAS MODALES ************************-->
+	<!-- Formulario registro nuevo patrocinador -->
+	<div id="frmNuevoPatrocinador" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Registro de nuevo patrocinador</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<form class="panel-formularios">
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-4">
+					    		<label>Identificación</label>
+					    		<input type="text" class="form-control" id="txtIdentificacion" placeholder="0000-0000-00000">
+					  		</div>
+					  		<div class="form-group  col-xs-12 col-md-8">
+					    		<label>Nombre completo</label>
+					    		<input type="text" class="form-control" id="txtNombrePatrocinador" placeholder="Nombre del patrocinador">
+					  		</div>
+		        		</div>
+		        		<div class="row">		        			
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Fecha de nacimiento</label>
+		        				<input type="date" id="txtNacimiento" class="form-control" placeholder="">
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Lugar de procedencia</label>
+		        				<input type="text" id="txtNomTarea" class="form-control" placeholder="Procedencia">
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Tipo Patrocinador</label>		 
+		        				<select class="form-control" id="selTipoPatrocinador">
+									    <option>Seleccione uno</option>
+									    <option>Tipo patroc. 1</option>
+									    <option>Tipo patroc. 2</option>
+									    <option>Tipo patroc. 3</option>
+									    <option>Tipo patroc. 4</option>
+								 	</select>	  				
+		        			</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-4">
+					    		<label>Persona de contacto</label>
+					    		<input type="text" class="form-control" id="txtContacto" placeholder="Nombre de contacto">
+					  		</div>
+					  		<div class="form-group  col-xs-12 col-md-4">
+					    		<label>Correo electronico</label>
+					    		<input type="text" class="form-control" id="txtCorreoContacto" placeholder="Correo electronico">
+					  		</div>
+					  		<div class="form-group  col-xs-12 col-md-4">
+					    		<label>Telefono de contacto</label>
+					    		<input type="text" class="form-control" id="txtTelContacto" placeholder="telefono de contacto">
+					  		</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-12">
+		        				<label>Domicilio o ubicación actual</label>
+		        				<textarea class="form-control" id="txtUbicacion" placeholder="Escriba su ubicación" rows="2"></textarea>
+		        			</div>
+		        		</div>
+		        	</form>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        	<button type="button" class="btn btn-success">Guardar</button>
+		      	</div>
+	    	</div><!-- /.modal-content -->
+	  	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
-	
+	<!-- Formulario de registro de nuevo patrocicio-->	
+	<div id="frmNuevoPatrocinio" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<h4 class="modal-title">Registo de nuevo patrocinio</h4>
+	     	</div>
+	     	<div class="modal-body">
+	     		<form class="panel-formularios form-horizontal">
+	     			<div class="form-group">
+					    <label class="col-sm-3 control-label">Fecha</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" id="txtFecha" placeholder="dd/mm/aaaa" readonly>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="col-sm-3 control-label">Valor:</label>
+					    <div class="col-sm-9">
+					      	<select class="form-control">
+					      		<option>Tipo 1</option>
+					      		<option>Tipo 2</option>
+					      		<option>Tipo 3</option>
+					      		<option>Tipo 4</option>
 
+					      	</select>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="col-sm-3 control-label">Valor:</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" id="txtValor" placeholder="00.00" >
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="col-sm-3 control-label">Descripcion:</label>
+					 </div>
+					 <div class="form-group">
+					    <div class="col-sm-12">
+					      <textarea class="form-control" rows="4" cols="20"> </textarea> 
+					    </div>
+					 </div>
+	     		</form>
+	     		
+	     	</div>
+	     	<div class="modal-footer">
+	     		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        	<button type="button" class="btn btn-success">Guardar</button>
+	     	</div>
+	    </div>
+	  </div>
+	</div>
 
 	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/datatables.js"></script> 
+	<script type="text/javascript" src="js/patrocinadores-init.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.0.0/js/dataTables.rowGroup.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
 
 </body>
 </html>

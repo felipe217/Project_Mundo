@@ -253,3 +253,5 @@ body{
 .toolbar1 {
     float: left;
 }
+
+table.dataTable tr.group td{font-weight:bold;background-color:#e0e0e0}
