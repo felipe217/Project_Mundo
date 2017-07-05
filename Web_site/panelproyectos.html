@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Administración de proyectos</title>
+
+	<link rel="stylesheet" type="text/css" href="css/datatables.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
+
+     <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+
+ 
+</head>
+<body>
+
+	<!--Barra de navegacion -->
+	<nav class="navbar  navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Un Mundo</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    	<ul class="nav navbar-nav">
+		        <li >
+		        	<a href="tablero.html">
+		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
+					 Tablero  
+					</a>
+				</li>
+		        <li>
+		        	<a href="panelusuarios.html">
+		        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					 Usuarios 
+					</a>
+				</li>
+				<li class="menu-activo">
+		        	<a href="panelproyectos.html">
+		        	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+					  Proyectos  
+					</a>
+				</li>
+				<li>
+		        	<a href="panelrecursos.html">
+		        	<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
+					  Recursos 
+					</a>
+				</li>
+	      	</ul> 
+	      
+	      <ul class="nav navbar-nav navbar-right">
+	        
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="perfil.html">Configurar cuenta</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Acerca de</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Cerrar sesión</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<!--Fin de la barra de navegación-->
+
+	<!-- Inicio de contenido-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-4 grid-margin">
+				<div class="panel panel-default panel-cuadrado">
+					  <div class="panel-heading">
+					  	<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>   Mis proyectos
+					  </div>
+						<!--Inicio de panel izquierso -->
+					  <div class="panel-body">
+					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+					  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+					  </button>
+					  	 <br>
+					    <div>
+					    	<table class="table table-striped"  id="tabla-proyectos">
+					    		<thead>
+						    		<tr>
+						    			<th>Codigo</th>
+						    			<th>Nombre</th>
+						    			<th>Estado</th>
+						    		</tr>
+						    	</thead>
+						    	<tbody>
+						    		<tr>
+						    			<td>0000</td></td>
+						    			<td>Proyecto 0</td>
+						    			<td><span class="badge badge-proceso">En proceso</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0001</td>
+						    			<td>Proyecto 1</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0002</td>
+						    			<td>Proyecto 2</td>
+						    			<td><span class="badge">Terminado</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0003</td>
+						    			<td>Proyecto 3</td>
+						    			<td><span class="badge">Terminado</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Proyecto 4</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Proyecto 4</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    		<tr>
+						    			<td>0004</td>
+						    			<td>Proyecto 4</td>
+						    			<td><span class=" badge badge-pendiente">Pendiente</span></td>
+						    		</tr>
+						    	</tbody>
+					    	</table>
+					    </div>
+					  </div>
+					</div>	
+			</div> 
+			<!-- Final del panel izquierdo-->
+
+			<!-- Panel derecho       -->
+			<div>
+				<div class="col-lg-8 grid-margin">
+					<div class="panel with-nav-tabs panel-default panel-cuadrado">
+					  <div class="panel-heading">
+					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
+  						<ul class="nav nav-tabs">
+  							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="padding: 10px;"></span> Proyecto: Nombre de proyecto &nbsp;&nbsp;&nbsp;&nbsp;</li>
+							<li class="active"><a  href="#1" data-toggle="tab">Datos de proyecto</a></li>
+							<li><a href="#2" data-toggle="tab">Operaciones y actividades</a></li>
+							<li><a href="#3" data-toggle="tab">Materiales</a></li>
+							<li><a href="#4" data-toggle="tab">Colaboradores</a></li>
+						</ul>
+
+					  </div>
+					  <div class="panel-body">
+						<div class="tab-content ">
+						<br>
+							<!--Inicio del tab1  +++++++++ -->
+							<div class="tab-pane active" id="1">
+								<div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="...">
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									  <button type="button" class="btn btn-default">
+									    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
+									  </button>
+									</div>
+							  	</div>
+							  	<br>
+							    <div class="col-lg-6">
+							    	
+							    	<table class="table ">
+							    		<tr>
+							    			<td><label>Codigo:</label></td>
+							    			<td>Codigo del proyecto</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Nombre:</label></td>
+							    			<td>Nombre del proyecto</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Fecha inicio:</label></td>
+							    			<td>dd/mm/aaaa</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Fecha final:</label></td>
+							    			<td>dd/mm/aaaa</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Lugar de ejecución:</label></td>
+							    			<td>dd/mm/aaaa</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Responsable:</label></td>
+							    			<td>Nombre del responsable</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Beneficiario directo:</label></td>
+							    			<td>Nombre del beneficiario</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Costo estipulado:</label></td>
+							    			<td>0000.00</td>
+							    		</tr>
+							    	</table>	
+							    </div>
+
+							    <div class="col-lg-6">
+							    	<table class="table">
+							    		<tr>
+							    			<td><label>Descripción:</label></td>
+							    			<td>Nombre del proyecto</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Tipo de proyecto:</label></td>
+							    			<td>Tipo de proyecto</td>
+							    		</tr>
+							    		<tr>
+							    			<td><label>Estado actual:</label></td>
+							    			<td>Estado actual de proyecto</td>
+							    		</tr>
+							    		<tr>
+							    			<td class="tr-patrocinadores" colspan="2" size="1">
+							    				<label>Patrocinadores:</label><br>
+							    				Patronicador 1<br>
+							    				Patronicador 2<br>
+							    				Patronicador 3<br>
+							    				Patronicador 4<br>
+							    				Patronicador 5<br>
+							    			</td>
+							    		</tr>
+							    	</table>	
+
+							    </div>
+							</div>
+							<!--Inicio del tab2  +++++++++ -->
+							<div class="tab-pane" id="2">
+								<div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea"> 
+									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva
+									  </button>
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmComentarios">
+								    	<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar</button>
+								      </button>
+									</div>
+							  	</div>
+								<br>
+								<table class="table table-striped" id="tabla-tareas">
+							    	<thead>
+								    	<tr>
+								    		<th>Código</th>
+								    		<th>Tarea</th>
+								    		<th>Prioridad</th>
+								    		<th>Fecha inicio</th>
+								    		<th>Fecha final</th>
+								    		<th>Responsables</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	<tr>
+								    		<td>1</td>
+								    		<td>Tarea 1</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>2</td>
+								    		<td>Tarea 2</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Tarea 3</td>
+								    		<td>Urgente</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>dd/mm/aaaa</td>
+								    		<td>Usuario1, usuario2, usuario3</td>
+								    	</tr>
+								    </tbody>
+							    </table>
+							</div>
+							<!--Inicio del tab3  +++++++++ -->
+							<div class="tab-pane" id="3">
+							    <div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoMaterial"> 
+									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+									  </button>
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoMaterial">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									</div>
+							  	</div>
+								<br>
+								<table class="table table-striped" id="tabla-materiales">
+							    	<thead>
+								    	<tr>
+								    		<th>Cod</th>
+								    		<th>Proveedor</th>
+								    		<th>Material</th>
+								    		<th>Unidades</th>
+								    		<th>Precio Uni</th>
+								    		<th>Total</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	<tr>
+								    		<td>1</td>
+								    		<td>Material 1</td>
+								    		<td>Proveedor x</td>
+								    		<td>10</td>
+								    		<td>0.00</td>
+								    		<td>0.00</td>
+								    	</tr>
+								    	<tr>
+								    		<td>2</td>
+								    		<td>Material 2</td>
+								    		<td>Proveedor x</td>
+								    		<td>200</td>
+								    		<td>0.00</td>
+								    		<td>0.00</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Material 3</td>
+								    		<td>Proveedor y</td>
+								    		<td>400</td>
+								    		<td>0.00</td>
+								    		<td>0.00</td>
+								    	</tr>
+								    </tbody>
+							    </table>
+							</div>
+							<!--Inicio del tab4  +++++++++ -->
+							<div class="tab-pane" id="4">
+								 
+								<div id="operaciones-proyectos">
+							  		<div class="btn-group" role="group" aria-label="">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#"> 
+									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
+									  </button>
+									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#">
+									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+									  </button>
+									</div>
+							  	</div>
+								<br>
+								<table class="table table-striped" id="tabla-colaboradores">
+							    	<thead>
+								    	<tr>
+								    		<th>Codigo</th>
+								    		<th>Nombre</th>
+								    		<th>Tipo Usuario</th>
+								    		<th>Departamento</th>
+								    		<th>Cargo</th>
+								    		<th>Rol</th>
+								    	</tr>
+								    </thead>
+								    <tbody>
+								    	<tr>
+								    		<td>1</td>
+								    		<td>Usuario 1</td>
+								    		<td>Voluntario</td>
+								    		<td>Ninguno</td>
+								    		<td>Ninguno</td>
+								    		<td>Rol 1</td>
+								    	</tr>
+								    	<tr>
+								    		<td>2</td>
+								    		<td>Usuario 2</td>
+								    		<td>Empleado</td>
+								    		<td>Departamento x</td>
+								    		<td>Cargo 1</td>
+								    		<td>Ninguno</td>
+								    	</tr>
+								    	<tr>
+								    		<td>3</td>
+								    		<td>Usuario 3</td>
+								    		<td>Empleado</td>
+								    		<td>Departamento y</td>
+								    		<td>Cargo 2</td>
+								    		<td>Rol 2</td>
+								    	</tr>
+								    </tbody>
+							    </table>
+							</div>
+						</div>
+
+					  </div>
+					 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+
+	<!--VENTANAS MODALES -->
+	<!-- Large modal ventana frmNuevoProyecto, es el formulario para registrar un nuevo proyecto-->
+	<div id="frmNuevoProyecto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	     	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<h4 class="modal-title">Registo de nuevo proyecto</h4>
+	     	</div>
+	     	<!-- CONTENIDO DEL FORMULARIO -->
+	     	<div class="modal-body">
+	     	<form class="panel-formularios">
+		     	<div class="row ">
+		     		<div class="col-lg-8 ">
+		     			<div class="row">
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Código de proyecto</label>
+							    <input type="text" class="form-control" id="txtCode" placeholder="Codigo de proyecto" readonly>
+						  	</div>
+						  	<div class="form-group col-lg-4">
+						    	<label for="exampleInputPassword1">Tipo de proyecto</label>
+						    		<select class="form-control" id="selTipoProyecto">
+									    <option>Seleccione uno</option>
+									    <option>Tipo proyecto 1</option>
+									    <option>Tipo proyecto 2</option>
+									    <option>Tipo proyecto 3</option>
+									    <option>Tipo proyecto 4</option>
+								 	</select>	
+						  	</div>
+						  	<div class="form-group col-lg-4">
+						    	<label for="exampleInputPassword1">Estado actual</label>
+							    	<select class="form-control" id="selEstados">
+								    	<option>Seleccione un estado</option>
+								    	<option>Estado 1</option>
+								    	<option>Estado 2</option>
+								    	<option>Estado 3</option>
+								    	<option>Estado 4</option>
+								 	</select>	
+						  	</div>
+					  	</div>
+					  	<div class="row">
+						  	<div class="form-group col-xs-12">
+						    	<label for="exampleInputEmail1">Nombre del proyecto</label>
+						    	<input type="text" class="form-control" id="txtNomProyecto" placeholder="Asigne un nombre a su proyecto">
+						  	</div> 
+					  	</div>
+					  	<div class="row">
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Lugar de ejecución</label>
+							    <input type="text" class="form-control" id="txtLugar" placeholder="Lugar donde se ejecuta">
+						  	</div>
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Fecha de inicio</label>
+							    <input type="date" class="form-control" id="txtFechaInicio" placeholder="dd/mm/aaaa">
+						  	</div>
+						  	<div class="form-group col-lg-4">
+							    <label for="exampleInputEmail1">Fecha final</label>
+							    <input type="date" class="form-control" id="txtFechaFinal" placeholder="dd/mm/aaaa">
+						  	</div>
+					  	</div>
+					  	<div class="row">
+						  	<div class="form-group col-lg-6">
+							    <label for="exampleInputEmail1">Responsable de proyecto</label>
+							    <input type="text" class="form-control" id="txtResponsable" placeholder="Nombre de responsable de proyecto">
+						  	</div>
+						  	<div class="form-group col-lg-6">
+							    <label for="exampleInputEmail1">Beneficiario directo</label>
+							    <input type="text" class="form-control" id="txtBeneficiario" placeholder="Nombre  de beneficiario directo">
+						  	</div>
+					  	</div>
+					  	
+		     		</div>
+		     		<div class="col-lg-4 ">
+					  	<div class="form-group">
+					  		<label>Costo estimando</label>
+						    <label class="sr-only" for="exampleInputAmount">Amount</label>
+						    <div class="input-group">
+						      	<div class="input-group-addon">L. </div>
+						      	<input type="text" class="form-control" id="txtCosto" placeholder="Cantidad">
+						    </div>
+						 </div>
+					  	<div class="form-group">
+					    	<label for="exampleInputPassword1">Patrocinadores:</label>
+					    		<select  class="form-control  selectpicker " data-live-search="true" id="selPatrocinadores" multiple>
+								    <option>Patrocinador 0</option>
+								    <option>Patrocinador 1</option>
+								    <option>Patrocinador 2</option>
+								    <option>Patrocinador 3</option>
+								    <option>Patrocinador 4</option>
+							 	</select>	
+					  	</div>
+					  	<div class="form-group">
+					    	<label>Colaboradores:</label>
+					    		<select  class="form-control  selectpicker " data-live-search="true" id="selColaboradores" multiple>
+								    <option>Colaborador 0</option>
+								    <option>Colaborador 1</option>
+								    <option>Colaborador 2</option>
+								    <option>Colaborador 3</option>
+								    <option>Colaborador 4</option>
+							 	</select>	
+					  	</div>
+					  	<div class="row">
+					  		<div class="form-group col-xs-12">
+							  <label for="comment">Descripción:</label>
+							  <textarea class="form-control" rows="2" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
+							</div>
+					  	</div>
+		     		</div>
+		     	</div>
+		    </form>	
+	     	</div>
+	     	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        	<button type="button" class="btn btn-success">Guardar</button>
+	      	</div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Ventana modal para ver y agregar comentarios -->
+	<div id="frmComentarios" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        				<h4 class="modal-title">Comentarios</h4>
+      			</div>
+      			<div class="caja-comentarios">
+      				<div class="modal-body">
+      				
+        			<ul class="list-group">
+					  <li class="list-group-item">
+						<div class="media">
+						  <div class="media-left">
+						    <a href="#">
+						      <img class="media-object small-profile-pic img-circle img-circle" src="img/userprofile.jpg" alt="...">
+						    </a>
+						  </div>
+						  <div class="media-body">
+						     <h5 class="media-heading">Nombre de persona     <small>     08/06/2017 10:00pm</small></h5>
+						    <h6>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</h6>
+						  </div>
+						</div>
+					  </li>
+					  <li class="list-group-item">
+						<div class="media">
+						  <div class="media-left">
+						    <a href="#">
+						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
+						    </a>
+						  </div>
+						  <div class="media-body">
+						     <h5 class="media-heading">Nombre de persona     <small>     08/06/2017 10:00pm</small></h5>
+						    <h6>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</h6>
+						  </div>
+						</div>
+					  </li>
+					  <li class="list-group-item">
+						<div class="media">
+						  <div class="media-left">
+						    <a href="#">
+						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
+						    </a>
+						  </div>
+						  <div class="media-body">
+						     <h5 class="media-heading">Nombre de persona     <small>     08/06/2017 10:00pm</small></h5>
+						    <h6>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</h6>
+						  </div>
+						</div>
+					  </li>
+					  <li class="list-group-item panel-formularios">
+						<div class="media">
+						  <div class="media-left">
+						    <a href="#">
+						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
+						    </a>
+						  </div>
+						  <div class="media-body">
+						    <form>
+	      						<div class="form-group">
+								    <h5 class="media-heading"><b>Nombre de persona &nbsp;</b><small>&nbsp;08/06/2017 10:00pm</small></h5>
+								     <textarea class="form-control" rows="2" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
+								     <button type=" " class="btn btn-default">Comentar</button>
+								  </div>
+							  	<div class="form-group">
+							  		
+							  	</div>
+      						</form>
+						  </div>
+						</div>
+					  </li>
+
+					</ul>
+      			</div>
+      			
+					
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>      			
+        		</div>
+    		</div><!-- /.modal-content -->
+  		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+	<!-- Ventana modal frmNuevaTarea para registrar nueva tarea-->
+	<div id="frmNuevaTarea" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Registro de nueva tarea</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<form class="panel-formularios">
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-4">
+					    		<label>Código de tarea</label>
+					    		<input type="text" class="form-control" id="txtCodTarea" placeholder="000000" readonly>
+					  		</div>
+					  		<div class="form-group  col-xs-12 col-md-4">
+					    		<label>Código de proyecto</label>
+					    		<input type="text" class="form-control" id="txtTareaCodProyecto" placeholder="000000" readonly>
+					  		</div>
+					  		<div class="form-group col-xs-12 col-md-4">
+					  			<label>Prioridad</label>
+						    		<select class="form-control" id="selPriodidades">
+									    <option>Seleccione una</option>
+									    <option>Prioridad 1</option>
+									    <option>Prioridad 2</option>
+									    <option>Prioridad 3</option>
+									    <option>Prioridad 4</option>
+								 	</select>	
+					  		</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Nombre de tarea</label>
+		        				<input type="text" id="txtNomTarea" class="form-control" placeholder="Nombre de la tarea">
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Fecha de inicio</label>
+		        				<input type="date" id="txtTareaInicio" class="form-control" placeholder="">
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-4">
+		        				<label>Fecha de entrega</label>
+		        				<input type="date" id="txtTareaEntrega" class="form-control" placeholder="">
+		        			</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="form-group col-xs-12 col-md-6">
+		        				<label>Descripción</label>
+		        				<textarea class="form-control" id="txtTareaDesc" placeholder="Escriba una descripcion" rows="2"></textarea>
+		        			</div>
+		        			<div class="form-group col-xs-12 col-md-6">
+		        				<label>Responsables</label>		 
+		        				<select class="form-control selectpicker" id="selUsuarios" data-live-search="true" multiple>
+		        					<option>Usuario 1</option>
+		        					<option>Usuario 2</option>
+		        					<option>Usuario 3</option>
+		        					<option>Usuario 4</option>
+		        					<option>Usuario 5</option>
+
+		        				</select>       				
+		        			</div>
+		        		</div>
+		        	</form>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        	<button type="button" class="btn btn-success">Guardar</button>
+		      	</div>
+	    	</div><!-- /.modal-content -->
+	  	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!-- Ventana modal frmNuevoMaterial para registrar nueva tarea-->
+	<div id="frmNuevoMaterial" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		  	<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+			      	<div class="modal-header">
+			        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title">Registro de nuevo material</h4>
+			      	</div>
+			      	<div class="modal-body">
+			        	<form class="panel-formularios">
+			        		<div class="row">
+			        			<div class="form-group col-xs-12 col-md-4">
+						    		<label>Código de ingreso</label>
+						    		<input type="text" class="form-control" id="txtCodIngreso" placeholder="000000" readonly>
+						  		</div>
+						  		<div class="form-group  col-xs-12 col-md-4">
+						    		<label>Código de proyecto</label>
+						    		<input type="text" class="form-control" id="txtTareaCodProyecto" placeholder="000000" readonly>
+						  		</div>
+						  		<div class="form-group col-xs-12 col-md-4">
+						  			<label>Fecha de asignación</label>
+						    		<input type="date" class="form-control" id="txtMatFecha">
+						  		</div>
+			        		</div>
+			        		<div class="row">
+			        			<div class="form-group col-xs-12 col-md-6">
+			        				<label>Proveedor:</label>
+			        				<input type="text" class="form-control" id="txtProveedor" placeholder="Ingrese nombre de Proveedor">
+			        			</div>
+			        			<div class="form-group col-xs-12 col-md-6">
+			        				  <label>Material:</label>
+			        				<input type="text" class="form-control" id="txtMaterial" placeholder="Ingrese nombre de material">
+			        			</div>
+			        		</div>
+			        		<div class="row">
+			        			<div class="form-group col-xs-12 col-md-4">
+			        				<label>Unidades:</label>
+			        				<input type="text" class="form-control" id="txtMatUnidades" placeholder="Cantidad">
+			        			</div>
+			        			<div class="form-group col-xs-12 col-md-4">
+			        				<label>Precio unidad:</label>
+			        				<input type="text" class="form-control" id="txtPrecioUnidad" placeholder="0.00">
+			        			</div>
+			        			<div class="form-group col-xs-12 col-md-4">
+			        				<label>Total</label>
+			        				<input type="text" class="form-control" id="txtMatTotal" placeholder="0.00">
+			        			</div>
+			        		</div>
+			        	</form>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			        	<button type="button" class="btn btn-success">Guardar</button>
+			      	</div>
+		    	</div><!-- /.modal-content -->
+		  	</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+</div>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/datatables.js"></script>     
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+	<script type="text/javascript" src="js/inicializador.js"></script>	 
+
+</body>
+</html>

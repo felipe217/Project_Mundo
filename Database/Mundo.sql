@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2017 at 09:07 PM
+-- Generation Time: Jul 04, 2017 at 09:17 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Database_Mundo`
+-- Database: `Mundo`
 --
 
 -- --------------------------------------------------------
@@ -173,6 +173,14 @@ CREATE TABLE `tblTipoUsuario` (
   `tipo_usuario` varchar(20) CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tblTipoUsuario`
+--
+
+INSERT INTO `tblTipoUsuario` (`codTipoUsuario`, `tipo_usuario`) VALUES
+(1, 'Administrador'),
+(2, 'Voluntario');
+
 -- --------------------------------------------------------
 
 --
@@ -186,10 +194,19 @@ CREATE TABLE `tblUsuarios` (
   `apellidos` varchar(45) NOT NULL,
   `nacimiento` date NOT NULL,
   `domicilio` varchar(100) NOT NULL,
-  `departamento` varchar(45) NOT NULL,
+  `pais` varchar(45) NOT NULL,
   `cargo` varchar(45) NOT NULL,
-  `codTipoUsuario` int(10) NOT NULL
+  `usuario` varchar(50) NOT NULL,
+  `contrasena` varchar(50) NOT NULL,
+  `codTipoUsuario` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblUsuarios`
+--
+
+INSERT INTO `tblUsuarios` (`codUsuario`, `identificacion`, `nombres`, `apellidos`, `nacimiento`, `domicilio`, `pais`, `cargo`, `usuario`, `contrasena`, `codTipoUsuario`) VALUES
+(5, '1234', 'k', 'k', '1990-11-11', 'k', 'Argentina', 'Voluntario', 'k', '13fbd79c3d390e5d6585a21e11ff5ec1970cff0c', 2);
 
 -- --------------------------------------------------------
 
@@ -328,7 +345,7 @@ ALTER TABLE `tblUsuarioxTarea`
 -- AUTO_INCREMENT for table `tblUsuarios`
 --
 ALTER TABLE `tblUsuarios`
-  MODIFY `codUsuario` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `codUsuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
@@ -384,7 +401,7 @@ ALTER TABLE `tblTareas`
 -- Constraints for table `tblUsuarios`
 --
 ALTER TABLE `tblUsuarios`
-  ADD CONSTRAINT `tblUsuarios_ibfk_1` FOREIGN KEY (`codTipoUsuario`) REFERENCES `tblTipoUsuario` (`codTipoUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tblUsuarios_ibfk_1` FOREIGN KEY (`codTipoUsuario`) REFERENCES `tblTipoUsuario` (`codTipoUsuario`);
 
 --
 -- Constraints for table `tblUsuarioxProyecto`
