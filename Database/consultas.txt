@@ -11,3 +11,13 @@ inner join tblestados B on A.codEstado = B.codEstado
 inner join tblusuarios C on A.codUsuario = C.codUsuario 
 inner join tiposproyectos D on A.codTipoProyecto = D.codTiposProyecto
 where A.codProyecto = 1
+
+Select A.codProyecto, A.nombreProyecto, A.fechaInicio, A.fechafinal, A.lugar, A.descripcion, A.beneficiario,
+			    B.estado, A.costoEstimado, 
+			    C.nombreUsuario, 
+			    D.tipoProyecto 
+			FROM tblProyectos A 
+			inner join tblestados B on A.codEstado = B.codEstado 
+			inner join tblusuarios C on A.codUsuario = C.codUsuario 
+			inner join tiposproyectos D on A.codTipoProyecto = D.codTiposProyecto
+			 where A.codProyecto = 1
