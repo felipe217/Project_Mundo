@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 	<meta charset="utf-8">
@@ -15,8 +15,6 @@
      <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
-
- 
 </head>
 <body>
 
@@ -92,7 +90,7 @@
 					  </div>
 						<!--Inicio de panel izquierso -->
 					  <div class="panel-body">
-					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto"> 
+					  <button type="button" class="btn btn-default" id="btn-nuevoProyecto" data-toggle="modal" data-target="#frmNuevoProyecto"> 
 					  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
 					  </button>
 					  	 <br>
@@ -166,12 +164,13 @@
 					  </div>
 					  <div class="panel-body">
 						<div class="tab-content ">
-						<br>
-							<!--Inicio del tab1  +++++++++ -->
+						<br> 
+							<!--Inicio del tab1 informacion de proyecto seleccionado +++++++++ -->
+							<!--Inicio del tab1  +++++++++ --> 
 							<div class="tab-pane active" id="tab1">
 								<div id="operaciones-proyectos">
 							  		<div class="btn-group" role="group" aria-label="...">
-									  <button type="button" class="btn btn-default"data-toggle="modal" data-target="#frmNuevoProyecto">
+									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto" onclick="editarProyecto();" >
 									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 									  </button>
 									  <button type="button" class="btn btn-default">
@@ -229,24 +228,17 @@
 							    			<td><label id="lblTipoProyecto"> Tipo de proyecto</label></td>
 							    		</tr>
 							    		<tr>
-							    			<td><label>Estado actual:</label></td>
-							    			<td><label id="lblEstado">Estado actual de proyecto</label> </td>
-							    		</tr>
+							    			<td><label>Estado actual:</label></td> 
+							    			<td><label id="lblEstado" >Estado actual de proyecto</label> </td> 							    		</tr>
 							    		<tr>
-							    			<td class="tr-patrocinadores" colspan="2" size="1">
-							    				<label>Patrocinadores:</label><br>
-							    				Patronicador 1<br>
-							    				Patronicador 2<br>
-							    				Patronicador 3<br>
-							    				Patronicador 4<br>
-							    				Patronicador 5<br>
+							    			<td class="tr-patrocinadores" colspan="2" size="1" id="tr-patrocinadoresxproyecto"> 
 							    			</td>
 							    		</tr>
 							    	</table>	
 
 							    </div>
 							</div>
-							<!--Inicio del tab2  +++++++++ -->
+							<!--Inicio del tab2  tareas de proycto selecconado +++++++++ -->
 							<div class="tab-pane" id="2">
 								<div id="operaciones-proyectos">
 							  		<div class="btn-group" role="group" aria-label="">
@@ -325,7 +317,7 @@
 								    </tbody>
 							    </table>
 							</div>
-							<!--Inicio del tab3  +++++++++ -->
+							<!--Inicio del tab3  materiles del proyecto seleccionado+++++++++ -->
 							<div class="tab-pane" id="3">
 							    <div id="operaciones-proyectos">
 							  		<div class="btn-group" role="group" aria-label="">
@@ -377,7 +369,7 @@
 								    </tbody>
 							    </table>
 							</div>
-							<!--Inicio del tab4  +++++++++ -->
+							<!--Inicio del tab4 colaboradores del proyecto seleccionado +++++++++ -->
 							<div class="tab-pane" id="4">
 								 
 								<div id="operaciones-proyectos">
@@ -461,22 +453,23 @@
 						  	</div>
 						  	<div class="form-group col-lg-4">
 						    	<label for="exampleInputPassword1">Tipo de proyecto</label>
-						    		<select class="form-control" id="selTipoProyecto">
+						    		<select class="form-control" id="selTipoProyecto"> 
+									    <option>Selec. un tipo</option> 
 									    <option>Seleccione uno</option>
 									    <option value="1">Tipo proyecto 1</option>
 									    <option value="2">Tipo proyecto 2</option>
 									    <option value="3">Tipo proyecto 3</option>
-									    <option value="4">Tipo proyecto 4</option>
+									    <option value="4">Tipo proyecto 4</option> 
 								 	</select>	
 						  	</div>
 						  	<div class="form-group col-lg-4">
 						    	<label for="exampleInputPassword1">Estado actual</label>
-							    	<select class="form-control" id="selEstados">
+							    	<select class="form-control" id="selEstados"> 
 								    	<option>Seleccione un estado</option>
 								    	<option value="1">Estado 1</option>
 								    	<option value="2">Estado 2</option>
 								    	<option value="3">Estado 3</option>
-								    	<option value="4">Estado 4</option>
+								    	<option value="4">Estado 4</option> 
 								 	</select>	
 						  	</div>
 					  	</div>
@@ -523,22 +516,13 @@
 						 </div>
 					  	<div class="form-group">
 					    	<label for="exampleInputPassword1">Patrocinadores:</label>
-					    		<select  class="form-control  selectpicker " data-live-search="true" id="selPatrocinadores" multiple>
-								    <option>Patrocinador 0</option>
-								    <option>Patrocinador 1</option>
-								    <option>Patrocinador 2</option>
-								    <option>Patrocinador 3</option>
-								    <option>Patrocinador 4</option>
+					    		<select  class="form-control selectpicker " data-live-search="true" id="selPatrocinadores" multiple>
+								     
 							 	</select>	
 					  	</div>
 					  	<div class="form-group">
 					    	<label>Colaboradores:</label>
-					    		<select  class="form-control  selectpicker " data-live-search="true" id="selColaboradores" multiple>
-								    <option>Colaborador 0</option>
-								    <option>Colaborador 1</option>
-								    <option>Colaborador 2</option>
-								    <option>Colaborador 3</option>
-								    <option>Colaborador 4</option>
+					    		<select  class="form-control  selectpicker " data-live-search="true" id="selColaboradores" multiple> 
 							 	</select>	
 					  	</div>
 					  	<div class="row">
@@ -710,7 +694,7 @@
 		      	</div>
 		      	<div class="modal-footer">
 		        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        	<button type="button" class="btn btn-success">Guardar</button>
+		        	<button type="button" class="btn btn-success" id="btn-guardar-tarea">Guardar</button>
 		      	</div>
 	    	</div><!-- /.modal-content -->
 	  	</div><!-- /.modal-dialog -->
