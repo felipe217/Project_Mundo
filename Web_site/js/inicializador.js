@@ -74,7 +74,7 @@ function cargarPatrocinadoresxProyecto(code){
 			for(var i=0; i<respuesta.length; i++){
 				listapatrocinadores = listapatrocinadores + respuesta[i].nombre+"<br>";
 			}
-		console.log(listapatrocinadores);
+		console.log("patrocinadores:"+listapatrocinadores);
 		$('#tr-patrocinadoresxproyecto').html(listapatrocinadores);
 		},
 		error: function(){
@@ -431,13 +431,14 @@ function inicializarTabla(){
 
 	//seleccionar proyecto para ver sus datos
 	$('#tabla-proyectos tbody').on( 'dblclick', 'td', function () { 
-	       valor = tblProyectos.cell( this ).data();
-	       if( !isNaN(valor) ) { 
-			  cargarSeleccionado(valor); 
-			  cargarTareas(valor); 
-			  cargarMateriales(valor);
-				cargarColaboradores(valor);
-				cargarPatrocinadoresxProyecto(valor);
+				 valor = tblProyectos.cell( this ).data();
+				 console.log("cargar tablas");
+	       if( !isNaN(valor) ) {  
+			  	cargarSeleccionado(valor); 
+			  	cargarTareas(valor); 
+					cargarMateriales(valor); 
+					cargarColaboradores(valor); 
+					cargarPatrocinadoresxProyecto(valor);
 			}
 		});	
 }

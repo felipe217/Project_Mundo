@@ -307,8 +307,8 @@
 		// carga todos los patrocinadoresde un proyecto especifico
 		case '9':
 			$sqlPatrocinadoresxproyecto = "SELECT A.codPatrocinador, A.CodProyecto, B.nombre from "
-																		."tblpatrocinadoresxproyecto A inner join tblpatrocinadores B on A.codPatrocinador = B.codPatrocinador "
-																		."where A.codProyecto = ".$codigoProyecto;
+										."tblpatrocinadoresxproyecto A inner join tblpatrocinadores B on A.codPatrocinador = B.codPatrocinador "
+										."where A.codProyecto = ".$codigoProyecto;
 			$resultado = $miConexion->ejecutarInstruccion($sqlPatrocinadoresxproyecto);
 			$cant = $miConexion->cantidadRegistros($resultado); 
 			if ($cant>0) {
