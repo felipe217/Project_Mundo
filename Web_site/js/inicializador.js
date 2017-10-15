@@ -69,13 +69,17 @@ function cargarPatrocinadoresxProyecto(code){
 		data:parametros,
 		method:"POST",
 		dataType: "json",
-		success: function(respuesta){
-			var listapatrocinadores = "<label>Patrocinadores:</label><br>";
-			for(var i=0; i<respuesta.length; i++){
-				listapatrocinadores = listapatrocinadores + respuesta[i].nombre+"<br>";
-			}
-		console.log("patrocinadores:"+listapatrocinadores);
-		$('#tr-patrocinadoresxproyecto').html(listapatrocinadores);
+		success: function(respuesta){ 
+			if (respuesta != 'null') {
+				var listapatrocinadores = "<label>Patrocinadores:</label><br>";
+				for(var i=0; i<respuesta.length; i++){
+					listapatrocinadores = listapatrocinadores + respuesta[i].nombre+"<br>";
+				}
+				console.log("patrocinadores:"+listapatrocinadores);
+				$('#tr-patrocinadoresxproyecto').html(listapatrocinadores);
+			}else
+				console.log("No hay patrocinadores");
+			
 		},
 		error: function(){
 			alert("ocurrio un error cargando los patrocinadores de este proyecto"); 
@@ -107,6 +111,7 @@ function cargarEstados(){
 
 //******************* editar proyecto al presionar en el boton editar prooyecto ***************************
 function editarProyecto(){
+	console.log("Valores del select: "+$('#selPatrocinadores').val());
 	$('#txtcode').val(proyectoTemp.codigo);
 	$('#txtNomProyecto').val(proyectoTemp.nombreProyecto);
 	$('#txtLugar').val(proyectoTemp.lugar);
@@ -117,7 +122,7 @@ function editarProyecto(){
 	$('#txtCosto').val(proyectoTemp.costoEstimado);
 	$('#txtDescripcion').val(proyectoTemp.descripcion);
 	$('#selEstados').val("1").prop('selected', true); 
-
+	console.log("Valores del select: "+$('#selPatrocinadores').val());
 }
 //****************funciones del panel de proyectos: tabla colaboradores*****************
 function initTablaColaboradores(){
@@ -459,9 +464,11 @@ $('#btnGuardarProyecto').click(function(){
 	+"&codEstado="+$('#selEstados').val()
 	+"&codTipoProyecto="+$('#selTipoProyecto').val()
 	+"&descripcion="+$('#txtDescripcion').val()
-	+"&codUsuario="+usuarioActual+"";
+	+"&codUsuario="+usuarioActual+""
+	+"&patrocinadores="+$('#selPatrocinadores').val();
+	console.log($('#selPatrocinadores').val());
 	console.log(parametros);
-	$.ajax(
+/* 	$.ajax(
 	        {
 	          url: "../Web_site/controles-php/registrarProyecto.php",
 	          data: parametros,
@@ -473,7 +480,7 @@ $('#btnGuardarProyecto').click(function(){
 	            alert("Ocurrio un error");
 	          }
 	        }
-	      );   
+	      );    */
 
 	addProyecto(valor, $('#txtNomProyecto').val(), 'proceso');
 	$('#frmNuevoProyecto').modal('hide');
@@ -483,7 +490,7 @@ $('#btnGuardarProyecto').click(function(){
 $('#btn-nuevoProyecto').click(function(){
 	cargarEstados();
 	cargarTiposProyecto();
-	cargarPatrocinadores();
+	cargarPatrocinadores(); 
 });
 
 //evento click para agregar nueva tarea
@@ -604,8 +611,12 @@ function inicializarTabla(){
 	tblProyectos =  $('#tabla-proyectos').DataTable({
 					        "scrollY":        "250px",
 					        "scrollCollapse": true,
-					        "paging":         false
+									"paging":         false,
+									"dom": '<"toolbar-proy">frtip'
 	});
+
+	$("div.toolbar-proy").html( 
+				);
 
 	$('#tabla-proyectos tbody').on( 'click', 'tr', function () {
 	        if ( $(this).hasClass('selected') ) {
@@ -628,7 +639,9 @@ function inicializarTabla(){
 	       if( !isNaN(valor) ) { 
 			  cargarSeleccionado(valor);
 			  cargarTareas(valor);
-			  cargarMateriales(valor);
+				cargarMateriales(valor);
+				cargarColaboradores(valor);
+				cargarPatrocinadoresxProyecto(valor);
 			}
 		});	
 }
@@ -651,6 +664,7 @@ $('#btnGuardarProyecto').click(function(){
 	+"&descripcion="+$('#txtDescripcion').val()
 	+"&codUsuario="+usuarioActual+"";
 	console.log(parametros);
+
 	$.ajax(
 	        {
 	          url: "../Web_site/controles-php/registrarProyecto.php",
@@ -675,7 +689,8 @@ $(document).ready(function(){
  	inicializarTabla();
  	cargarProyectos();
  	initTablaTareas();
- 	initTablaMateriales(); 
+	 initTablaMateriales(); 
+	 initTablaColaboradores();
  	$('#tabla-usuarios').DataTable(
 		{
 	        "scrollY":        "250px",
@@ -684,24 +699,7 @@ $(document).ready(function(){
 	        "dom": '<"toolbar">frtip'
 	    }       
 	    
-	); 
- 	$('#tabla-colaboradores').DataTable(
-			{
-		        "scrollY":        "250px",
-		        "scrollCollapse": true,
-		        "paging":         false
-		    }
-		);
-    //Para la página de usuarios
-    $('#tabla-usuarios').DataTable(
-			{
-		        "scrollY":        "250px",
-		        "scrollCollapse": true,
-		        "paging":         false,
-		        "dom": '<"toolbar">frtip'
-		    }       
-		    
-		);  
+	);   
 
 	$('#tabla-bitacora').DataTable(
 			{
@@ -719,6 +717,7 @@ $(document).ready(function(){
 		        "dom": '<"toolbar1">frtip'
 		    }
 		);
+ 
 
 	$("div.toolbar1").html('<form class="form-inline">'
 				+'<select class="form-group selectpicker" data-live-search="true" multiple data-max-options="1" multiple size="3">'
