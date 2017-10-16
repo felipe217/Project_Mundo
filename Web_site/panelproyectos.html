@@ -169,14 +169,14 @@
 							<!--Inicio del tab1  +++++++++ --> 
 							<div class="tab-pane active" id="tab1">
 								<div id="operaciones-proyectos">
-							  		<div class="btn-group" role="group" aria-label="...">
+							  		<div class="btn-group" role="group" >
 									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoProyecto" onclick="editarProyecto();" >
 									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 									  </button>
-									  <button type="button" class="btn btn-default">
-									    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Terminar
-									  </button>
 									</div>
+									<div class="btn-group"role="group">										
+										<a href="#"> Tareas <span class="badge">42</span></a>
+									</div> 
 							  	</div>
 							  	<br>
 							    <div class="col-lg-6">
@@ -395,7 +395,7 @@
 								    	</tr>
 								    </thead>
 								    <tbody>
-								    	<tr>
+								    	<!-- <tr>
 								    		<td>1</td>
 								    		<td>Usuario 1</td>
 								    		<td>Voluntario</td>
@@ -418,7 +418,7 @@
 								    		<td>Departamento y</td>
 								    		<td>Cargo 2</td>
 								    		<td>Rol 2</td>
-								    	</tr>
+								    	</tr> -->
 								    </tbody>
 							    </table>
 							</div>
@@ -454,12 +454,7 @@
 						  	<div class="form-group col-lg-4">
 						    	<label for="exampleInputPassword1">Tipo de proyecto</label>
 						    		<select class="form-control" id="selTipoProyecto"> 
-									    <option>Selec. un tipo</option> 
-									    <option>Seleccione uno</option>
-									    <option value="1">Tipo proyecto 1</option>
-									    <option value="2">Tipo proyecto 2</option>
-									    <option value="3">Tipo proyecto 3</option>
-									    <option value="4">Tipo proyecto 4</option> 
+									    <option>Selec. un tipo</option>  
 								 	</select>	
 						  	</div>
 						  	<div class="form-group col-lg-4">

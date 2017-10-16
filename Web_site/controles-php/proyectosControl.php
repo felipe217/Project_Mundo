@@ -1,15 +1,15 @@
 <?php 
 	/*
-		CASOS:
-		1. consulta todos los proyectos
-		2. consulta la información de un proyecto
-		3. conculta todas las tares de un proyecto
-		4. consultas de todos los materiales de un proyecto 
-		5. selecciona los colaboradores del proyecto seleccionado:
-		6. cargar todos los estados disponibles en la base de datos
-		7. carga todos los diferentes tipos de proyectos establecidos en la base de datos 
-		8. carga todos los patrocinadores en el sistema
-		9. carga todos los patrocinadoresde un proyecto especifico
+		 CASOS:
+		 1. consulta todos los proyectos
+		 2. consulta la información de un proyecto
+		 3. conculta todas las tares de un proyecto
+		 4. consultas de todos los materiales de un proyecto 
+		 5. selecciona los colaboradores del proyecto seleccionado:
+		 6. cargar todos los estados disponibles en la base de datos
+		 7. carga todos los diferentes tipos de proyectos establecidos en la base de datos 
+		 8. carga todos los patrocinadores en el sistema
+		 9. carga todos los patrocinadoresde un proyecto especifico 
 
 
 	*/ 

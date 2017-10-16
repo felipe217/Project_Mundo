@@ -55,10 +55,12 @@
 						."'".$codUsuario."',"
 						."'".$costoEstimado."',"
 			."'".$beneficiario."');";
-			$consulta = $consulta." SELECT LAST_INSERT_ID() as codigo;";
+			//$consulta = $consulta." SELECT LAST_INSERT_ID() as codigo;";
 			$resultado = $miConexion->ejecutarInstruccion($consulta);
 			if ($resultado) {
 				//capturar el valor del codigo asignado y utilizarlo parala nueva consulta´
+				$consulta = " SELECT LAST_INSERT_ID() as codigo;";
+				$resultado = $miConexion->ejecutarInstruccion($consulta);
 				$fila = $miConexion->obtenerFila($resultado);
 				$codigo = $fila['codigo']; 
 				$miConexion->liberarResultado($resultado);
@@ -68,18 +70,17 @@
 				if(count($arreglo) > 0){
 					for($i=0; $i<count($arreglo); $i++){ 
 						$insertPatrocinadores = 
-						$insertPatrocinadores." "
-						." insert into tblpatrocinadoresxproyecto (codPatrocinador, codProyecto) values (".$arreglo[$i]." , ".$codigo."); ";
+						" insert into tblpatrocinadoresxproyecto (codPatrocinador, codProyecto) values (".$arreglo[$i]." , ".$codigo."); ";
+						//registrar los patrocinadores del proyecto
+						$resultado = $miConexion->ejecutarInstruccion($insertPatrocinadores);
 					}
-					//registrar los patrocinadores del proyecto
-					$resultado = $miConexion->ejecutarInstruccion($insertPatrocinadores);
 					if($resultado){
 						echo "El proyecto y sus patrocinadores se registraron exitosamente.";
-					}
-					$miConexion->liberarResultado($resultado);
+					} 
 				}
-				}else
-					echo "no se realizaó ningun registro: ".$consulta."y resultado: ".$resultado;
+			}else
+				echo "Ocurrió un error, no se pudo registrar.";
+				//echo "no se realizaó ningun registro: ".$consulta."y resultado: ".$resultado;
 			break;
 
 		//caso 2, actualizar un proyecto registrado
