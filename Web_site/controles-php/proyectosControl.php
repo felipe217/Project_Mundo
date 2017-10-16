@@ -74,6 +74,7 @@
 				$proyecto->setDescripcion($fila['descripcion']);
 				$proyecto->setCostoEstimado($fila['costoEstimado']);
 				$proyecto->setResponsable($fila['nombreUsuario']);
+				$proyecto->setBeneficiario($fila['beneficiario']);
 
 				$JSONLine = $JSONLine.$proyecto->toJSON()."-";
 				
@@ -240,9 +241,9 @@
 				while ($fila = $miConexion->obtenerFila($resultado)){
 					$estadosArray[$i]["codigo"] = $fila['codEstado'];
 					$estadosArray[$i]["estado"] = $fila['estado'];
-					$JSONLine = json_encode($estadosArray);	
 					$i++;				
 				}
+				$JSONLine = json_encode($estadosArray);	
 				if ($cant==1) {
 					echo $JSONLine;
 				}else
@@ -281,18 +282,18 @@
 
 		//carga todos los patrocinadores en el sistema
 		case '8':
-			$sqlPatrocinadores = "select codPatrocinador, nombre from tblpatrocinadores";
-			$resultado = $miConexion->ejecutarInstruccion($sqlPatrocinadores);
+			$sqlEstados = "select codPatrocinador, nombre from tblpatrocinadores";
+			$resultado = $miConexion->ejecutarInstruccion($sqlEstados);
 			$cant = $miConexion->cantidadRegistros($resultado); 
 			if ($cant>0) {
-				$estadosArray = array();
+				$arreglo = array();
 				$i=0;
 				while ($fila = $miConexion->obtenerFila($resultado)){
-					$estadosArray[$i]["codigo"] = $fila['codPatrocinador'];
-					$estadosArray[$i]["nombre"] = $fila['nombre'];
-					$JSONLine = json_encode($estadosArray);	
+					$arreglo[$i]["codigo"] = $fila['codPatrocinador'];
+					$arreglo[$i]["nombre"] = $fila['nombre'];
 					$i++;				
 				}
+				$JSONLine = json_encode(array_values($arreglo));	
 				if ($cant==1) {
 					echo $JSONLine;
 				}else
@@ -303,6 +304,31 @@
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion(); 
 			break;
+			/* $sqlPatrocinadores = "select codPatrocinador, nombre from tblpatrocinadores";
+			$resultado = $miConexion->ejecutarInstruccion($sqlPatrocinadores);
+			$cant = $miConexion->cantidadRegistros($resultado); 
+			if ($cant>0) {
+				$estadosArray = array();
+				$i=0;
+				while ($fila = $miConexion->obtenerFila($resultado)){
+					$estadosArray[$i]["codigo"] = $fila['codPatrocinador'];
+					$estadosArray[$i]["nombre"] = $fila['nombre'];
+					$i++;				
+				}
+				for ($i=0; $i < count($estadosArray) ; $i++) { 
+					$JSONLine = $JSONLine.'{"codigo" : "'.$estadosArray[$i]['codigo'].'","nombre" : "'.$estadosArray[$i]['nombre'].'"}*';
+				}
+				//$JSONLine = json_encode($estadosArray);	
+				if ($cant==1) {
+					echo $JSONLine;
+				}else
+					echo rtrim($JSONLine, "*");
+			}else
+				echo "null";
+
+			$miConexion->liberarResultado($resultado);
+			$miConexion->cerrarConexion(); 
+			break; */
 		
 		// carga todos los patrocinadoresde un proyecto especifico
 		case '9':
