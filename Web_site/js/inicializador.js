@@ -15,6 +15,7 @@ var valor = 0;
 var codTareaSel =0;
 var usuarioActual=1;  
 var patrocinadoresEditar; 
+var todosPatrocinadores;
 
 function cargarPatrocinadores(){
 	var parametros = "caso=8&codigo=1";
@@ -26,6 +27,7 @@ function cargarPatrocinadores(){
 			dataType: "json",
 			success: function(respuesta){ 
 				//console.log(respuesta); 
+				todosPatrocinadores = respuesta;
 				var opciones = " "; 		 
 				for(var i=0; i<respuesta.length; i++){
 					opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].nombre+"</option>";
@@ -72,7 +74,8 @@ function cargarPatrocinadoresxProyecto(code){
 		method:"POST",
 		dataType: "json",
 		success: function(respuesta){ 
-			if (respuesta != 'null') {
+			console.log(respuesta);
+			if (respuesta != "null") {
 				patrocinadoresEditar = respuesta;
 				var listapatrocinadores = "<label>Patrocinadores:</label><br>";
 				for(var i=0; i<respuesta.length; i++){
@@ -113,19 +116,71 @@ function cargarEstados(){
 }
 
 //******************* editar proyecto al presionar en el boton editar prooyecto ***************************
+
+function cargarPatrocinadoresSeleccionados(){
+	var parametros = "caso=8&codigo=1";
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/proyectosControl.php",
+			data: parametros,
+			method: "POST",
+			dataType: "json",
+			success: function(respuesta){ 
+				//console.log(respuesta);  console.log(patrocinadoresEditar); 
+				var opciones = " "; 	
+				var cont =0;
+				while(cont < respuesta.length){
+					for (var k = cont; k < patrocinadoresEditar.length; k++) {
+						if (respuesta[cont].codigo === patrocinadoresEditar[k].codigoPatrocinador) {
+							opciones = opciones + "<option value='"+respuesta[cont].codigo+"' selected>"+respuesta[cont].nombre+"</option>";
+							k=patrocinadoresEditar.length;
+						}else{
+							opciones = opciones + "<option value='"+respuesta[cont].codigo+"'>"+respuesta[cont].nombre+"</option>";
+						}
+					}
+					cont++;
+				}
+
+				/* for (var i = cont; i < respuesta.length; i++) {
+					console.log(respuesta[i].codigo);
+					for (var k = 0; k < patrocinadoresEditar.length; k++) {
+						if (respuesta[i].codigo === patrocinadoresEditar[k].codigoPatrocinador) {
+							opciones = opciones + "<option value='"+respuesta[i].codigo+"' selected>"+respuesta[i].nombre+"</option>";
+						}else{
+							opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].nombre+"</option>";
+						}
+					}
+					cont++;
+				} */
+				console.log(opciones);
+				$('#selPatrocinadores').html(opciones);	  
+				$('.selectpicker').selectpicker('refresh'); 
+			},
+			error: function(){
+				alert("ocurrió un error");
+			}
+		}
+	)	
+}
 function editarProyecto(){ 
 	$('#btnGuardarProyecto').addClass("hidden");
 	$('#btnCancelarGuardar').addClass("hidden");
 	$('#btnActualizarProyecto').removeClass("hidden"); 
 	$('#btnCancelarEdicion').removeClass("hidden"); 
-	
-	for (var k = 0; k < patrocinadoresEditar.length; k++) {
-		console.log(patrocinadoresEditar[k].codigoPatrocinador);	
-		$('#selPatrocinadores').val(patrocinadoresEditar[k].codigoPatrocinador).prop('selected', true);
-	} 
 	cargarEstados();
-	cargarPatrocinadores(); 
+	//cargarPatrocinadores(); 
 	cargarTiposProyecto();
+	cargarPatrocinadoresSeleccionados();
+		/* var opciones ="";
+	for (var i = 0; i < todosPatrocinadores.length; i++) {
+		for (var k = 0; k < patrocinadoresEditar.length; k++) {
+			if (todosPatrocinadores[i].codigoPatrocinador == patrocinadoresEditar[k].codigoPatrocinador) {
+				opciones = opciones + "<option value='"+todosPatrocinadores[i].codigo+"' selected>"+todosPatrocinadores[i].nombre+"</option>";
+			}else
+				opciones = opciones + "<option value='"+todosPatrocinadores[i].codigo+"'>"+todosPatrocinadores[i].nombre+"</option>";
+		}
+	}
+	$('#selPatrocinadores').html(opciones);	 */   
 	$('#txtcode').val(proyectoTemp.codigo);
 	$('#txtNomProyecto').val(proyectoTemp.nombreProyecto);
 	$('#txtLugar').val(proyectoTemp.lugar);
@@ -136,6 +191,8 @@ function editarProyecto(){
 	$('#txtCosto').val(proyectoTemp.costoEstimado);
 	$('#txtDescripcion').val(proyectoTemp.descripcion);
 	//$('#selEstados').val("1").prop('selected', true);  
+	//$('.selectpicker').selectpicker('val', 'Mustard');
+	
 }
  
 //****************funciones del panel de proyectos: tabla colaboradores*****************
@@ -538,6 +595,7 @@ $('#btnActualizarProyecto').click(function(){
 					alert(respuesta);
 					cargarSeleccionado(proyectoTemp.codProyecto);
 					cargarProyectos();
+					cargarPatrocinadoresxProyecto(proyectoTemp.codProyecto);
 				},
 				error:function(){
 					alert("Ocurrio un error");

@@ -100,6 +100,25 @@
 			."WHERE codProyecto = ".$codigoProyecto; 
 			$resultado = $miConexion->ejecutarInstruccion($updateSQL);
 			if ($resultado) {
+				//Eliminar todos los patrocinadores por proyecto
+				$deleteQuey = "DELETE FROM tblpatrocinadoresxproyecto WHERE codProyecto = ".$codigoProyecto;
+				$resultado = $miConexion->ejecutarInstruccion($deleteQuey);
+				if($resultado){
+					//volver a insertar la nueva seleccion
+					$insertPatrocinadores = "";
+					$arreglo = explode(",", $cadenaPatrocindores);
+					if(count($arreglo) > 0){
+						for($i=0; $i<count($arreglo); $i++){ 
+							$insertPatrocinadores = 
+							" insert into tblpatrocinadoresxproyecto (codPatrocinador, codProyecto) values (".$arreglo[$i]." , ".$codigoProyecto."); ";
+							//registrar los patrocinadores del proyecto
+							$resultado = $miConexion->ejecutarInstruccion($insertPatrocinadores);
+						}
+						if(!$resultado){
+							echo "Error con los patrocinadores... ";
+						} 
+					}
+				}
 				echo "Se ha actualizado exitosamente";
 			}else 
 				echo "null : ".$updateSQL;
