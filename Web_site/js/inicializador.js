@@ -212,6 +212,22 @@ function editarProyecto(){
 
  
 //****************funciones del panel de proyectos: tabla colaboradores*****************
+
+//evento click para agregar un nuevo colaborador
+$('#btnAgregarColaborador').click(function(){
+	$('#selUsuariosProyecto').removeClass("hidden");
+	$('#rolTextGroup').removeClass("hidden");
+});
+
+$('#btnActualizarColaborador').click(function(){ 
+	$('#rolTextGroup').removeClass("hidden");
+});
+
+$('#btnOcultarRolText').click(function(){
+	$('#selUsuariosProyecto').addClass("hidden");
+	$('#rolTextGroup').addClass("hidden");
+});
+
 function initTablaColaboradores(){
 	tblColaboradores = $('#tabla-colaboradores').DataTable(
 		{
@@ -624,10 +640,10 @@ function getTotalTareas(){
 
 function inicializarTabla(){
 	tblProyectos =  $('#tabla-proyectos').DataTable({
-					        "scrollY":        "250px",
-					        "scrollCollapse": true,
-									"paging":         false,
-									"dom": '<"toolbar-proy">frtip'
+				"scrollY":        "290px",
+				"scrollCollapse": true,
+				"paging":         false,
+				"dom": '<"toolbar-proy">frtip'
 	});
 
 	$("div.toolbar-proy").html( 

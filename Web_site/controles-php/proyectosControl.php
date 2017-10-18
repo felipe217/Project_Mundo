@@ -159,8 +159,8 @@
 			$miConexion->cerrarConexion();*/
 			break;
   
+		//consultas de todos los materiales de un proyecto  
 		case '4':
-			//consultas de todos los materiales de un proyecto  
 			$sqlMateriales = "SELECT codMaterial, proveedor, material, cant, precio, total FROM tblmateriales WHERE codProyecto = ".$codigoProyecto;
 			$material = new Material();
 			$resultado = $miConexion->ejecutarInstruccion($sqlMateriales);
@@ -188,7 +188,7 @@
 
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion();
-			break;
+		break;
  
 		//selecciona los colaboradores del proyecto seleccionado:
 		case '5':
