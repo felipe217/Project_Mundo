@@ -161,6 +161,7 @@ function cargarPatrocinadoresSeleccionados(){
 		}
 	)	
 }
+
 function editarProyecto(){ 
 	if (proyectoTemp != null) {
 		$('#btnGuardarProyecto').addClass("hidden");
@@ -224,12 +225,19 @@ $('#btnActualizarColaborador').click(function(){
 	$('#txtRolColaborador').val("");
 });
 
-$('#btnRegistrarColaborador').click(function(){
-	if ($('#selUsuariosProyecto').val()>0 && $('#txtRolColaborador').val()!="") {
+$('#btnRegistrarColaborador').click(function(){ 
+	var n;
+	if (!isNaN($('#txtCodOculto').val())) {
+		n= $('#txtCodOculto').val();
+	}else  if (!isNaN($('#selUsuariosProyecto').val())) {
+		n= $('#txtCodOculto').val();
+	}
+
+	if (n>0 && $('#txtRolColaborador').val()!="") {
 		var parametros = "caso=5&codigoProyecto="
 						+proyectoTemp.codProyecto
 						+"&codUsuario="
-						+$('#selUsuariosProyecto').val()
+						+n
 						+"&rol="+$('#txtRolColaborador').val();
 		console.log(parametros);
 		$.ajax(
@@ -266,6 +274,23 @@ function initTablaColaboradores(){
 	        "paging":         false
 	    }
 	);
+
+	$('#tabla-colaboradores tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			tblColaboradores.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
+	});
+
+	$('#tabla-colaboradores tbody').on( 'click', 'td', function () {  
+		if( !isNaN(tblColaboradores.cell( this ).data()) ) {  
+			$('#txtCodOculto').val(tblColaboradores.cell( this ).data());
+			alert("codigo: "+$('#txtCodOculto').val());
+		}
+	});	
 }
 function addColaborador(codUsuario,nombreUsuario,tipoUsuario,departamento,cargo,rol ){
 	tblColaboradores.row.add( [ codUsuario,
@@ -718,13 +743,13 @@ function inicializarTabla(){
 				);
 
 	$('#tabla-proyectos tbody').on( 'click', 'tr', function () {
-	        if ( $(this).hasClass('selected') ) {
-	            $(this).removeClass('selected');
-	        }
-	        else {
-	            tblProyectos.$('tr.selected').removeClass('selected');
-	            $(this).addClass('selected');
-	        }
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			tblProyectos.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
 	});
 
 	$('#tabla-proyectos tbody').on( 'dblclick', 'tr', function () {

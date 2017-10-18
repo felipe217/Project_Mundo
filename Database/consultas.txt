@@ -26,3 +26,6 @@ select  a.nombreUsuario, b.Rol FROM tblusuarios a
 inner join tblusuarioxproyecto b on a.codUsuario = b.codUsuario 
 inner join tbltipousuario c on a.codTipoUsuario = c.codTipoUsuario 
 WHERE b.Rol = 'n/a' and b.codProyecto = 1
+
+Asignar un rol a un usuario de un proyecto
+	update tblusuarioxproyecto set Rol = "practicante" where codUsuario = 4 and codProyecto = 1

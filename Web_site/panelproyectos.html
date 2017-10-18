@@ -410,6 +410,7 @@
 									<div class="col-sm-5 grid-margin">
 										<div class="input-group hidden" id="rolTextGroup">
 											<input type="text" class="form-control" placeholder="Indica un rol" id="txtRolColaborador">
+											<input type="hidden" class="" id="txtCodOculto">
 											<div class="input-group-btn">
 												<button class="btn btn-default " type="button" id="btnRegistrarColaborador"><i class="fa fa-check" aria-hidden="true"></i></button>
 												<button class="btn btn-default" type="button" id="btnOcultarRolText"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -682,7 +683,7 @@
 					  			<label>Prioridad</label>
 						    		<select class="form-control" id="selPriodidades">
 									    <option>Seleccione una</option>
-									    <option>Prioridad 1</option>
+									    <option value="alta">alta</option>
 									    <option>Prioridad 2</option>
 									    <option>Prioridad 3</option>
 									    <option>Prioridad 4</option>
@@ -716,7 +717,6 @@
 		        					<option>Usuario 3</option>
 		        					<option>Usuario 4</option>
 		        					<option>Usuario 5</option>
-
 		        				</select>       				
 		        			</div>
 		        		</div>
