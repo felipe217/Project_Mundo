@@ -2,21 +2,10 @@
 	/* casos para este archivo:
 		1. Registrar un proyecto
 		2. Actualizar un proyecto
-		3. eliminar un proyecto  */
+		3. eliminar un proyecto  
+		4. Agregar un nuevo usuario a un proyecto
+		5. Asignar un rol a un usuario de un proyecto */
 	
-	//capturando los datos del proyecto
-	$codigoProyecto = $_POST['codigoProyecto'];
-	$nombreProyecto = $_POST['nombre'];
-	$fechaInicio = $_POST['fechaInicio'];	
-	$fechaFinal = $_POST['fechaFinal'];
-	$lugar = $_POST['lugar'];
-	$descripcion = $_POST['descripcion'];
-	$costoEstimado = $_POST['costo'];
-	$beneficiario = $_POST['beneficiario'];
-	$estado = $_POST['codEstado'];
-	$codTipoProyecto = $_POST['codTipoProyecto'];
-	$codUsuario = $_POST['codUsuario'];
-	$cadenaPatrocindores = $_POST['patrocinadores'];
 	$caso = $_POST['caso'];
 
 	/*"nombre=nombre&fechaInicio=fechaInicio&fechaFinal=fechafinal&lugar=lugar&costo=costo&beneficiario=beneficiario&codEstado=codEstado&codTipoProyecto=tipo&codUsuario=codUsuario"*/
@@ -29,6 +18,20 @@
 	switch ($caso) {
 		//caso 1, registro de un nuevo proyecto
 		case '1':
+			//capturando los datos del proyecto
+			$codigoProyecto = $_POST['codigoProyecto'];
+			$nombreProyecto = $_POST['nombre'];
+			$fechaInicio = $_POST['fechaInicio'];	
+			$fechaFinal = $_POST['fechaFinal'];
+			$lugar = $_POST['lugar'];
+			$descripcion = $_POST['descripcion'];
+			$costoEstimado = $_POST['costo'];
+			$beneficiario = $_POST['beneficiario'];
+			$estado = $_POST['codEstado'];
+			$codTipoProyecto = $_POST['codTipoProyecto'];
+			$codUsuario = $_POST['codUsuario'];
+			$cadenaPatrocindores = $_POST['patrocinadores'];
+
 				//consulta para registrar el proyecto
 				$consulta = "INSERT INTO tblproyectos ("
 				."codProyecto, "
@@ -85,6 +88,20 @@
 
 		//caso 2, actualizar un proyecto registrado
 		case '2':
+			//capturando los datos del proyecto
+			$codigoProyecto = $_POST['codigoProyecto'];
+			$nombreProyecto = $_POST['nombre'];
+			$fechaInicio = $_POST['fechaInicio'];	
+			$fechaFinal = $_POST['fechaFinal'];
+			$lugar = $_POST['lugar'];
+			$descripcion = $_POST['descripcion'];
+			$costoEstimado = $_POST['costo'];
+			$beneficiario = $_POST['beneficiario'];
+			$estado = $_POST['codEstado'];
+			$codTipoProyecto = $_POST['codTipoProyecto'];
+			$codUsuario = $_POST['codUsuario'];
+			$cadenaPatrocindores = $_POST['patrocinadores'];
+			
 			//consulta update
 			$updateSQL = "UPDATE tblproyectos SET " 
 								."nombreProyecto =  '".$nombreProyecto."', "
@@ -122,7 +139,23 @@
 				echo "Se ha actualizado exitosamente";
 			}else 
 				echo "null : ".$updateSQL;
-			break;
+		break;
+		//Asignar un rol a un usuario de un proyecto
+		case '5':
+			//capturando los datos del proyecto
+			$codigoProyecto = $_POST['codigoProyecto'];
+			$codUsuario = $_POST['codUsuario'];
+			$rol = $_POST['rol'];
+			$sqlAgregarRol =
+				"update tblusuarioxproyecto set Rol = '"
+				.$rol."' where codUsuario = ".$codUsuario." and codProyecto = ".$codigoProyecto;
+			
+			$resultado = $miConexion->ejecutarInstruccion($sqlAgregarRol);
+			if ($resultado) {
+				echo "Rol asignado exitosamente";
+			}else
+				echo "No se pudo asignar el rol.".$sqlAgregarRol;
+		break;
 	}
 
 	

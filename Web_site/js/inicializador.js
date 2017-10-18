@@ -216,29 +216,48 @@ function editarProyecto(){
 $('#btnAgregarColaborador').click(function(){
 	$('#selUsuariosProyecto').removeClass("hidden");
 	$('#rolTextGroup').removeClass("hidden");
+	$('#txtRolColaborador').val("");
 });
 
 $('#btnActualizarColaborador').click(function(){ 
 	$('#rolTextGroup').removeClass("hidden");
+	$('#txtRolColaborador').val("");
 });
 
 $('#btnRegistrarColaborador').click(function(){
-	if ($('#txtRolColaborador').val()!="") {
+	if ($('#selUsuariosProyecto').val()>0 && $('#txtRolColaborador').val()!="") {
+		var parametros = "caso=5&codigoProyecto="
+						+proyectoTemp.codProyecto
+						+"&codUsuario="
+						+$('#selUsuariosProyecto').val()
+						+"&rol="+$('#txtRolColaborador').val();
+		console.log(parametros);
+		$.ajax(
+			{
+				url: "../Web_site/controles-php/registrarProyecto.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){ 
+					cargarColaboradores(proyectoTemp.codProyecto);
+					cargarColaboradoresSinRol(proyectoTemp.codProyecto);
+					alert(respuesta);
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
+			}
+		);    
 		$('#selUsuariosProyecto').addClass("hidden");
 		$('#rolTextGroup').addClass("hidden");
 	}else
-		alert("Debe indicar un rol");
+		alert("Seleccione un usuario y luego indique un rol.");
 });
 
 $('#btnOcultarRolText').click(function(){ 
 	$('#selUsuariosProyecto').addClass("hidden");
 	$('#rolTextGroup').addClass("hidden");
 });
-
-function agregarColaborador(){
-	
-}
-
+ 
 function initTablaColaboradores(){
 	tblColaboradores = $('#tabla-colaboradores').DataTable(
 		{
@@ -249,7 +268,6 @@ function initTablaColaboradores(){
 	);
 }
 function addColaborador(codUsuario,nombreUsuario,tipoUsuario,departamento,cargo,rol ){
-	
 	tblColaboradores.row.add( [ codUsuario,
 								nombreUsuario,
 								tipoUsuario,
