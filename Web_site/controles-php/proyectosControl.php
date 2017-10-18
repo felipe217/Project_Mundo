@@ -53,7 +53,7 @@
 			//consultar todos los datos de un proyecto 
 			$dataProyecto = 
 				"Select A.codProyecto, A.nombreProyecto, A.fechaInicio, A.fechafinal, A.lugar, A.descripcion, A.beneficiario,"
-			    ."B.estado, A.costoEstimado, "
+			    ." A.codTipoProyecto, B.estado, B.codEstado, A.costoEstimado, "
 			    ."C.nombreUsuario, "
 			    ."D.tipoProyecto "
 			."FROM tblProyectos A "
@@ -75,6 +75,9 @@
 				$proyecto->setCostoEstimado($fila['costoEstimado']);
 				$proyecto->setResponsable($fila['nombreUsuario']);
 				$proyecto->setBeneficiario($fila['beneficiario']);
+				$proyecto->setTipoProyecto($fila['tipoProyecto']);
+				$proyecto->setCodTipoProyecto($fila['codTipoProyecto']);
+				$proyecto->setCodEstado($fila['codEstado']);
 
 				$JSONLine = $JSONLine.$proyecto->toJSON()."-";
 				

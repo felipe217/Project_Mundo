@@ -10,7 +10,10 @@
 		private $costoEstimado;
 		private $beneficiario;
 		private $estado;
+		private $codEstado;
 		private $responsable;
+		private $codTipoProyecto;
+		private $tipoProyecto;
 
 		public function construir(
 					$codigo,
@@ -35,6 +38,27 @@
 			
 		}		
 
+		public function setCodEstado($codEstado){
+			$this->codEstado = $codEstado;
+		}
+
+		public function getCodEstado(){
+			return $this->codEstado;
+		}
+
+		public function setCodTipoProyecto($codTipoProyecto){
+			$this->codTipoProyecto = $codTipoProyecto;
+		}
+		public function getCodTipoProyecto(){
+			return $this->codTipoProyecto;
+		}
+
+		public function setTipoProyecto($tipoProyecto){
+			$this->tipoProyecto = $tipoProyecto;
+		}
+		public function getTipoProyecto(){
+			return $this->tipoProyecto;
+		}
 		
 
 		public function setCodProyecto($code){
