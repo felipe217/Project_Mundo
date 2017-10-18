@@ -180,7 +180,7 @@
 					
 				}
 				if ($cant==1) {
-					echo $JSONLine;
+					echo rtrim($JSONLine,"*");
 				}else
 					echo rtrim($JSONLine,"*");
 			}else

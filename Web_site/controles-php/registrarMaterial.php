@@ -9,6 +9,7 @@
 	$precio = $_POST['precio'];	
 	$total = $_POST['total'];		
 	$codProyecto = $_POST['codProyecto'];
+	$fechaAsignacion = $_POST['fechaAsignacion'];
 	
 	include_once("../class/class_conexion.php");	
 
@@ -20,7 +21,8 @@
 	                            ."cant, "
 	                            ."precio, "
 	                            ."total, "             
-	                            ."codProyecto"
+								."codProyecto,"
+								."fechaAsignacion"
 	                        .") "
 
 	                       ."VALUES ( null ,"
@@ -29,7 +31,8 @@
 	                                ."'".$cantidad."',"
 	                                ."'".$precio."',"
 	                                ."'".$total."',"          
-	                                ."'".$codProyecto."')";
+									."'".$codProyecto."',"
+									."'".$fechaAsignacion."')";
 
 	$resultado = $miConexion->ejecutarInstruccion($consulta);
 	if ($resultado) {		

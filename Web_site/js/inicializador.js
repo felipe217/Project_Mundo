@@ -5,6 +5,7 @@
 var cuerpo="";
 var tblProyectos; //tabla lateral de proyectos
 var tblTareas; //tabla de tareas
+var totalTareas =0;
 var tblMateriales; //tabla materiales
 var tblColaboradores; //tabla colaboradores
 var valor = 0;
@@ -259,7 +260,8 @@ function cargarColaboradores(codigoProyecto){
           	console.log(respuesta);
           	if (respuesta!="null") { 
       		  json = respuesta;      		  
-              var json_array = json.split('*');
+			  var json_array = json.split('*');
+			  $('#colaboradoresCount').html(json_array.length);
               for (var i = 0; i<json_array.length; i++) { 
                 var objColaborador = JSON.parse(json_array[i]);
                 addColaborador(objColaborador.codUsuario,
@@ -270,7 +272,7 @@ function cargarColaboradores(codigoProyecto){
 							objColaborador.rol );
               }
           	}else
-          		console.log("no hay colaboradores");               
+			  $('#colaboradoresCount').html("0");            
           },
           error:function(){
             alert("Ocurrio un error");
@@ -312,7 +314,8 @@ $('#btnConfirmarMaterial').click(function(){
 	+"&cantidad="+$('#txtMatUnidades').val()
 	+"&precio="+$('#txtPrecioUnidad').val()
 	+"&total="+$('#txtMatTotal').val()
-	+"&codProyecto="+proyectoTemp.codProyecto;
+	+"&codProyecto="+proyectoTemp.codProyecto
+	+"&fechaAsignacion="+$('#txtMatFecha').val();
 	console.log(parametros);
 	$.ajax(
 			{
@@ -361,10 +364,11 @@ function cargarMateriales(codigoProyecto){
           method:"POST",
           success:function(respuesta){
           	console.log(respuesta);
-          	if (respuesta!="null") {
+          	if (respuesta!="null") { 
       		  json = respuesta;
       		  tblMateriales.clear().draw();
-              var json_array = json.split('*');
+			  var json_array = json.split('*');
+			  $('#materialesCount').html(json_array.length);
               for (var i = 0; i<json_array.length; i++) { 
                 var objMaterial = JSON.parse(json_array[i]);
                 addMaterial(objMaterial.codMaterial,
@@ -375,7 +379,7 @@ function cargarMateriales(codigoProyecto){
 							objMaterial.total );
               }
           	}else
-          		console.log("no hay tareas");
+			  $('#materialesCount').html("0");
               
           },
           error:function(){
@@ -406,7 +410,7 @@ function agregarTarea(codTarea, nombreTarea,descripcion,prioridad,fechaInicio,fe
 }
 
 function cargarTareas(codigoProyecto){
-    tblTareas.clear().draw();
+	tblTareas.clear().draw();
 	var parametros = "caso=3&codigo="+codigoProyecto+"";
 	$.ajax(
         {
@@ -417,7 +421,8 @@ function cargarTareas(codigoProyecto){
           	console.log(respuesta);
           	if (respuesta!="null") {
       		  json = respuesta;
-              var json_array = json.split('*');
+			  var json_array = json.split('*');
+			  $('#tareasCount').html(json_array.length);
               for (var i = 0; i<json_array.length; i++) { 
                 var objTarea = JSON.parse(json_array[i]);
                 agregarTarea(objTarea.codTarea,
@@ -427,15 +432,19 @@ function cargarTareas(codigoProyecto){
 							objTarea.fechaInicio,
 							objTarea.fechaEntrega );
               }
-          	}else
-          		console.log("no hay tareas");
+          	}else{
+				$('#tareasCount').html("0");
+				//console.log("no hay tareas");
+			  }
+          		
               
           },
           error:function(){
             alert("Ocurrio un error");
           }
         }
-      );  
+	  );  
+	 
 }
 
 //****************funciones del panel de proyectos*****************
@@ -634,8 +643,8 @@ function addProyecto(cod, nombre, estado){
 }); */
 
 
-function getTotalTareas(){
-	return tblTareas.rows().data().length;
+function getTotalTareas(){ 
+	return totalTareas;
 }
 
 function inicializarTabla(){
@@ -673,7 +682,7 @@ function inicializarTabla(){
 			  cargarMateriales(valor);
 			  cargarColaboradores(valor);
 			  cargarPatrocinadoresxProyecto(valor);
-			  $('#tareasCount').html(getTotalTareas()); 
+			   
 			}
 		});	
 }
