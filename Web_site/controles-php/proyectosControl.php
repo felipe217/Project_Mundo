@@ -10,6 +10,7 @@
 		 7. carga todos los diferentes tipos de proyectos establecidos en la base de datos 
 		 8. carga todos los patrocinadores en el sistema
 		 9. carga todos los patrocinadoresde un proyecto especifico 
+		10. carga los usuarios sin rol asignados a un proyecto
 
 
 	*/ 
@@ -202,7 +203,7 @@
 								."FROM tblusuarios a "
 								."inner join tblusuarioxproyecto b on a.codUsuario = b.codUsuario "
 								."inner join tbltipousuario c on a.codTipoUsuario = c.codTipoUsuario "
-								."WHERE b.codProyecto = ".$codigoProyecto;
+								."WHERE b.Rol != 'n/a' and b.codProyecto = ".$codigoProyecto;
 
 			$resultado = $miConexion->ejecutarInstruccion($sqlColaboradores);
 			$cant = $miConexion->cantidadRegistros($resultado); 
@@ -359,7 +360,41 @@
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion(); 
 			break;
+		
+		//carga los usuarios asignados a un proyecto 
+		case '10':
+			$sqlColaboradores = 
+			"select  "
+				."	a.codUsuario, a.nombreUsuario, "  
+				."  b.Rol "
+			."FROM tblusuarios a "
+			."inner join tblusuarioxproyecto b on a.codUsuario = b.codUsuario "
+			."inner join tbltipousuario c on a.codTipoUsuario = c.codTipoUsuario "
+			."WHERE b.Rol = 'n/a' and b.codProyecto = ".$codigoProyecto;
 
+			$resultado = $miConexion->ejecutarInstruccion($sqlColaboradores);
+			$cant = $miConexion->cantidadRegistros($resultado); 
+			$colaborador = new Colaborador();
+			if ($cant>0) {
+
+			while ($fila = $miConexion->obtenerFila($resultado)){
+				$colaborador->setCodUsuario($fila['codUsuario']);
+				$colaborador->setNombreUsuario($fila['nombreUsuario']);
+				$colaborador->setRol($fila['Rol']); 
+				$JSONLine = $JSONLine.$colaborador->toJSON()."*"; 
+			}
+			if ($cant==1) {
+				echo rtrim($JSONLine,"*");
+			}else
+				echo rtrim($JSONLine,"*");
+			}else
+			echo "null";
+
+			$miConexion->liberarResultado($resultado);
+			$miConexion->cerrarConexion();
+		break;
+		
+		
 		default:
 		# code...
 		break; 

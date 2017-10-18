@@ -209,8 +209,6 @@ function editarProyecto(){
 		$('#frmNuevoProyecto').modal('hide');
 	}
 }
-
-
  
 //****************funciones del panel de proyectos: tabla colaboradores*****************
 
@@ -224,10 +222,22 @@ $('#btnActualizarColaborador').click(function(){
 	$('#rolTextGroup').removeClass("hidden");
 });
 
-$('#btnOcultarRolText').click(function(){
+$('#btnRegistrarColaborador').click(function(){
+	if ($('#txtRolColaborador').val()!="") {
+		$('#selUsuariosProyecto').addClass("hidden");
+		$('#rolTextGroup').addClass("hidden");
+	}else
+		alert("Debe indicar un rol");
+});
+
+$('#btnOcultarRolText').click(function(){ 
 	$('#selUsuariosProyecto').addClass("hidden");
 	$('#rolTextGroup').addClass("hidden");
 });
+
+function agregarColaborador(){
+	
+}
 
 function initTablaColaboradores(){
 	tblColaboradores = $('#tabla-colaboradores').DataTable(
@@ -248,8 +258,35 @@ function addColaborador(codUsuario,nombreUsuario,tipoUsuario,departamento,cargo,
 								rol ] ).draw( false );
 }
 
-function cargarColaboradores(codigoProyecto){
+function cargarColaboradoresSinRol(codigoProyecto){
 	tblColaboradores.clear().draw();
+	$('#selUsuariosProyecto').html("<option>Seleccione uno</option> ");
+	var parametros = "caso=10&codigo="+codigoProyecto+""; 
+	$.ajax(
+        {
+          url: "../Web_site/controles-php/proyectosControl.php",
+          data: parametros,
+          method:"POST",
+          success:function(respuesta){
+          	console.log(respuesta);
+          	if (respuesta!="null") { 
+      		  json = respuesta;      		  
+			  var json_array = json.split('*'); 
+              for (var i = 0; i<json_array.length; i++) { 
+                var objColaborador = JSON.parse(json_array[i]); 
+				$('#selUsuariosProyecto').append('<option value="'+objColaborador.codUsuario+'">'+objColaborador.nombreUsuario+'</option>');
+              }
+          	}			             
+          },
+          error:function(){
+            alert("Ocurrio un error");
+          }
+        }
+      );  
+}
+
+function cargarColaboradores(codigoProyecto){
+	tblColaboradores.clear().draw(); 
 	var parametros = "caso=5&codigo="+codigoProyecto+""; 
 	$.ajax(
         {
@@ -269,7 +306,7 @@ function cargarColaboradores(codigoProyecto){
 							objColaborador.tipoUsuario,
 							objColaborador.departamento,
 							objColaborador.cargo,
-							objColaborador.rol );
+							objColaborador.rol ); 
               }
           	}else
 			  $('#colaboradoresCount').html("0");            
@@ -341,7 +378,11 @@ function initTablaMateriales(){
 			{
 		        "scrollY":        "250px",
 		        "scrollCollapse": true,
-		        "paging":         false
+				"paging":         false,
+				"language": {
+					"decimal": ",",
+					"thousands": "."
+				}
 		    });
 }
 
@@ -682,6 +723,7 @@ function inicializarTabla(){
 			  cargarMateriales(valor);
 			  cargarColaboradores(valor);
 			  cargarPatrocinadoresxProyecto(valor);
+			  cargarColaboradoresSinRol(valor);
 			   
 			}
 		});	

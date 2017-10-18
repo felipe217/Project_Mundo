@@ -26,6 +26,15 @@
 			$this->rol = $rol;
 		}
 
+		public function setCodUsuario($codigoUsuario){
+			$this->codUsuario = $codigoUsuario;
+		}
+		public function setNombreUsuario($nomUser){
+			$this->nombreUsuario = $nomUser;
+		}
+		public function setRol($rol){
+			$this->rol=$rol;
+		}
 		public function getCodUsuario(){
 			return $this->codUsuario;
 		}
