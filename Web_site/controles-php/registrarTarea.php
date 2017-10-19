@@ -62,7 +62,7 @@
 				}else
 					echo "hubo un lindo y hermoso error";
 		break;
-		
+		//editar la información de una tarea
 		case '2': 
 			$codTarea = $_POST['codTarea'];
 			//consulta update
@@ -77,7 +77,7 @@
 			$resultado = $miConexion->ejecutarInstruccion($updateSQL);
 			if ($resultado) {
 				//Eliminar todos los usuarios enrolados en el proyecto y asignados a la tarea
-				$deleteQuey = "DELETE FROM tblusuarioxtarea WHERE codUsuario = ".$codigoProyecto;
+				$deleteQuey = "DELETE from tblusuarioxtarea where codTarea = ".$codTarea;
 				$resultado = $miConexion->ejecutarInstruccion($deleteQuey);
 				if($resultado){
 					//volver a insertar la nueva seleccion
@@ -85,8 +85,8 @@
 					$arreglo = explode(",", $cadenaDeUsuarios);
 					if(count($arreglo) > 0){
 						for($i=0; $i<count($arreglo); $i++){ 
-							$insertUsuarios = 
-							" insert into tblpatrocinadoresxproyecto (codPatrocinador, codProyecto) values (".$arreglo[$i]." , ".$codigoProyecto."); ";
+							$insertUsuarios =  "INSERT INTO tblusuarioxtarea ( codTarea, codUsuario )" 
+											   ." VALUES ('".$codTarea."', '".$arreglo[$i]."' )";
 							//registrar los usuarios del proyecto
 							$resultado = $miConexion->ejecutarInstruccion($insertUsuarios);
 						}

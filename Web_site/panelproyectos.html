@@ -258,7 +258,7 @@
 									  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#frmNuevaTarea"> 
 									  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva
 									  </button>
-									  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea">
+									  <button type="button" onclick="editarTarea();" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea">
 									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 									  </button>
 									  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmComentarios">
@@ -718,7 +718,8 @@
 		        	</form>
 		      	</div>
 		      	<div class="modal-footer">
-		        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-success hidden" id="btnActualizarTarea">Actualizar</button>
 		        	<button type="button" class="btn btn-success" id="btn-guardar-tarea">Guardar</button>
 		      	</div>
 	    	</div><!-- /.modal-content -->

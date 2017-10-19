@@ -12,6 +12,7 @@ var valor = 0;
 var codTareaSel =0;
 var usuarioActual=1;
 var proyectoTemp =null; //es el proyecto seleccionado, objeto necesario para la funcion de edicion de los datos
+var tareaTemp = null; //es un objeto json que contiene todos los datos de la tarea seleccioada. 
 var patrocinadoresEditar; 
 var todosPatrocinadores;
 
@@ -508,6 +509,45 @@ $('#btn-guardar-tarea').click(function(){
 	$('#frmNuevaTarea').modal('hide');
 }); 
 
+function editarTarea(){
+	$('#btnActualizarTarea').removeClass("hidden");
+	$('#btn-guardar-tarea').addClass("hidden");
+	//colocar los valores de la tarea seleccionada en las respectivas cajas de texto
+}
+
+$('#btnActualizarTarea').click(function(){
+		var parametros = 
+		"caso=2"
+		+"&nombreTarea="+$('#txtNomTarea').val()
+		+"&descripcion="+$('#txtTareaDesc').val()
+		+"&prioridad="+$('#selPriodidades').val()
+		+"&fechaInicio="+$('#txtTareaInicio').val()
+		+"&fechaEntrega="+$('#txtTareaEntrega').val()
+		+"&cadenaDeUsuarios="+$('#selUsuarios').val()
+		+"&codTarea="+codTareaSel
+		+"&codProyecto="+proyectoTemp.codProyecto;
+		
+		console.log(parametros);
+		$.ajax(
+			{
+				url: "../Web_site/controles-php/registrarTarea.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){
+					alert(respuesta);
+					cargarTareas(proyectoTemp.codProyecto);
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
+			}
+		);  
+	
+		$('#frmNuevaTarea').modal('hide');
+	$('#btnActualizarTarea').addClass("hidden");
+	$('#btn-guardar-tarea').removeClass("hidden"); 
+});
+
 function initTablaTareas(){
 	tblTareas = $('#tabla-tareas').DataTable(
 				{
@@ -516,6 +556,23 @@ function initTablaTareas(){
 			        "paging":         false
 			    }
 			);
+	
+	$('#tabla-tareas tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			tblTareas.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
+	});
+
+	$('#tabla-tareas tbody').on( 'click', 'td', function () {  
+		if( !isNaN(tblTareas.cell( this ).data()) ) {  
+			 codTareaSel = tblTareas.cell( this ).data();
+			 alert(codTareaSel);
+		}
+	});	
 }
 
 function agregarTarea(codTarea, nombreTarea,descripcion,prioridad,fechaInicio,fechaEntrega){
