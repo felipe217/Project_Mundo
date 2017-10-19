@@ -287,8 +287,7 @@ function initTablaColaboradores(){
 
 	$('#tabla-colaboradores tbody').on( 'click', 'td', function () {  
 		if( !isNaN(tblColaboradores.cell( this ).data()) ) {  
-			$('#txtCodOculto').val(tblColaboradores.cell( this ).data());
-			alert("codigo: "+$('#txtCodOculto').val());
+			$('#txtCodOculto').val(tblColaboradores.cell( this ).data()); 
 		}
 	});	
 }
@@ -302,8 +301,7 @@ function addColaborador(codUsuario,nombreUsuario,tipoUsuario,departamento,cargo,
 }
 
 function cargarColaboradoresSinRol(codigoProyecto){
-	tblColaboradores.clear().draw();
-	$('#selUsuariosProyecto').html("<option>Seleccione uno</option> ");
+	tblColaboradores.clear().draw(); 
 	var parametros = "caso=10&codigo="+codigoProyecto+""; 
 	$.ajax(
         {
@@ -314,10 +312,9 @@ function cargarColaboradoresSinRol(codigoProyecto){
           	console.log(respuesta);
           	if (respuesta!="null") { 
       		  json = respuesta;      		  
-			  var json_array = json.split('*'); 
+			  		var json_array = json.split('*'); 
               for (var i = 0; i<json_array.length; i++) { 
-                var objColaborador = JSON.parse(json_array[i]); 
-				$('#selUsuariosProyecto').append('<option value="'+objColaborador.codUsuario+'">'+objColaborador.nombreUsuario+'</option>');
+                var objColaborador = JSON.parse(json_array[i]);  
               }
           	}			             
           },
@@ -330,6 +327,7 @@ function cargarColaboradoresSinRol(codigoProyecto){
 
 function cargarColaboradores(codigoProyecto){
 	tblColaboradores.clear().draw(); 
+	$("#selUsuarios").html("");
 	var parametros = "caso=5&codigo="+codigoProyecto+""; 
 	$.ajax(
         {
@@ -339,20 +337,26 @@ function cargarColaboradores(codigoProyecto){
           success:function(respuesta){
           	console.log(respuesta);
           	if (respuesta!="null") { 
-      		  json = respuesta;      		  
-			  var json_array = json.split('*');
-			  $('#colaboradoresCount').html(json_array.length);
-              for (var i = 0; i<json_array.length; i++) { 
-                var objColaborador = JSON.parse(json_array[i]);
-                addColaborador(objColaborador.codUsuario,
-							objColaborador.nombreUsuario,
-							objColaborador.tipoUsuario,
-							objColaborador.departamento,
-							objColaborador.cargo,
-							objColaborador.rol ); 
+							json = respuesta;      		  
+							var json_array = json.split('*');
+							$('#colaboradoresCount').html(json_array.length);
+								for (var i = 0; i<json_array.length; i++) { 
+									var objColaborador = JSON.parse(json_array[i]);
+									addColaborador(objColaborador.codUsuario,
+										objColaborador.nombreUsuario,
+										objColaborador.tipoUsuario,
+										objColaborador.departamento,
+										objColaborador.cargo,
+										objColaborador.rol ); 
+								//Agregando usuarios en formulario modal
+								$("#selUsuarios").append('<option value="'+objColaborador.codUsuario+'">'+objColaborador.nombreUsuario+'</option>');
               }
-          	}else
-			  $('#colaboradoresCount').html("0");            
+							$('.selectpicker').selectpicker('refresh');
+          	}else{
+							$('#colaboradoresCount').html("0");  
+							$("#selUsuarios").html(""); 
+						}
+			  			         
           },
           error:function(){
             alert("Ocurrio un error");
@@ -474,6 +478,36 @@ function cargarMateriales(codigoProyecto){
 }
 
 //****************funciones del panel de proyectos: tabla tareas*****************
+
+$('#btn-guardar-tarea').click(function(){ 
+	var parametros = 
+	"caso=1"
+	+"&nombreTarea="+$('#txtNomTarea').val()
+	+"&descripcion="+$('#txtTareaDesc').val()
+	+"&prioridad="+$('#selPriodidades').val()
+	+"&fechaInicio="+$('#txtTareaInicio').val()
+	+"&fechaEntrega="+$('#txtTareaEntrega').val()
+	+"&cadenaDeUsuarios="+$('#selUsuarios').val()
+	+"&codProyecto="+proyectoTemp.codProyecto;
+	console.log(parametros);
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/registrarTarea.php",
+			data: parametros,
+			method:"POST",
+			success:function(respuesta){
+				alert(respuesta);
+				cargarTareas(proyectoTemp.codProyecto);
+			},
+			error:function(){
+				alert("Ocurrio un error");
+			}
+		}
+	);   
+	//agregarTarea(0, $('#txtNomTarea').val(),$('#selPriodidades').val(),$('#txtTareaInicio').val(),$('#txtTareaEntrega').val(), "cualquier");
+	$('#frmNuevaTarea').modal('hide');
+}); 
+
 function initTablaTareas(){
 	tblTareas = $('#tabla-tareas').DataTable(
 				{
@@ -519,16 +553,13 @@ function cargarTareas(codigoProyecto){
           	}else{
 				$('#tareasCount').html("0");
 				//console.log("no hay tareas");
-			  }
-          		
-              
+			  }              
           },
           error:function(){
             alert("Ocurrio un error");
           }
         }
 	  );  
-	 
 }
 
 //****************funciones del panel de proyectos*****************
@@ -692,45 +723,6 @@ function addProyecto(cod, nombre, estado){
     tblProyectos.row.add( [cod,nombre,estado ] ).draw( false );
 }
  
-
-
-//evento click para agregar nueva tarea
-/* $('#btn-guardar-tarea').click(function(){ 
-	var parametros = 
-	"nombreTarea="+$('#txtNomTarea').val()
-	+"&fechaInicio="+$('#txtFechaInicio').val()
-	+"&fechaFinal="+$('#txtFechaFinal').val()
-	+"&lugar="+$('#txtLugar').val()
-	+"&costo="+$('#txtCosto').val()
-	+"&beneficiario="+$('#txtBeneficiario').val()
-	+"&codEstado="+$('#selEstados').val()
-	+"&codTipoProyecto="+$('#selTipoProyecto').val()
-	+"&descripcion="+$('#txtDescripcion').val()
-	+"&codUsuario="+usuarioActual+"";
-	console.log(parametros);
-	$.ajax(
-	        {
-	          url: "../Web_site/controles-php/registrarTarea.php",
-	          data: parametros,
-	          method:"POST",
-	          success:function(respuesta){
-	          	 alert(respuesta);
-	          },
-	          error:function(){
-	            alert("Ocurrio un error");
-	          }
-	        }
-	      );   
-
-	addProyecto(valor, $('#txtNomProyecto').val(), 'proceso');
-	$('#frm').modal('hide');
-}); */
-
-
-function getTotalTareas(){ 
-	return totalTareas;
-}
-
 function inicializarTabla(){
 	tblProyectos =  $('#tabla-proyectos').DataTable({
 				"scrollY":        "290px",
