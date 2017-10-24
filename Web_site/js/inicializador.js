@@ -1,4 +1,8 @@
 
+//hola Allan 
+
+
+
 //lunes 10
 
 //variables globales
