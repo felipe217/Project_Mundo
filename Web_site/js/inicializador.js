@@ -948,7 +948,7 @@ function validarFormularioMaterial(){
 }
 
 
-//funciones de validacion hhhh
+//funciones de validacion 
 function noVacio(valor){
 	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
 	return isCorrect;

@@ -29,3 +29,44 @@ WHERE b.Rol = 'n/a' and b.codProyecto = 1
 
 Asignar un rol a un usuario de un proyecto
 	update tblusuarioxproyecto set Rol = "practicante" where codUsuario = 4 and codProyecto = 1
+
+
+
+
+
+
+	//consulta a la tabla patrocinador agregando el campo direccion
+	ALTER TABLE tblpatrocinadores ADD direccion VARCHAR(150) NOT NULL ;
+
+
+
+	//consultar la información de un patrocinador especifico
+	SELECT codPatrocinador, nombre, tipoPatrocinador, lugarProcedencia, correoElectronico, nombreContacto,
+	 telefonoContacto, direccion FROM tblpatrocinadores WHERE codPatrocinador = ".$codigoPatrocinador;
+
+	//Insert de un nuevo patrocinador
+
+	INSERT INTO tblpatrocinadores (codPatrocinador, nombre, tipoPatrocinador, lugarProcedencia, correoElectronico, nombreContacto,
+	 telefonoContacto, direccion) VALUES ();
+
+	//update de un patrocinador
+	UPDATE tblpatrocinadores SET codPatrocinador=[value-1],nombre=[value-2],tipoPatrocinador=[value-3],
+	lugarProcedencia=[value-4],correoElectronico=[value-5],nombreContacto=[value-6],
+	telefonoContacto=[value-7],direccion=[value-8] WHERE codPatrocinador = ".$codigoPatrocinador;
+
+	//consulta de los patrocionios 
+	SELECT codigo, tipoPatrocinio, descripcion, fecha, valor, codPatrocinador FROM tblpatrocinios
+	 WHERE codPatrocinio = ".$codigoPatrocinio;
+
+	//Insert de un nuevo patrocionio
+	INSERT INTO tblpatrocinios (codigo, tipoPatrocinio, descripcion, fecha, valor, codPatrocinador) 
+	VALUES ();
+
+
+	//Consulta de los todos los desembolsos
+	SELECT codDesembolso, fecha, valor, codPatrocinio, codProyecto FROM tbldesembolsos 
+	WHERE codDesembolso = ".$codigoDesembolso;
+
+	//Insert de un nuevo desembolsos
+	INSERT INTO tbldesembolsos (codDesembolso, fecha, valor, codPatrocinio, codProyecto) 
+	VALUES ();
