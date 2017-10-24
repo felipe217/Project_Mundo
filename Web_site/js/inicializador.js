@@ -128,18 +128,30 @@ function cargarPatrocinadoresSeleccionados(){
 				//console.log(respuesta);  console.log(patrocinadoresEditar); 
 				var opciones = " "; 	
 				var cont =0;
-				/* while(cont < respuesta.length){
-					for (var k = cont; k < patrocinadoresEditar.length; k++) {
-						if (respuesta[cont].codigo === patrocinadoresEditar[k].codigoPatrocinador) {
-							opciones = opciones + "<option value='"+respuesta[cont].codigo+"' selected>"+respuesta[cont].nombre+"</option>";
-							 
-						}else{
-							opciones = opciones + "<option value='"+respuesta[cont].codigo+"'>"+respuesta[cont].nombre+"</option>";
+				var flag = 0; 
+				if (patrocinadoresEditar == null) {
+					cargarPatrocinadores();
+				}else{
+					while(cont < respuesta.length){
+						for (var k = cont; k < patrocinadoresEditar.length; k++) {
+							if (respuesta[cont].codigo === patrocinadoresEditar[k].codigoPatrocinador) {
+								opciones = opciones + "<option value='"+respuesta[cont].codigo+"' selected>"+respuesta[cont].nombre+"</option>";
+								 k=patrocinadoresEditar.length;
+								 flag=1;
+							}
 						}
-					}
-					cont++;
-				} */
+						if(flag==0){
+							opciones = opciones + "<option value='"+respuesta[cont].codigo+"'>"+respuesta[cont].nombre+"</option>";
+						}else {
+							flag=0;
+						}
+						cont++;
+					} 
 
+					$('#selPatrocinadores').html(opciones);	  
+					$('.selectpicker').selectpicker('refresh'); 
+				}
+				
 				/* for (var i = cont; i < respuesta.length; i++) {
 					console.log(respuesta[i].codigo);
 					for (var k = 0; k < patrocinadoresEditar.length; k++) {
@@ -153,8 +165,7 @@ function cargarPatrocinadoresSeleccionados(){
 					cont++;
 				} */
 				console.log(opciones);
-				$('#selPatrocinadores').html(opciones);	  
-				$('.selectpicker').selectpicker('refresh'); 
+				
 			},
 			error: function(){
 				alert("ocurrió un error");
@@ -170,20 +181,20 @@ function editarProyecto(){
 		$('#btnActualizarProyecto').removeClass("hidden"); 
 		$('#btnCancelarEdicion').removeClass("hidden"); 
 		cargarEstados();
-		cargarPatrocinadores(); 
-		cargarTiposProyecto(); 
+		//cargarPatrocinadores(); 
+		cargarTiposProyecto();  
 		
-		//cargarPatrocinadoresSeleccionados();
-			/* var opciones ="";
-		for (var i = 0; i < todosPatrocinadores.length; i++) {
-			for (var k = 0; k < patrocinadoresEditar.length; k++) {
-				if (todosPatrocinadores[i].codigoPatrocinador == patrocinadoresEditar[k].codigoPatrocinador) {
-					opciones = opciones + "<option value='"+todosPatrocinadores[i].codigo+"' selected>"+todosPatrocinadores[i].nombre+"</option>";
-				}else
-					opciones = opciones + "<option value='"+todosPatrocinadores[i].codigo+"'>"+todosPatrocinadores[i].nombre+"</option>";
-			}
-		}
-		$('#selPatrocinadores').html(opciones);	 */   
+		cargarPatrocinadoresSeleccionados();
+		// var opciones ="";
+		// for (var i = 0; i < todosPatrocinadores.length; i++) {
+		// 	for (var k = 0; k < patrocinadoresEditar.length; k++) {
+		// 		if (todosPatrocinadores[i].codigoPatrocinador == patrocinadoresEditar[k].codigoPatrocinador) {
+		// 			opciones = opciones + "<option value='"+todosPatrocinadores[i].codigo+"' selected>"+todosPatrocinadores[i].nombre+"</option>";
+		// 		}else
+		// 			opciones = opciones + "<option value='"+todosPatrocinadores[i].codigo+"'>"+todosPatrocinadores[i].nombre+"</option>";
+		// 	}
+		// }
+		//$('#selPatrocinadores').html(opciones);	    
 		$('#txtcode').val(proyectoTemp.codigo);
 		$('#txtNomProyecto').val(proyectoTemp.nombreProyecto);
 		$('#txtLugar').val(proyectoTemp.lugar);
@@ -509,9 +520,19 @@ $('#btn-guardar-tarea').click(function(){
 	$('#frmNuevaTarea').modal('hide');
 }); 
 
+$('#btnNuevaTarea').click(function(){
+		$('#txtNomTarea').val("");
+            $('#txtTareaDesc').val("");
+            //$('#selPriodidades').val("");
+            $('#txtTareaInicio').val("");
+            $('#txtTareaEntrega').val("");
+}) ;
+
 function editarTarea(){
 	$('#btnActualizarTarea').removeClass("hidden");
 	$('#btn-guardar-tarea').addClass("hidden");
+
+
 	//colocar los valores de la tarea seleccionada en las respectivas cajas de texto
 }
 
@@ -570,18 +591,46 @@ function initTablaTareas(){
 	$('#tabla-tareas tbody').on( 'click', 'td', function () {  
 		if( !isNaN(tblTareas.cell( this ).data()) ) {  
 			 codTareaSel = tblTareas.cell( this ).data();
-			 alert(codTareaSel);
+			 //alert(codTareaSel);
+			 cargarTareaSeleccionada(codTareaSel);
 		}
 	});	
 }
 
-function agregarTarea(codTarea, nombreTarea,descripcion,prioridad,fechaInicio,fechaEntrega){
+function cargarTareaSeleccionada(codigoTarea){
+	var parametros = "caso=11&codTarea="+codigoTarea+"&codigo="+proyectoTemp.codProyecto;
+	$.ajax(
+        {
+          url: "../Web_site/controles-php/proyectosControl.php",
+          data: parametros,
+          method:"POST",
+          success:function(respuesta){ 	 
+			console.log(respuesta);
+            tareaTemp = JSON.parse(respuesta);
+            $('#txtNomTarea').val(tareaTemp.nombreTarea);
+            $('#txtTareaDesc').val(tareaTemp.descripcion);
+            $('#selPriodidades').val(tareaTemp.prioridad).prop('selected', true); 
+            $('#txtTareaInicio').val(tareaTemp.fechaInicio);
+            $('#txtTareaEntrega').val(tareaTemp.fechaEntrega);
+            //$('#selUsuarios').val(tareaTemp.responsable).prop('selected', true); 
+
+
+            //ciclo para descomponer cadena y agragar lista de patrocinadores
+          },
+          error:function(){
+            alert("Ocurrio un error");
+          }
+        }
+      );       
+}
+
+function agregarTarea(codTarea, nombreTarea,prioridad,fechaInicio,fechaEntrega,responsable){
 	tblTareas.row.add( [codTarea,
 						nombreTarea,
-						descripcion,
 						prioridad,
 						fechaInicio,
-						fechaEntrega ] ).draw( false );
+						fechaEntrega,
+						responsable ] ).draw( false );
 }
 
 function cargarTareas(codigoProyecto){
@@ -599,13 +648,14 @@ function cargarTareas(codigoProyecto){
 			  var json_array = json.split('*');
 			  $('#tareasCount').html(json_array.length);
               for (var i = 0; i<json_array.length; i++) { 
-                var objTarea = JSON.parse(json_array[i]);
+				var objTarea = JSON.parse(json_array[i]);
+				console.log("Esta es la prioridad: "+ objTarea.prioridad);
                 agregarTarea(objTarea.codTarea,
-							objTarea.nombreTarea,
-							objTarea.descripcion,
+							objTarea.nombreTarea,							
 							objTarea.prioridad,
 							objTarea.fechaInicio,
-							objTarea.fechaEntrega );
+							objTarea.fechaEntrega,
+							objTarea.responsable ); 
               }
           	}else{
 				$('#tareasCount').html("0");

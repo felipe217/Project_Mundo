@@ -7,6 +7,7 @@
 		private $prioridad;
 		private $fechaInicio;		
 		private $fechaEntrega; 
+		private $responsable;
 
 		public function construir(
 					$codTarea,
@@ -14,14 +15,16 @@
 					$descripcion,
 					$prioridad,
 					$fechaInicio,
-					$fechaEntrega
+					$fechaEntrega,		
+					$responsable
 					){
 			$this->codTarea=$codTarea;
 			$this->nombreTarea=$nombreTarea;
 			$this->descripcion=$descripcion;
 			$this->prioridad=$prioridad;
 			$this->fechaInicio=$fechaInicio;
-			$this->fechaEntrega=$fechaEntrega;	
+			$this->fechaEntrega=$fechaEntrega;
+			$this->responsable=$responsable;	
 		}		
 
 		public function setCodTarea($codTarea){
@@ -61,6 +64,12 @@
 			$this->fechaEntrega = $fechaEntrega;
 		}			
 
+		public function getResponsable(){
+			return $this->responsable;
+		}
+		public function setResponsable($responsable){
+			$this->responsable = $responsable;
+		}		
 
 		public function toJSON(){
 			return json_encode(get_object_vars($this));

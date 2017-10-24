@@ -11,6 +11,7 @@
 		 8. carga todos los patrocinadores en el sistema
 		 9. carga todos los patrocinadoresde un proyecto especifico 
 		10. carga los usuarios sin rol asignados a un proyecto
+		11. carga todos los datos de una tarea especifica
 
 
 	*/ 
@@ -90,8 +91,8 @@
 
 			$miConexion->cerrarConexion();
 
-			break;
-  
+		break;
+		//consulta todas las tareas de un proyecto
 		case '3':
 				//consulta de todas las tareas de este proyecto:
 			$sqltareas ="SELECT codTarea, nombreTarea, descripcion, prioridad, fechaInicio, fechaEntrega  FROM tbltareas WHERE codProyecto = ".$codigoProyecto;
@@ -114,8 +115,9 @@
 						$miConexion->liberarResultado($rstResponsables);
 						$tarea->construir(
 										$fila['codTarea'],
-										$fila['nombreTarea'],										
-										$fila['prioridad'],
+										$fila['nombreTarea'],
+										$fila['descripcion'],										
+										$fila['prioridad'],										
 										$fila['fechaInicio'],
 										$fila['fechaEntrega'],
 										$listResponsables	
@@ -393,8 +395,49 @@
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion();
 		break;
-		
-		
+		//carga todos los datos de una tarea especifica
+		case '11':
+			$codTarea = $_POST['codTarea'];
+			$sqltareas ="SELECT nombreTarea, descripcion, prioridad, fechaInicio, fechaEntrega  FROM tbltareas WHERE codTarea = ".$codTarea;
+			$tarea = new Tarea();
+			$resultado = $miConexion->ejecutarInstruccion($sqltareas);
+			$cant = $miConexion->cantidadRegistros($resultado);
+			if ($cant>0) {
+				while ($fila = $miConexion->obtenerFila($resultado)){
+						//antes de llenar la tabla debemos identificar a los responsables de las tareas
+						$sqlResponsables = 
+										"select c.nombreUsuario from tblusuarioxtarea a "
+										."inner join tbltareas b on a.codTarea = b.codTarea "
+										."inner join tblusuarios c on a.codUsuario = c.codUsuario "
+										."where b.codProyecto = ".$codigoProyecto." and a.codTarea = ".$codTarea;
+
+						$rstResponsables =$miConexion->ejecutarInstruccion($sqlResponsables);
+						while ($row = $miConexion->obtenerFila($rstResponsables)) {
+							$listResponsables = $listResponsables." ".$row['nombreUsuario'].",";
+						}
+						$miConexion->liberarResultado($rstResponsables);
+						$tarea->construir(
+										$codTarea,
+										$fila['nombreTarea'],
+										$fila['descripcion'],										
+										$fila['prioridad'],										
+										$fila['fechaInicio'],
+										$fila['fechaEntrega'],
+										$listResponsables	
+										);
+					$JSONLine = $JSONLine.$tarea->toJSON();
+					$listResponsables ="";
+				}
+				if ($cant==1) {
+					echo rtrim($JSONLine,"*");
+				}else
+					echo rtrim($JSONLine,"*");
+			}else
+				echo "null";
+
+			$miConexion->liberarResultado($resultado);
+			$miConexion->cerrarConexion();
+		break;
 		default:
 		# code...
 		break; 
