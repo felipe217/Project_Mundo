@@ -403,32 +403,35 @@ $('#btnNuevoMaterial').click(function(){
 
 //evento click para registrar un nuevo material
 $('#btnConfirmarMaterial').click(function(){
-	
-	var parametros = 
-	"proveedor="+$('#txtProveedor').val()
-	+"&material="+$('#txtMaterial').val()
-	+"&cantidad="+$('#txtMatUnidades').val()
-	+"&precio="+$('#txtPrecioUnidad').val()
-	+"&total="+$('#txtMatTotal').val()
-	+"&codProyecto="+proyectoTemp.codProyecto
-	+"&fechaAsignacion="+$('#txtMatFecha').val();
-	console.log(parametros);
-	$.ajax(
-			{
-				url: "../Web_site/controles-php/registrarMaterial.php",
-				data: parametros,
-				method:"POST",
-				success:function(respuesta){
-					alert(respuesta);
-					//addMaterial(0,$('#txtProveedor').val(),$('#txtMaterial').val(),$('#txtMatUnidades').val(),$('#txtPrecioUnidad').val(),$('#txtMatTotal').val());
-					cargarMateriales(proyectoTemp.codProyecto);
-					},
-				error:function(){
-					alert("Ocurrio un error");
+	if (validarFormularioMaterial()!=0) {
+		alert("hay errores");
+	}else{
+		var parametros = 
+		"proveedor="+$('#txtProveedor').val()
+		+"&material="+$('#txtMaterial').val()
+		+"&cantidad="+$('#txtMatUnidades').val()
+		+"&precio="+$('#txtPrecioUnidad').val()
+		+"&total="+$('#txtMatTotal').val()
+		+"&codProyecto="+proyectoTemp.codProyecto
+		+"&fechaAsignacion="+$('#txtMatFecha').val();
+		console.log(parametros);
+		$.ajax(
+				{
+					url: "../Web_site/controles-php/registrarMaterial.php",
+					data: parametros,
+					method:"POST",
+					success:function(respuesta){
+						alert(respuesta);
+						//addMaterial(0,$('#txtProveedor').val(),$('#txtMaterial').val(),$('#txtMatUnidades').val(),$('#txtPrecioUnidad').val(),$('#txtMatTotal').val());
+						cargarMateriales(proyectoTemp.codProyecto);
+						},
+					error:function(){
+						alert("Ocurrio un error");
+					}
 				}
-			}
-		);   
-	$('#frmNuevoMaterial').modal('hide');
+			);   
+		$('#frmNuevoMaterial').modal('hide');
+	}
 });
 
 
@@ -871,8 +874,6 @@ function inicializarTabla(){
 		});	
 }
 
-
-
 $(document).ready(function(){  
         
 	//inicializar la pagina proyectos 
@@ -916,4 +917,35 @@ $(document).ready(function(){
     					);
 });
 
+function validarFormulario(){
 
+}
+
+
+function validarFormularioMaterial(){
+	var errores = 0;
+
+	if (!noVacio($('#txtProveedor').val())) {
+		$('#txtProveedor').addClass('btn-warning'); 
+		errores++;
+	}
+	if (!noVacio($('#txtMaterial').val())) {
+		$('#txtMaterial').addClass('btn-warning'); 
+		errores++;
+	}
+	if (parseInt($('#txtMatUnidades').val())<=0) { 
+		$('#txtMatUnidades').addClass('btn-warning'); 
+		errores++;
+	}
+	if (parseFloat($('#txtPrecioUnidad').val())<=0) { 
+		errores++;
+	} 
+	return errores;
+}
+
+
+//funciones de validacion
+function noVacio(valor){
+	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
+	return isCorrect;
+} 

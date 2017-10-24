@@ -268,3 +268,7 @@ body{
 }
 
 table.dataTable tr.group td{font-weight:bold;background-color:#e0e0e0}
+
+.invalid{
+	background-color: rgba(252, 101, 96, 0.952);
+}
