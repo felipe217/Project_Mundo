@@ -1,10 +1,3 @@
-
-//hola Allan 
-
-
-
-//lunes 10
-
 //variables globales
 var cuerpo="";
 var tblProyectos; //tabla lateral de proyectos
@@ -620,8 +613,6 @@ function cargarTareaSeleccionada(codigoTarea){
             $('#txtTareaInicio').val(tareaTemp.fechaInicio);
             $('#txtTareaEntrega').val(tareaTemp.fechaEntrega);
             //$('#selUsuarios').val(tareaTemp.responsable).prop('selected', true); 
-
-
             //ciclo para descomponer cadena y agragar lista de patrocinadores
           },
           error:function(){
@@ -920,11 +911,6 @@ $(document).ready(function(){
 			    +'<button type="submit" class="btn btn-success">Asignar</button></form>&nbsp;&nbsp;&nbsp;&nbsp;'
     					);
 });
-
-function validarFormulario(){
-
-}
-
 
 function validarFormularioMaterial(){
 	var errores = 0;
