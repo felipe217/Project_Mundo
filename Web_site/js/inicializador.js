@@ -613,8 +613,6 @@ function cargarTareaSeleccionada(codigoTarea){
             $('#txtTareaInicio').val(tareaTemp.fechaInicio);
             $('#txtTareaEntrega').val(tareaTemp.fechaEntrega);
             //$('#selUsuarios').val(tareaTemp.responsable).prop('selected', true); 
-
-
             //ciclo para descomponer cadena y agragar lista de patrocinadores
           },
           error:function(){

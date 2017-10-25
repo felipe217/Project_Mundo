@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-
-<!--
-	LA IDEA DE ESTA PLANTILLA ES QUE UTILICEMOS UN ESTANDAR, QUE LA BARRA DE TAREAS SEA LA MISMA
-	EN TODA LAS PAGINAS. 
--->
-
 <html>
 <head>
 	<meta charset="utf-8">
@@ -13,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>Panel de recursos</title>
-
 	<link rel="stylesheet" type="text/css" href="css/datatables.css">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
@@ -22,7 +15,6 @@
 	<style type="text/css">
 		
 	</style>
-
 </head>
 <body>
 
@@ -108,7 +100,7 @@
 					  	</div>
 					  	<br>					     
 					    <div>
-					    	<table class="table table-striped"  id="tabla-patrocinadores" onclick="verInfo();">
+					    	<table class="table table-striped"  id="tabla-patrocinadores">
 					    		<thead>
 						    		<tr>
 						    			<th>Código</th>
@@ -154,51 +146,68 @@
 						<br>
 						<!-- tab 1-->
 							<div class="tab-pane active" id="1">
-							     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#">
-								  	 	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-								</button>
-								<br><br>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Codigo:</label>
-							    	<p class="col-md-9 control-label">0000</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Numero Identificación:</label>
-							    	<p class="col-md-9 control-label">0000-0000-00000</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Nombre:</label>
-							    	<p class="col-md-9 control-label">Nombres del patrocinador</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Procedencia:</label>
-							    	<p class="col-md-9 control-label">Lugar de procedencia</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Fecha de nacimiento:</label>
-							    	<p class="col-md-9 control-label">dd/mm/aaaa</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Ubicación o domicilio</label>
-							    	<p class="col-md-9 control-label">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-							    </div>
-							    <hr>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Tipo de patrocinador:</label>
-							    	<p class="col-md-9 control-label">Tipo de patrocinador</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Persona de contacto:</label>
-							    	<p class="col-md-9 control-label">Nombre de persona de contacto</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">e-mail de contacto:</label>
-							    	<p class="col-md-9 control-label">correo.contacto@algo.com</p>
-							    </div>
-							    <div class="form-group">
-							    	<label class="col-md-3 control-label">Telefono de contacto:</label>
-							    	<p class="col-md-9 control-label">2200-0000, 9999-9999</p>
-							    </div>
+								<form class="form-horizontal">
+									<div class="form-group">
+										<div class="col-sm-3">
+											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#">
+												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+											</button> 
+										</div>
+										<div class="col-sm-6 pull-right">
+											<div class="btn-toolbar" role="toolbar" >
+												<div class="btn-group" role="group" >
+													<button class="btn btn-default">Aceptar</button>
+												</div>
+												<div class="btn-group" role="group" >
+													<button class="btn btn-default">Cancelar</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<br>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Nombre:</label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtNombrePatrocinador" readonly placeholder="Nombre">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Procedencia: </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtProcedencia" readonly placeholder="Procedencia">
+										</div>
+									</div> 
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Ubicación: </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtUbicacion" readonly placeholder="Ubicacion">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Tipo patrocinador: </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtTipoPatrocinador" readonly placeholder="Tipo patrocinador">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Persona de contacto: </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtPersonaContacto" readonly placeholder="Nombre persona de contacto">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Correo electrónico: </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtCorreoContacto" readonly placeholder="correo electrónico">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Teléfono contacto: </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="txtTelefono" readonly placeholder="Telefono">
+										</div>
+									</div>
+								</form>
 							</div>
 
 							<!--tab 2-->
@@ -478,7 +487,7 @@
 	<script type="text/javascript" src="js/datatables.js"></script> 
 	<script type="text/javascript" src="js/patrocinadores-init.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.0.0/js/dataTables.rowGroup.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
 
 </body>
 </html>
