@@ -1,6 +1,7 @@
 <?php
 
 	class Patrocinadores{
+		private $codPatrocinador;
 		private $nombre;
 		private $tipoPatrocinador;
 		private $lugarProcedencia;		
@@ -9,7 +10,8 @@
 		private $telefonoContacto;		
 		
 
-		public function __construct(
+		public function construir(
+					$codPatrocinador,
 					$nombre,
 					$tipoPatrocinador,
 					$lugarProcedencia,

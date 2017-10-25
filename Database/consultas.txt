@@ -1,4 +1,5 @@
 
+hola
 
 SELECT A.codigo, A.codPatrocinador, A.CodProyecto, B.nombre from 
 tblpatrocinadoresxproyecto A inner join tblpatrocinadores B on A.codPatrocinador = B.codPatrocinador
