@@ -1,11 +1,40 @@
 //variables globales
 var dtDesembolsos; //objeto datatable para los desembolsos
-var dtPatricinios; //objeto datatable para los patrocinios
+var dtPatrocinios; //objeto datatable para los patrocinios
 var dtPatrocinadores// objeto datatable para los patrocinadores 
 var codPatrocinadorSel;
 var patrocinadorTemp;
 
 //funciones para patrocinadores
+$('#btnEditar').click(function(){
+	$('#btnGuardarNuevo').addClass("hidden"); 
+	$('#btnConfirmarEdit').removeClass("hidden"); 
+});
+
+$('#btnNuevoPatrocinador').click(function(){
+	$('#btnGuardarNuevo').removeClass("hidden"); 
+	$('#btnConfirmarEdit').addClass("hidden");
+	limpiarCampos();
+});
+
+function limpiarCampos(){
+	//formulario nuevo patrocinador
+	$('#txtNombrePatrocinador').val("");
+	$('#txtProcedencia').val("");
+	$('#txtUbicacion').val("");
+	$('#txtPersonaContacto').val("");
+	$('#txtCorreoContacto').val("");
+	$('#txtTelefono').val("");
+	//formulario nuevo patrocinio
+	$('#txtFecha').val("");
+	$('#txtValor').val("");
+	$('#txtDescripcion').val(""); 
+}
+
+function confirmarEditar(){
+
+}
+
 function cargarTablaPatrocinadores(){
 		dtPatrocinadores.clear().draw();
 		var parametros = "caso=4&codigo="+codigoProyecto+"";
@@ -38,18 +67,18 @@ function cargarTablaPatrocinadores(){
 }
 
 function addPatrocinador(codigo, nombre){
-		dtPatrocinadores.add([codigo,nombre]).draw(false);
+	dtPatrocinadores.add([codigo,nombre]).draw(false);
 }
 
 function cargarPatrocinadorSeleccionado(codigo){
 	//var parametros = "caso=11&codTarea="+codigoTarea+"&codigo="+proyectoTemp.codProyecto;
-	$('#txtNombrePatrocinador').val(codigo);
-	$('#txtProcedencia').val(codigo); 
-	$('#txtUbicacion').val(codigo);
-	$('#txtTipoPatrocinador').val(codigo);
-	$('#txtPersonaContacto').val(codigo);
-	$('#txtCorreoContacto').val(codigo);
-	$('#txtTelefono').val(codigo);
+	$('#lblNombrePatrocinador').html(codigo);
+	$('#lblProcedencia').html(codigo); 
+	$('#lblTipoPatrocinador').html(codigo);
+	$('#lblUbicacion').html(codigo);
+	$('#lblNombreContacto').html(codigo);
+	$('#lblCorreo').html(codigo);
+	$('#lblTelefono').html(codigo);
 	/* $.ajax(
 		{
 			url: "../Web_site/controles-php/proyectosControl.php",
@@ -66,7 +95,6 @@ function cargarPatrocinadorSeleccionado(codigo){
 		}
 	);   */
 }
-
 function initTablaPatrocinadores(){
 	//aplicar funciones a tabla patrocinadores
 	dtPatrocinadores =	$('#tabla-patrocinadores').DataTable(
@@ -86,12 +114,7 @@ function initTablaPatrocinadores(){
 			$(this).addClass('selected');
 		}
 	});
-
-	$('#tabla-patrocinadores tbody').on( 'dblclick', 'tr', function () {
-		dtPatrocinadores.$('tr.selected').removeClass('selected');
-		$(this).addClass('selected'); 
-	} );
-
+ 
 	$('#tabla-patrocinadores tbody').on( 'dblclick', 'td', function () { 
 		codPatrocinadorSel = dtPatrocinadores.cell( this ).data();
 		if( !isNaN(codPatrocinadorSel) ) { 
@@ -102,35 +125,69 @@ function initTablaPatrocinadores(){
 
 }
 
-$(document).ready( function () {
-	initTablaPatrocinadores();
+//funciones para tabla de contribuciones de patrocinadores
+function initTablaPatronicios(){
 	//aplicar funciones a tabla cotribuciones
-	 dtPatricinios =
-		$('#tabla-patrocinios').DataTable(
-				{
-					"scrollY":        "320px",
-					"scrollCollapse": true,
-					"paging":         false,
-					"dom": '<"toolbar1">frtip'
-				}
-			);
+	dtPatrocinios =
+	$('#tabla-patrocinios').DataTable(
+			{
+				"scrollY":        "320px",
+				"scrollCollapse": true,
+				"paging":         false,
+				"dom": '<"toolbar1">frtip'
+			}
+		);
 
-		$("div.toolbar1").html('<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinio">' 
-								+'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>');
+	$("div.toolbar1").html('<button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinio">' 
+							+'<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>');
 
+	$('#tabla-patrocinios tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			dtPatrocinios.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected'); 
+			console.log(dtPatrocinios.cell(this,0).data());
+		}
+	});
+}
+
+function addPatrocinio(codigo, fecha, tipo, valor, descripcion){
+	dtPatrocinios.add([codigo, fecha, tipo, valor, descripcion]).draw(false);
+}
+//funciones para tabla desembolsos
+function initTablaDesembolsos(){
 	//aplicar funciones a tabla desembolsos
 	dtDesembolsos =
-		$('#tabla-desembolsos').DataTable(
-				{
-					"scrollY":        "320px",
-					"scrollCollapse": true,
-					"paging":         false,
-					order: [[4, 'asc']],
-					rowGroup: {
-						dataSrc: 4
-					}
+	$('#tabla-desembolsos').DataTable(
+			{
+				"scrollY":        "320px",
+				"scrollCollapse": true,
+				"paging":         false,
+				order: [[4, 'asc']],
+				rowGroup: {
+					dataSrc: 4
 				}
-			);
+			}
+		);
+
+	$('#tabla-desembolsos tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			dtDesembolsos.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected'); 
+			console.log(dtDesembolsos.cell(this,0).data());
+		}
+	});
+}
+
+$(document).ready( function () {
+	initTablaPatrocinadores();
+	initTablaPatronicios();
+	initTablaDesembolsos();
 
 // Fin del documento
 });
