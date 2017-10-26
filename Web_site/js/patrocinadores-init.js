@@ -122,29 +122,28 @@ function addPatrocinador(codigo, nombre){
 }
 
 function cargarPatrocinadorSeleccionado(codigo){
-	//var parametros = "caso=11&codTarea="+codigoTarea+"&codigo="+proyectoTemp.codProyecto;
-	$('#lblNombrePatrocinador').html(codigo);
-	$('#lblProcedencia').html(codigo); 
-	$('#lblTipoPatrocinador').html(codigo);
-	$('#lblUbicacion').html(codigo);
-	$('#lblNombreContacto').html(codigo);
-	$('#lblCorreo').html(codigo);
-	$('#lblTelefono').html(codigo);
-	/* $.ajax(
+	var parametros = "caso=3&codPatrocinador="+codigo;
+	$.ajax(
 		{
-			url: "../Web_site/controles-php/proyectosControl.php",
+			url: "../Web_site/controles-php/recursosControl.php",
 			data: parametros,
 			method:"POST",
 			success:function(respuesta){ 	 
 				console.log(respuesta);
 				patrocinadorTemp = JSON.parse(respuesta); 
-				
+				$('#lblNombrePatrocinador').html(patrocinadorTemp.nombre);
+				$('#lblProcedencia').html(patrocinadorTemp.lugarProcedencia); 
+				$('#lblTipoPatrocinador').html(patrocinadorTemp.tipoPatrocinador);
+				$('#lblUbicacion').html(patrocinadorTemp.direccion);
+				$('#lblNombreContacto').html(patrocinadorTemp.nombreContacto);
+				$('#lblCorreo').html(patrocinadorTemp.correoElectronico);
+				$('#lblTelefono').html(patrocinadorTemp.telefonoContacto);
 			},
 			error:function(){
 				alert("Ocurrio un error");
 			}
 		}
-	);   */
+	);  
 }
 function initTablaPatrocinadores(){
 	//aplicar funciones a tabla patrocinadores
@@ -169,7 +168,7 @@ function initTablaPatrocinadores(){
 	$('#tabla-patrocinadores tbody').on( 'dblclick', 'td', function () { 
 		codPatrocinadorSel = dtPatrocinadores.cell( this ).data();
 		if( !isNaN(codPatrocinadorSel) ) { 
-			alert(codPatrocinadorSel);
+			//alert(codPatrocinadorSel);
 			cargarPatrocinadorSeleccionado(codPatrocinadorSel);
 		 }
 	});	
