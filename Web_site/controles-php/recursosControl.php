@@ -16,8 +16,8 @@
 
 	*/ 
 	 
-	$caso = $_GET['caso'];
-	$codigoPatrocinador = $_GET['codPatrocinador'];
+	$caso = $_POST['caso'];
+	$codigoPatrocinador = $_POST['codPatrocinador'];
 	include_once("../class/class_conexion.php");
 	include_once("../class/clase_Patrocinadores.php");
 	include_once("../class/clase_Patrocinios.php");
