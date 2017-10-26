@@ -117,36 +117,40 @@
 			$miConexion->cerrarConexion(); 
 			break;
   
-		//Insert de un nuevo patrocinador  
+		//Consulta el desembolso de patrocinador 
 		case '4':
-			$sqlMateriales = "SELECT codMaterial, proveedor, material, cant, precio, total FROM tblmateriales WHERE codProyecto = ".$codigoProyecto;
-			$material = new Material();
-			$resultado = $miConexion->ejecutarInstruccion($sqlMateriales);
-			$cant = $miConexion->cantidadRegistros($resultado);
+			$sqlEstados = "SELECT A.codDesembolso, A.fecha, A.valor, A.codPatrocinio, A.codProyecto, B.nombreProyecto 
+						   FROM tbldesembolsos A 
+						   INNER JOIN tblproyectos B ON A.codProyecto = B.codProyecto 
+						   INNER JOIN tblpatrocinios C ON A.codPatrocinio = C.codigo 
+						   INNER JOIN tblpatrocinadores D ON C.codPatrocinador = D.codPatrocinador 
+						   WHERE D.codPatrocinador = ".$codigoPatrocinador;
+							//echo $sqlEstados;
+			$resultado = $miConexion->ejecutarInstruccion($sqlEstados);
+			$cant = $miConexion->cantidadRegistros($resultado); 
 			if ($cant>0) {
+				$estadosArray = array();
+				$i=0;
 				while ($fila = $miConexion->obtenerFila($resultado)){
-						$material->construir(
-										$fila['codMaterial'],
-										$fila['proveedor'],
-										$fila['material'],
-										$fila['cant'],
-										$fila['precio'],
-										$fila['total']	
-										);
-
-					$JSONLine = $JSONLine.$material->toJSON()."*";
-					
+					$estadosArray[$i]["codDesembolso"] = $fila['codDesembolso'];
+					$estadosArray[$i]["fecha"] = $fila['fecha'];
+					$estadosArray[$i]["valor"] = $fila['valor'];
+					$estadosArray[$i]["codPatrocinio"] = $fila['codPatrocinio'];
+					$estadosArray[$i]["codProyecto"] = $fila['codProyecto'];
+					$estadosArray[$i]["nombreProyecto"] = $fila['nombreProyecto'];			
+					$i++;				
 				}
+				$JSONLine = json_encode($estadosArray);	
 				if ($cant==1) {
-					echo rtrim($JSONLine,"*");
+					echo $JSONLine;
 				}else
-					echo rtrim($JSONLine,"*");
+					echo $JSONLine;
 			}else
 				echo "null";
 
 			$miConexion->liberarResultado($resultado);
-			$miConexion->cerrarConexion();
-		break; 
+			$miConexion->cerrarConexion(); 
+			break;
 		
 		//consulta de los patrocionios:
 		case '6':
