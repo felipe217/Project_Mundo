@@ -1,19 +1,22 @@
 <?php
 
 	class Patrocinios{
-		private $codPatrocinio;
+		private $codigo;
 		private $tipoPatrocinio;
 		private $descripcion;		
 		private $fecha;		
 		private $valor;
+		private $codPatrocinador;
 		
 		
 		
 		public function construir(
+					$codigo,
 					$tipoPatrocinio,
 					$descripcion,
 					$fecha,
-					$valor
+					$valor,
+					$codPatrocinador
 					
 					
 			){
