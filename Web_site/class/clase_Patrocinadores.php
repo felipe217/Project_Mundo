@@ -21,14 +21,14 @@
 					$telefonoContacto,
 					$direccion
 			){
+			$this->codpatrocinador = $codPatrocinador;
 			$this->nombre=$nombre;
 			$this->tipoPatrocinador=$tipoPatrocinador;
 			$this->lugarProcedencia=$lugarProcedencia;
 			$this->correoElectronico=$correoElectronico;
 			$this->nombreContacto=$nombreContacto;
 			$this->telefonoContacto=$telefonoContacto;
-		
-			
+			$this->direccion = $direccion;			
 		}		
 
 		public function setCodigo($codigo){

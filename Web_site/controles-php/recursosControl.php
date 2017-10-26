@@ -94,6 +94,7 @@
 			$cant = $miConexion->cantidadRegistros($resultado);
 			if ($cant>0) {
 				while ($fila = $miConexion->obtenerFila($resultado)){
+					$Patrocinador = new Patrocinadores();
 					$Patrocinador->construir(
 					$fila['codPatrocinador'],
 					$fila['nombre'],
