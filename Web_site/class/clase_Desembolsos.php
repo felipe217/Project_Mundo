@@ -7,7 +7,7 @@
 		
 		
 		
-		public function __construct(
+		public function construir(
 					$fecha,
 					$valor
 					
@@ -31,19 +31,7 @@
 			$this->valor = $valor;
 		}			
 		
-		}
-		// function encender(){
-		// 	echo "Encendiendo";
-		// }
-		// function apagar(){
-		// 	echo "Apagando";
-		// }
-		// function explotar(){
-		// 	echo "Explotando";
-		// }
-		// function procesar(){
-		// 	echo "Procesando";
-		// }
+		
 
 		public function __toString(){
 			return 					

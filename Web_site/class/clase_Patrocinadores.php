@@ -7,7 +7,8 @@
 		private $lugarProcedencia;		
 		private $correoElectronico;
 		private $nombreContacto;
-		private $telefonoContacto;		
+		private $telefonoContacto;	
+		private $direccion;	
 		
 
 		public function construir(
@@ -17,7 +18,8 @@
 					$lugarProcedencia,
 					$correoElectronico,
 					$nombreContacto,
-					$telefonoContacto
+					$telefonoContacto,
+					$direccion
 			){
 			$this->nombre=$nombre;
 			$this->tipoPatrocinador=$tipoPatrocinador;
@@ -64,22 +66,11 @@
 		}
 		public function setTelefonoContacto($telefonoContacto){
 			$this->telefonoContacto = $telefonoContacto;
-		}
-				
-		}
-		// function encender(){
-		// 	echo "Encendiendo";
-		// }
-		// function apagar(){
-		// 	echo "Apagando";
-		// }
-		// function explotar(){
-		// 	echo "Explotando";
-		// }
-		// function procesar(){
-		// 	echo "Procesando";
-		// }
+		}			
 
+		public function toJSON(){
+        	return json_encode(get_object_vars($this));
+    	}
 		public function __toString(){
 			return 	$this->nombre.','.
 					$this->tipoPatrocinador.','.

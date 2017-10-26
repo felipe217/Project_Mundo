@@ -1,6 +1,7 @@
 <?php
 
 	class Patrocinios{
+		private $codPatrocinio;
 		private $tipoPatrocinio;
 		private $descripcion;		
 		private $fecha;		
@@ -8,7 +9,7 @@
 		
 		
 		
-		public function __construct(
+		public function construir(
 					$tipoPatrocinio,
 					$descripcion,
 					$fecha,
@@ -47,21 +48,7 @@
 		}
 		public function setValor($valor){
 			$this->valor = $valor;
-		}			
-		
-		}
-		// function encender(){
-		// 	echo "Encendiendo";
-		// }
-		// function apagar(){
-		// 	echo "Apagando";
-		// }
-		// function explotar(){
-		// 	echo "Explotando";
-		// }
-		// function procesar(){
-		// 	echo "Procesando";
-		// }
+		}		
 
 		public function __toString(){
 			return 	$this->tipoPatrocinio.','.

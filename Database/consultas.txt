@@ -47,8 +47,8 @@ Asignar un rol a un usuario de un proyecto
 
 	//Insert de un nuevo patrocinador
 
-	INSERT INTO tblpatrocinadores (codPatrocinador, nombre, tipoPatrocinador, lugarProcedencia, correoElectronico, nombreContacto,
-	 telefonoContacto, direccion) VALUES ();
+	INSERT INTO tblpatrocinadores (nombre, tipoPatrocinador, lugarProcedencia, 
+	correoElectronico, nombreContacto, telefonoContacto, direccion) VALUES ();
 
 	//update de un patrocinador
 	UPDATE tblpatrocinadores SET codPatrocinador=[value-1],nombre=[value-2],tipoPatrocinador=[value-3],
