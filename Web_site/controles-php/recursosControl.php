@@ -16,8 +16,8 @@
 
 	*/ 
 	 
-	$caso = $_POST['caso'];
-	$codigoPatrocinador = $_POST['codPatrocinador'];
+	$caso = $_GET['caso'];
+	$codigoPatrocinador = $_GET['codPatrocinador'];
 	include_once("../class/class_conexion.php");
 	include_once("../class/clase_Patrocinadores.php");
 	include_once("../class/clase_Patrocinios.php");
@@ -95,14 +95,14 @@
 			if ($cant>0) {
 				while ($fila = $miConexion->obtenerFila($resultado)){
 					$Patrocinador->construir(
-					$fila['codPatrocinador'],
-					$fila['nombre'],
-					$fila['tipoPatrocinador'],
-					$fila['lugarProcedencia'],
-					$fila['correoElectronico'],
-					$fila['nombreContacto'],
-					$fila['telefonoContacto'],
-					$fila['direccion']
+						$fila['codPatrocinador'],
+						$fila['nombre'],
+						$fila['tipoPatrocinador'],
+						$fila['lugarProcedencia'],
+						$fila['correoElectronico'],
+						$fila['nombreContacto'],
+						$fila['telefonoContacto'],
+						$fila['direccion']
 					);
 				$JSONLine = $JSONLine.$Patrocinador->toJSON()."*"; 
 				}
