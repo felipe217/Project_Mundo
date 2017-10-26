@@ -147,49 +147,7 @@
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion();
 		break; 
-		//update de un patrocinador:
-		case '5':
-			$sqlColaboradores = 
-								"select a.codUsuario, "
-									."	a.nombreUsuario, "
-									."	c.tipo_usuario, "
-									."	a.departamento, "
-									."	a.cargo, "
-									."  b.Rol "
-								."FROM tblusuarios a "
-								."inner join tblusuarioxproyecto b on a.codUsuario = b.codUsuario "
-								."inner join tbltipousuario c on a.codTipoUsuario = c.codTipoUsuario "
-								."WHERE b.Rol != 'n/a' and b.codProyecto = ".$codigoProyecto;
-
-			$resultado = $miConexion->ejecutarInstruccion($sqlColaboradores);
-			$cant = $miConexion->cantidadRegistros($resultado); 
-			$colaborador = new Colaborador();
-			if ($cant>0) {
-
-				while ($fila = $miConexion->obtenerFila($resultado)){
-						$colaborador->construir(
-										$fila['codUsuario'],
-										$fila['nombreUsuario'],
-										$fila['tipo_usuario'],
-										$fila['departamento'],
-										$fila['cargo'],
-										$fila['Rol']
-										);
-
-					$JSONLine = $JSONLine.$colaborador->toJSON()."*";
-					
-				}
-				if ($cant==1) {
-					echo rtrim($JSONLine,"*");
-				}else
-					echo rtrim($JSONLine,"*");
-			}else
-				echo "null";
-
-			$miConexion->liberarResultado($resultado);
-			$miConexion->cerrarConexion();
-			break;
-
+		
 		//consulta de los patrocionios:
 		case '6':
 			/* $sqlEstados = "SELECT codigo, tipoPatrocinio, descripcion, fecha, valor, codPatrocinador FROM tblpatrocinios
