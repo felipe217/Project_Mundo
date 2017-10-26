@@ -4,7 +4,7 @@
 	 2. editar la información de una tarea
 	 */                     
 	
-	$caso = $_GET['caso'];
+	$caso = $_POST['caso'];
 	
 	include_once("../class/class_conexion.php");	
 	$miConexion = new Conexion();
@@ -14,14 +14,14 @@
 		case '1':
 			
 	        //Capturando los datos de tabla Patrocinador
-           // $codPatrocinador = $_GET['codPatrocinador'];
-            $nombre = $_GET['nombre'];
-            $tipoPatrocinador = $_GET['tipoPatrocinador'];
-            $lugarProcedencia = $_GET['lugarProcedencia'];
-            $correoElectronico = $_GET['correoElectronico'];	
-            $nombreContacto = $_GET['nombreContacto'];		
-            $telefonoContacto = $_GET['telefonoContacto'];
-            $direccion = $_GET['direccion'];
+           // $codPatrocinador = $_POST['codPatrocinador'];
+            $nombre = $_POST['nombre'];
+            $tipoPatrocinador = $_POST['tipoPatrocinador'];
+            $lugarProcedencia = $_POST['lugarProcedencia'];
+            $correoElectronico = $_POST['correoElectronico'];	
+            $nombreContacto = $_POST['nombreContacto'];		
+            $telefonoContacto = $_POST['telefonoContacto'];
+            $direccion = $_POST['direccion'];
 
             //tipoPatrocinador=tipo_1&lugarProcedencia=Cuyamel&correoElectronico=yamevoy@gmail.com&nombreContacto=halo&telefonoContacto=22232567&direccion=cerca de aca
 
@@ -36,7 +36,7 @@
 				."telefonoContacto, "
 				."direccion)"
 
-			."VALUES ( null ,"
+			." VALUES ( null ,"
 						."'".$nombre."',"
 						."'".$tipoPatrocinador."'," 
 						."'".$lugarProcedencia."',"
@@ -51,20 +51,20 @@
 				
 			}else
 				//echo "Ocurrió un error, no se pudo registrar.";
-				echo "no se realizaó ningun registro: ".$consulta."y resultado: ".$resultado;
+				echo "no se realizaó ningun registro: ".$consulta." y resultado: ".$resultado;
 			break;
 
 		//caso 2, actualizar un patrocinador registrado
 		case '2':
 			//capturando los datos del proyecto
-			$codPatrocinador = $_GET['codPatrocinador'];
-            $nombre = $_GET['nombre'];
-            $tipoPatrocinador = $_GET['tipoPatrocinador'];
-            $lugarProcedencia =$_GET['lugarProcedencia'];
-            $correoElectronico =$_GET['correoElectronico'];	
-            $nombreContacto =$_GET['nombreContacto'];		
-            $telefonoContacto =$_GET['telefonoContacto'];
-            $direccion = $_GET['direccion'];
+			$codPatrocinador = $_POST['codPatrocinador'];
+            $nombre = $_POST['nombre'];
+            $tipoPatrocinador = $_POST['tipoPatrocinador'];
+            $lugarProcedencia =$_POST['lugarProcedencia'];
+            $correoElectronico =$_POST['correoElectronico'];	
+            $nombreContacto =$_POST['nombreContacto'];		
+            $telefonoContacto =$_POST['telefonoContacto'];
+            $direccion = $_POST['direccion'];
 			
 			//consulta update
 			$updateSQL = "UPDATE tblpatrocinadores SET " 
@@ -82,24 +82,8 @@
 				
 			}else
 				//echo "Ocurrió un error, no se pudo registrar.";
-				echo "no se realizaó ningun registro: ".$updateSQL."y resultado: ".$resultado;
-			break;
-		//Asignar un rol a un usuario de un proyecto
-		case '5':
-			//capturando los datos del proyecto
-			$codigoProyecto = $_POST['codigoProyecto'];
-			$codUsuario = $_POST['codUsuario'];
-			$rol = $_POST['rol'];
-			$sqlAgregarRol =
-				"update tblusuarioxproyecto set Rol = '"
-				.$rol."' where codUsuario = ".$codUsuario." and codProyecto = ".$codigoProyecto;
-			
-			$resultado = $miConexion->ejecutarInstruccion($sqlAgregarRol);
-			if ($resultado) {
-				echo "Rol asignado exitosamente";
-			}else
-				echo "No se pudo asignar el rol.".$sqlAgregarRol;
-		break;
+				echo "no se realizó ningun registro: ".$updateSQL."y resultado: ".$resultado;
+			break; 
 	}
 
 	
