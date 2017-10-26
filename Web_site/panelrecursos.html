@@ -92,10 +92,9 @@
 					  <div class="panel-body">
 					  	<div id="operaciones-patrocinadores">
 					  		<div class="btn-group" role="group" aria-label="...">
-							  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador"> 
+							  <button id="btnNuevoPatrocinador" type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador"> 
 							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
-							  </button>
-							   
+							  </button> 
 							</div>
 					  	</div>
 					  	<br>					     
@@ -145,69 +144,57 @@
 						<div class="tab-content ">
 						<br>
 						<!-- tab 1-->
-							<div class="tab-pane active" id="1">
-								<form class="form-horizontal">
-									<div class="form-group">
-										<div class="col-sm-3">
-											<button type="button" class="btn btn-default" data-toggle="modal" data-target="#">
-												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-											</button> 
-										</div>
-										<div class="col-sm-6 pull-right">
-											<div class="btn-toolbar" role="toolbar" >
-												<div class="btn-group" role="group" >
-													<button class="btn btn-default">Aceptar</button>
-												</div>
-												<div class="btn-group" role="group" >
-													<button class="btn btn-default">Cancelar</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<br>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Nombre:</label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtNombrePatrocinador" readonly placeholder="Nombre">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Procedencia: </label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtProcedencia" readonly placeholder="Procedencia">
-										</div>
+							<div class="tab-pane active" id="1"> 
+								<div class="row">
+									<div class="col-sm-3">
+										<button type="button" id="btnEditar" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador">
+											<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+										</button>
+										<br>	<br>
 									</div> 
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Ubicación: </label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtUbicacion" readonly placeholder="Ubicacion">
-										</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<table class="table table-condensed">
+											<tr>
+												<td><label>Nombre:</label></td>
+												<td><label class="form-control" id="lblNombrePatrocinador"></label></td>
+											</tr>
+											<tr>
+												<td><label>Procendencia:</label></td>
+												<td><label class="form-control" id="lblProcedencia"></label></td>
+											</tr>
+											<tr>
+												<td><label>Tipo patrocinador:</label></td>
+												<td><label class="form-control" id="lblTipoPatrocinador"></label></td>
+											</tr>
+											<tr>
+												<td><label>Ubicación:</label></td>
+												<td><textarea class="form-control" rows="3" id="lblUbicacion" readonly></textarea> </td>
+											</tr>
+										</table>	
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Tipo patrocinador: </label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtTipoPatrocinador" readonly placeholder="Tipo patrocinador">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Persona de contacto: </label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtPersonaContacto" readonly placeholder="Nombre persona de contacto">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Correo electrónico: </label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtCorreoContacto" readonly placeholder="correo electrónico">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Teléfono contacto: </label>
-										<div class="col-sm-5">
-											<input type="text" class="form-control" id="txtTelefono" readonly placeholder="Telefono">
-										</div>
-									</div>
-								</form>
+									<div class="col-lg-6">
+										<table class="table">
+											<tr>
+												<td colspan="2">Información de la persona de contacto:</td>
+											</tr>
+											<tr>
+												<td><label>Nombre:</label></td>
+												<td><label class="form-control" id="lblNombreContacto">Nombre de la persona</label></td>
+											</tr>
+											<tr>
+												<td><label>correo:</label></td>
+												<td><label class="form-control" id="lblCorreo"> </label></td>
+											</tr>
+											<tr>
+												<td><label>Teléfono:</label></td> 
+												<td><label class="form-control" id="lblTelefono" > </label> </td> 							    		
+											</tr>
+											 
+										</table>
+									</div> 
+								</div>  	
 							</div>
 
 							<!--tab 2-->
@@ -362,73 +349,71 @@
 	<!-- ******************* VENTANAS MODALES ************************-->
 	<!-- Formulario registro nuevo patrocinador -->
 	<div id="frmNuevoPatrocinador" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-	  	<div class="modal-dialog" role="document">
-	    	<div class="modal-content">
-		      	<div class="modal-header">
-		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        	<h4 class="modal-title">Registro de nuevo patrocinador</h4>
-		      	</div>
-		      	<div class="modal-body">
-		        	<form class="panel-formularios">
-		        		<div class="row">
-		        			<div class="form-group col-xs-12 col-md-4">
-					    		<label>Identificación</label>
-					    		<input type="text" class="form-control" id="txtIdentificacion" placeholder="0000-0000-00000">
-					  		</div>
-					  		<div class="form-group  col-xs-12 col-md-8">
-					    		<label>Nombre completo</label>
-					    		<input type="text" class="form-control" id="txtNombrePatrocinador" placeholder="Nombre del patrocinador">
-					  		</div>
-		        		</div>
-		        		<div class="row">		        			
-		        			<div class="form-group col-xs-12 col-md-4">
-		        				<label>Fecha de nacimiento</label>
-		        				<input type="date" id="txtNacimiento" class="form-control" placeholder="">
-		        			</div>
-		        			<div class="form-group col-xs-12 col-md-4">
-		        				<label>Lugar de procedencia</label>
-		        				<input type="text" id="txtNomTarea" class="form-control" placeholder="Procedencia">
-		        			</div>
-		        			<div class="form-group col-xs-12 col-md-4">
-		        				<label>Tipo Patrocinador</label>		 
-		        				<select class="form-control" id="selTipoPatrocinador">
-									    <option>Seleccione uno</option>
-									    <option>Tipo patroc. 1</option>
-									    <option>Tipo patroc. 2</option>
-									    <option>Tipo patroc. 3</option>
-									    <option>Tipo patroc. 4</option>
-								 	</select>	  				
-		        			</div>
-		        		</div>
-		        		<div class="row">
-		        			<div class="form-group col-xs-12 col-md-4">
-					    		<label>Persona de contacto</label>
-					    		<input type="text" class="form-control" id="txtContacto" placeholder="Nombre de contacto">
-					  		</div>
-					  		<div class="form-group  col-xs-12 col-md-4">
-					    		<label>Correo electronico</label>
-					    		<input type="text" class="form-control" id="txtCorreoContacto" placeholder="Correo electronico">
-					  		</div>
-					  		<div class="form-group  col-xs-12 col-md-4">
-					    		<label>Telefono de contacto</label>
-					    		<input type="text" class="form-control" id="txtTelContacto" placeholder="telefono de contacto">
-					  		</div>
-		        		</div>
-		        		<div class="row">
-		        			<div class="form-group col-xs-12 col-md-12">
-		        				<label>Domicilio o ubicación actual</label>
-		        				<textarea class="form-control" id="txtUbicacion" placeholder="Escriba su ubicación" rows="2"></textarea>
-		        			</div>
-		        		</div>
-		        	</form>
-		      	</div>
-		      	<div class="modal-footer">
-		        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        	<button type="button" class="btn btn-success">Guardar</button>
-		      	</div>
-	    	</div><!-- /.modal-content -->
-	  	</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Registro de nuevo patrocinador</h4>
+					</div>
+					<div class="modal-body">
+							<form class="form-horizontal"> 
+								<div class="form-group">
+									<label class="col-sm-4 control-label">Nombre:</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="txtNombrePatrocinador" placeholder="Nombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">Procedencia: </label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="txtProcedencia" placeholder="Procedencia">
+									</div>
+								</div> 
+								<div class="form-group">
+										<label class="col-sm-4 control-label">Tipo de patrocinador: </label>
+										<div class="col-sm-7">
+											<select class="form-control">
+												<option>Tipo 1</option>
+												<option>Tipo 2</option>
+											</select>
+										</div>
+									</div> 
+								<div class="form-group">
+									<label class="col-sm-4 control-label">Ubicación: </label>
+									<div class="col-sm-7">
+										<textarea id="txtUbicacion" class="form-control"></textarea>
+									</div>
+								</div> 
+								<div class="form-group">
+									<label class="col-sm-4 control-label">Persona de contacto: </label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="txtPersonaContacto" placeholder="Nombre persona de contacto">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">Correo electrónico: </label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="txtCorreoContacto" placeholder="correo electrónico">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">Teléfono contacto: </label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="txtTelefono" placeholder="Telefono">
+									</div>
+								</div>
+							</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="btnConfirmarEdit" class="btn btn-default">Confirmar</button> 
+						<button type="button" id="btnGuardarNuevo" class="btn btn-default">Aceptar</button> 
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+	
+	<!-- /.modal -->
 
 	<!-- Formulario de registro de nuevo patrocicio-->	
 	<div id="frmNuevoPatrocinio" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -469,7 +454,7 @@
 					 </div>
 					 <div class="form-group">
 					    <div class="col-sm-12">
-					      <textarea class="form-control" rows="4" cols="20"> </textarea> 
+					      <textarea id="txtDescripcion" class="form-control" rows="4" cols="20"> </textarea> 
 					    </div>
 					 </div>
 	     		</form>
@@ -487,7 +472,7 @@
 	<script type="text/javascript" src="js/datatables.js"></script> 
 	<script type="text/javascript" src="js/patrocinadores-init.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.0.0/js/dataTables.rowGroup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
 
 </body>
 </html>
