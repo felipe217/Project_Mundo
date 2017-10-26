@@ -23,7 +23,6 @@
 	include_once("../class/clase_Patrocinios.php");
 	include_once("../class/clase_Desembolsos.php"); 	
 	$miConexion = new Conexion();
-	$Patrocinador = new Patrocinadores();
 	$JSONLine = "";
 	//$listResponsables = ""; 
 
@@ -34,18 +33,23 @@
 			$resultado = $miConexion->ejecutarInstruccion($sqlEstados);
 			$cant = $miConexion->cantidadRegistros($resultado); 
 			if ($cant>0) {
+				$Patrocinador = new Patrocinadores();
 				$arreglo = array();
 				$i=0;
 				while ($fila = $miConexion->obtenerFila($resultado)){
-					$arreglo[$i]["codigo"] = $fila['codPatrocinador'];
-					$arreglo[$i]["nombre"] = $fila['nombre'];
-					$i++;				
+					$Patrocinador->setCodigo($fila['codPatrocinador']);
+					$Patrocinador->setNombre($fila['nombre']);
+					$JSONLine = $JSONLine.$Patrocinador->toJSON()."*";
+					// $arreglo[$i]["codigo"] = $fila['codPatrocinador'];
+					// $arreglo[$i]["nombre"] = $fila['nombre'];
+					// $i++;				
 				}
-				$JSONLine = json_encode($arreglo);	
+				
+				//$JSONLine = json_encode(array_values($arreglo));	
 				if ($cant==1) {
-					echo $JSONLine;
+					echo rtrim($JSONLine,"*");
 				}else
-					echo $JSONLine;
+				echo rtrim($JSONLine,"*");
 			}else
 				echo "null";
 

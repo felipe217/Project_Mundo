@@ -100,14 +100,12 @@ function cargarTablaPatrocinadores(){
 				success:function(respuesta){
 					console.log(respuesta);
 					if (respuesta!="null") { 
-						// json = respuesta; 
-						// var json_array = json.split('*');
-						// for (var i = 0; i<respuesta.length; i++) { 
-						// 	addPatrocinador(respuesta[i].codigo, respuesta[i].nombre);
-							
-						// 	// var objPatrocinador = JSON.parse(json_array[i]);
-						// 	// console.log(objPatrocinador.nombre, objPatrocinador.codigo);
-						// }
+						json = respuesta; 
+						var json_array = json.split('*');
+						for (var i = 0; i<json_array.length; i++) {  
+							var objPatrocinador = JSON.parse(json_array[i]);
+							addPatrocinador(objPatrocinador.codPatrocinador,objPatrocinador.nombre); 
+						}
 					}else
 						alert("No hay patrocinadores");
 						

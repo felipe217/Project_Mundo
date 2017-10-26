@@ -98,6 +98,7 @@ function cargarEstados(){
 			method: "POST",
 			dataType: "json",
 			success: function(respuesta){ 
+				console.log(respuesta);
 				var opciones = "<option>Selec. un estado</option>";				 
 				for(var i=0; i<respuesta.length; i++){
 					opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].estado+"</option>";

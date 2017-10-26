@@ -31,6 +31,9 @@
 			
 		}		
 
+		public function setCodigo($codigo){
+			$this->codPatrocinador= $codigo;
+		}
 		public function getNombre(){
 			return $this->nombre;
 		}
