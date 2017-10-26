@@ -9,6 +9,13 @@ var patrocinadorTemp;
 $('#btnEditar').click(function(){
 	$('#btnGuardarNuevo').addClass("hidden"); 
 	$('#btnConfirmarEdit').removeClass("hidden"); 
+
+	$('#txtNombrePatrocinador').val($('#lblNombrePatrocinador').html());
+	$('#txtProcedencia').val($('#lblProcedencia').html());
+	$('#txtUbicacion').val($('#lblUbicacion').html());
+	$('#txtPersonaContacto').val($('#lblNombreContacto').html());
+	$('#txtCorreoContacto').val($('#lblCorreo').html());
+	$('#txtTelefono').val($('#lblTelefono').html());
 });
 
 $('#btnNuevoPatrocinador').click(function(){
@@ -62,7 +69,7 @@ $('#btnGuardarNuevo').click(function(){
 
 $('#btnConfirmarEdit').click(function(){
 	var parametros = 
-	"caso=2"
+	"caso=2&codPatrocinador="+codPatrocinadorSel
 	+"&nombre="+$('#txtNombrePatrocinador').val()
 	+"&lugarProcedencia="+$('#txtProcedencia').val()
 	+"&direccion="+$('#txtUbicacion').val()
@@ -85,7 +92,6 @@ $('#btnConfirmarEdit').click(function(){
 			}
 		}
 	);   
-	//agregarTarea(0, $('#txtNomTarea').val(),$('#selPriodidades').val(),$('#txtTareaInicio').val(),$('#txtTareaEntrega').val(), "cualquier");
 	$('#frmNuevoPatrocinador').modal('hide');
 });
 
