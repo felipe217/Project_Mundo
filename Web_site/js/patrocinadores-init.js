@@ -9,13 +9,15 @@ var patrocinadorTemp;
 $('#btnEditar').click(function(){
 	$('#btnGuardarNuevo').addClass("hidden"); 
 	$('#btnConfirmarEdit').removeClass("hidden"); 
-
 	$('#txtNombrePatrocinador').val($('#lblNombrePatrocinador').html());
 	$('#txtProcedencia').val($('#lblProcedencia').html());
 	$('#txtUbicacion').val($('#lblUbicacion').html());
 	$('#txtPersonaContacto').val($('#lblNombreContacto').html());
 	$('#txtCorreoContacto').val($('#lblCorreo').html());
 	$('#txtTelefono').val($('#lblTelefono').html());
+	$('#selTipoPatrocinador').val($('#lblTipoPatrocinador').html());
+
+	
 });
 
 $('#btnNuevoPatrocinador').click(function(){
@@ -85,7 +87,8 @@ $('#btnConfirmarEdit').click(function(){
 			method:"POST",
 			success:function(respuesta){
 				alert(respuesta);
-				cargarTablaPatrocinadores(codPatrocinadorSel);
+				cargarTablaPatrocinadores(codPatrocinadorSel); 
+				cargarPatrocinadorSeleccionado(codPatrocinadorSel);
 			},
 			error:function(){
 				alert("Ocurrio un error");
