@@ -39,7 +39,8 @@ Asignar un rol a un usuario de un proyecto
 	//consulta a la tabla patrocinador agregando el campo direccion
 	ALTER TABLE tblpatrocinadores ADD direccion VARCHAR(150) NOT NULL ;
 
-
+//CAMBIAR LOGINTUD DE CAMPO TIPO patrocinador
+ALTER TABLE `tblpatrocinadores` CHANGE `tipoPatrocinador` `tipoPatrocinador` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 
 	//consultar la información de un patrocinador especifico
 	SELECT codPatrocinador, nombre, tipoPatrocinador, lugarProcedencia, correoElectronico, nombreContacto,
@@ -71,3 +72,6 @@ Asignar un rol a un usuario de un proyecto
 	//Insert de un nuevo desembolsos
 	INSERT INTO tbldesembolsos (codDesembolso, fecha, valor, codPatrocinio, codProyecto) 
 	VALUES ();
+
+INSERT INTO `tblpatrocinios` (`codigo`, `tipoPatrocinio`, `descripcion`, `fecha`, `valor`, `codPatrocinador`) 
+VALUES (NULL, 'Economico', NULL, '2017-10-04', '200', '1');

@@ -160,22 +160,17 @@
 			$resultado = $miConexion->ejecutarInstruccion($sqlEstados);
 			$cant = $miConexion->cantidadRegistros($resultado); 
 			if ($cant>0) {
-				$estadosArray = array();
-				$i=0;
+				$patrocinio = new Patrocinios();
 				while ($fila = $miConexion->obtenerFila($resultado)){
-					$estadosArray[$i]["codigo"] = $fila['codigo'];
-					$estadosArray[$i]["tipoPatrocinio"] = $fila['tipoPatrocinio'];
-					$estadosArray[$i]["descripcion"] = $fila['descripcion'];
-					$estadosArray[$i]["fecha"] = $fila['fecha'];
-					$estadosArray[$i]["valor"] = $fila['valor'];
-					$estadosArray[$i]["codPatrocinador"] = $fila['codPatrocinador'];
-					$i++;				
-				}
-				$JSONLine = json_encode($estadosArray);	
+					$patrocinio->construir(
+						$fila['codigo'], $fila['tipoPatrocinio'],$fila['descripcion'],$fila['fecha'],$fila['valor'],$fila['codPatrocinador']
+					);
+					$JSONLine = $JSONLine.$patrocinio->toJSON()."*";			
+				} 
 				if ($cant==1) {
-					echo $JSONLine;
+					echo rtrim($JSONLine,"*");
 				}else
-					echo $JSONLine;
+					echo rtrim($JSONLine,"*");
 			}else
 				echo "null";
 

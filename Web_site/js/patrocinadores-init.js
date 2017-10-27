@@ -9,13 +9,15 @@ var patrocinadorTemp;
 $('#btnEditar').click(function(){
 	$('#btnGuardarNuevo').addClass("hidden"); 
 	$('#btnConfirmarEdit').removeClass("hidden"); 
-
 	$('#txtNombrePatrocinador').val($('#lblNombrePatrocinador').html());
 	$('#txtProcedencia').val($('#lblProcedencia').html());
 	$('#txtUbicacion').val($('#lblUbicacion').html());
 	$('#txtPersonaContacto').val($('#lblNombreContacto').html());
 	$('#txtCorreoContacto').val($('#lblCorreo').html());
 	$('#txtTelefono').val($('#lblTelefono').html());
+	$('#selTipoPatrocinador').val($('#lblTipoPatrocinador').html());
+
+	
 });
 
 $('#btnNuevoPatrocinador').click(function(){
@@ -85,7 +87,8 @@ $('#btnConfirmarEdit').click(function(){
 			method:"POST",
 			success:function(respuesta){
 				alert(respuesta);
-				cargarTablaPatrocinadores(codPatrocinadorSel);
+				cargarTablaPatrocinadores(codPatrocinadorSel); 
+				cargarPatrocinadorSeleccionado(codPatrocinadorSel);
 			},
 			error:function(){
 				alert("Ocurrio un error");
@@ -96,31 +99,31 @@ $('#btnConfirmarEdit').click(function(){
 });
 
 function cargarTablaPatrocinadores(){
-		dtPatrocinadores.clear().draw();
-		var parametros = "caso=1&codPatrocinador=1";
-		$.ajax(
-			{
-				url: "../Web_site/controles-php/recursosControl.php",
-				data: parametros,
-				method:"POST",
-				success:function(respuesta){
-					console.log(respuesta);
-					if (respuesta!="null") { 
-						json = respuesta; 
-						var json_array = json.split('*');
-						for (var i = 0; i<json_array.length; i++) {  
-							var objPatrocinador = JSON.parse(json_array[i]);
-							addPatrocinador(objPatrocinador.codPatrocinador,objPatrocinador.nombre); 
-						}
-					}else
-						alert("No hay patrocinadores");
-						
-				},
-				error:function(){
-					alert("Ocurrio un error");
-				}
+	dtPatrocinadores.clear().draw();
+	var parametros = "caso=1&codPatrocinador=1";
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/recursosControl.php",
+			data: parametros,
+			method:"POST",
+			success:function(respuesta){
+				console.log(respuesta);
+				if (respuesta!="null") { 
+					json = respuesta; 
+					var json_array = json.split('*');
+					for (var i = 0; i<json_array.length; i++) {  
+						var objPatrocinador = JSON.parse(json_array[i]);
+						addPatrocinador(objPatrocinador.codPatrocinador,objPatrocinador.nombre); 
+					}
+				}else
+					alert("No hay patrocinadores");
+					
+			},
+			error:function(){
+				alert("Ocurrio un error");
 			}
-		);  
+		}
+	);  
 }
 
 function addPatrocinador(codigo, nombre){
@@ -176,6 +179,7 @@ function initTablaPatrocinadores(){
 		if( !isNaN(codPatrocinadorSel) ) { 
 			//alert(codPatrocinadorSel);
 			cargarPatrocinadorSeleccionado(codPatrocinadorSel);
+			cargarTablaPatrocinios();
 		 }
 	});	
 
@@ -210,7 +214,39 @@ function initTablaPatronicios(){
 }
 
 function addPatrocinio(codigo, fecha, tipo, valor, descripcion){
-	dtPatrocinios.add([codigo, fecha, tipo, valor, descripcion]).draw(false);
+	dtPatrocinios.row.add([codigo, fecha, tipo, valor, descripcion]).draw(false);
+}
+
+function cargarTablaPatrocinios(){
+	dtPatrocinios.clear().draw();
+	var parametros = "caso=5&codPatrocinador="+codPatrocinadorSel;
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/recursosControl.php",
+			data: parametros,
+			method:"POST",
+			success:function(respuesta){
+				console.log(respuesta);
+				if (respuesta!="null") { 
+					json = respuesta; 
+					var json_array = json.split('*'); 
+					for (var i = 0; i<json_array.length; i++) {  
+						var objPatrocinador = JSON.parse(json_array[i]); 
+						addPatrocinio(	objPatrocinador.codigo,
+										objPatrocinador.fecha,
+										objPatrocinador.tipoPatrocinio,
+										objPatrocinador.valor,
+										objPatrocinador.descripcion );
+					}
+				}else
+					alert("No hay patrocinadores");
+					
+			},
+			error:function(){
+				alert("Ocurrio un error");
+			}
+		}
+	);  	
 }
 //funciones para tabla desembolsos
 function initTablaDesembolsos(){

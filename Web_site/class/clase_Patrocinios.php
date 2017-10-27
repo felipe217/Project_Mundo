@@ -6,10 +6,7 @@
 		private $descripcion;		
 		private $fecha;		
 		private $valor;
-		private $codPatrocinador;
-		
-		
-		
+		private $codPatrocinador; 
 		public function construir(
 					$codigo,
 					$tipoPatrocinio,
@@ -17,14 +14,13 @@
 					$fecha,
 					$valor,
 					$codPatrocinador
-					
-					
 			){
+			$this->codigo = $codigo;
 			$this->tipoPatrocinio=$tipoPatrocinio;
 			$this->descripcion=$descripcion;			
 			$this->fecha=$fecha;
 			$this->valor=$valor;			
-			
+			$this->codPatrocinador = $codPatrocinador;
 			
 		}		
 
@@ -53,6 +49,9 @@
 			$this->valor = $valor;
 		}		
 
+		public function toJSON(){
+			return json_encode(get_object_vars($this));
+		}
 		public function __toString(){
 			return 	$this->tipoPatrocinio.','.
 					$this->descripcion.','.					
