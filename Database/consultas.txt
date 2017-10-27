@@ -72,3 +72,6 @@ ALTER TABLE `tblpatrocinadores` CHANGE `tipoPatrocinador` `tipoPatrocinador` VAR
 	//Insert de un nuevo desembolsos
 	INSERT INTO tbldesembolsos (codDesembolso, fecha, valor, codPatrocinio, codProyecto) 
 	VALUES ();
+
+INSERT INTO `tblpatrocinios` (`codigo`, `tipoPatrocinio`, `descripcion`, `fecha`, `valor`, `codPatrocinador`) 
+VALUES (NULL, 'Economico', NULL, '2017-10-04', '200', '1');
