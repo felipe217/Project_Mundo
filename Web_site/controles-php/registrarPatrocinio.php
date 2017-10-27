@@ -2,14 +2,14 @@
 	 
 
 	//Capturando los datos de tabla Patrocinio
-	$tipoPatrocinio = $_GET['tipoPatrocinio'];
-	$descripcion = $_GET['descripcion'];
-	$fecha = $_GET['fecha'];	
-	$valor = $_GET['valor'];		
-	$codPatrocinador = $_GET['codPatrocinador'];
+	$tipoPatrocinio = $_POST['tipoPatrocinio'];
+	$descripcion = $_POST['descripcion'];
+	$fecha = $_POST['fecha'];	
+	$valor = $_POST['valor'];		
+	$codPatrocinador = $_POST['codPatrocinador'];
 
    
-	$caso = $_GET['caso'];
+	$caso = $_POST['caso'];
 	
 	include_once("../class/class_conexion.php");	
 	$miConexion = new Conexion();

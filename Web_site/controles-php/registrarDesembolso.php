@@ -2,12 +2,12 @@
 	 
 
 	//Capturando los datos de tabla Desembolsos
-    $fecha = $_GET['fecha'];
-    $valor = $_GET['valor'];
-	$codPatrocinio = $_GET['codPatrocinio'];		
-	$codProyecto = $_GET['codProyecto'];             
+    $fecha = $_POST['fecha'];
+    $valor = $_POST['valor'];
+	$codPatrocinio = $_POST['codPatrocinio'];		
+	$codProyecto = $_POST['codProyecto'];             
 
-   	$caso = $_GET['caso'];
+   	$caso = $_POST['caso'];
 	
 	include_once("../class/class_conexion.php");	
 	$miConexion = new Conexion();
