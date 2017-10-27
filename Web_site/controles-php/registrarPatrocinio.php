@@ -1,7 +1,7 @@
 <?php 
 	 
 
-	//Capturando los datos de tabla Tarea
+	//Capturando los datos de tabla Patrocinio
 	$tipoPatrocinio = $_GET['tipoPatrocinio'];
 	$descripcion = $_GET['descripcion'];
 	$fecha = $_GET['fecha'];	
@@ -32,7 +32,8 @@
 							."'".$valor."',"							             
 							."'".$codPatrocinador."')";
 
-                //caso=1&tipoPatrocinio=tipo_3&descripcion=es de otro mundo&fecha=2015-10-23&valor=45660&codPatrocinador=2            
+             //Linea para prueba del registro de datos  
+             //caso=1&tipoPatrocinio=tipo_3&descripcion=es de otro mundo&fecha=2015-10-23&valor=45660&codPatrocinador=2            
 
 			$resultado = $miConexion->ejecutarInstruccion($consulta);
 			if ($resultado) {

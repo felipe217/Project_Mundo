@@ -1,16 +1,18 @@
 <?php
 
 	class Desembolsos{
-			
+		private $codDesembolso;	
 		private $fecha;		
 		private $valor;
-		
-		
+		private $codPatrocinio;
+		private $codProyecto;
 		
 		public function construir(
+					$codDesembolso,
 					$fecha,
-					$valor
-					
+					$valor,
+					$codPatrocinio,
+					$codProyecto					
 					
 			){						
 			$this->fecha=$fecha;
