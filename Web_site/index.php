@@ -1,13 +1,5 @@
 <?php
-/*require 'sql/selectoperator.php';
-require 'sql/selectsupervisor.php';
-require 'sql/selectadministrator.php';
 require 'sql/loginuser.php';
-
-$conexion = new mysqli("mysql16.000webhost.com", "a7289093_root", "qwerty123", "a7289093_iwish");*/
-
-require 'sql/loginuser.php';
-
 $mensaje = null;
 
 if(isset($_POST['login'])){
