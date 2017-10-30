@@ -72,6 +72,12 @@ ALTER TABLE `tblpatrocinadores` CHANGE `tipoPatrocinador` `tipoPatrocinador` VAR
 	//Insert de un nuevo desembolsos
 	INSERT INTO tbldesembolsos (codDesembolso, fecha, valor, codPatrocinio, codProyecto) 
 	VALUES ();
+	
 
 INSERT INTO `tblpatrocinios` (`codigo`, `tipoPatrocinio`, `descripcion`, `fecha`, `valor`, `codPatrocinador`) 
 VALUES (NULL, 'Economico', NULL, '2017-10-04', '200', '1');
+
+
+//Se agrego dos columnas en la tabla bitacora
+ALTER TABLE tblbitacora ADD descripcion VARCHAR(150) NOT NULL AFTER codUsuario,
+ ADD fecha DATE NOT NULL AFTER descripcion;
