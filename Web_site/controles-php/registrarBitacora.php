@@ -1,12 +1,12 @@
 <?php 	
 	 
 	//Capturando los datos de tabla Bitacora  
-	$Operacion = $_GET['Operacion']; 
-    $codUsuario = $_GET['codUsuario'];   		
-	$descripcion = $_GET['descripcion']; 
-    $fecha = $_GET['fecha'];          
+	$Operacion = $_POST['Operacion']; 
+    $codUsuario = $_POST['codUsuario'];   		
+	$descripcion = $_POST['descripcion']; 
+    $fecha = $_POST['fecha'];          
 
-   	$caso = $_GET['caso'];
+   	$caso = $_POST['caso'];
 	
 	include_once("../class/class_conexion.php");	
 	$miConexion = new Conexion();
