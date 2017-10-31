@@ -6,6 +6,7 @@ class Conexion{
              
     $usuario = 'root';
     $password = 'Turingenigma2017';
+    //$password = '';
     $host = 'localhost';
     $db = 'Mundo';
     

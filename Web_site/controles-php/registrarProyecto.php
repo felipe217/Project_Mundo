@@ -82,7 +82,7 @@
 					} 
 				}
 			}else
-				echo "Ocurrió un error, no se pudo registrar.";
+				echo "Ocurrió un error, no se pudo registrar."+$resultado.$consulta;
 				//echo "no se realizaó ningun registro: ".$consulta."y resultado: ".$resultado;
 			break;
 

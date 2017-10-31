@@ -12,16 +12,8 @@ if(isset($_POST['login'])){
     $var->password = sha1(htmlspecialchars($_POST['password']));
 	  $var->login();
 	  $mensaje = $var->mensaje;
-
-
 }
 ?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>

@@ -37,14 +37,15 @@
 									."codEstado = b.codEstado";
 
 			$resultado = $miConexion->ejecutarInstruccion($todosLosProyectos);
-			while ($fila = $miConexion->obtenerFila($resultado)){
-				$proyecto->setCodProyecto($fila['codProyecto']);
-				$proyecto->setNombreProyecto($fila['nombreProyecto']);
-				$proyecto->setEstado($fila['estado']);
-
-				$JSONLine = $JSONLine.$proyecto->toJSON()."-";
+			if ($resultado) {
+				while ($fila = $miConexion->obtenerFila($resultado)){
+					$proyecto->setCodProyecto($fila['codProyecto']);
+					$proyecto->setNombreProyecto($fila['nombreProyecto']);
+					$proyecto->setEstado($fila['estado']);
+	
+					$JSONLine = $JSONLine.$proyecto->toJSON()."-";
+				}
 			}
-
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion();
 

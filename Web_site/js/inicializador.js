@@ -23,13 +23,15 @@ function cargarPatrocinadores(){
 			dataType: "json",
 			success: function(respuesta){ 
 				//console.log(respuesta); 
-				todosPatrocinadores = respuesta;
-				var opciones = " "; 		 
-				for(var i=0; i<respuesta.length; i++){
-					opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].nombre+"</option>";
+				if (respuesta.length>0) {
+					todosPatrocinadores = respuesta;
+					var opciones = " "; 		 
+					for(var i=0; i<respuesta.length; i++){
+						opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].nombre+"</option>";
+					}
+					$('#selPatrocinadores').html(opciones);	  
+					$('.selectpicker').selectpicker('refresh'); 
 				}
-				$('#selPatrocinadores').html(opciones);	  
-				$('.selectpicker').selectpicker('refresh'); 
 			},
 			error: function(){
 				alert("ocurrió un error");
@@ -46,7 +48,8 @@ function cargarTiposProyecto(){
 			data: parametros,
 			method: "POST",
 			dataType: "json",
-			success: function(respuesta){ 
+			success: function(respuesta){  
+				console.log(respuesta);
 				var opciones = "<option>Selec. un tipo</option>"; 		 
 				for(var i=0; i<respuesta.length; i++){
 					opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].tipo+"</option>";
@@ -54,8 +57,8 @@ function cargarTiposProyecto(){
 				$('#selTipoProyecto').html(opciones);
 
 			},
-			error: function(){
-				alert("ocurrió un error cargando los proyectos.");
+			error: function(e){  
+				alert("ocurrió un error cargando los tipos de proyectos.");
 			}
 		}
 	)
@@ -808,14 +811,17 @@ function cargarProyectos(){
           data: parametros,
           method:"POST",
           success:function(respuesta){
-          	  //console.log(respuesta);
-              json = respuesta;
-              var json_array = json.split("-");
-              for (var i = 0; i<json_array.length; i++) {
-                var myObj = JSON.parse(json_array[i]);
-                addProyecto(myObj.codProyecto,myObj.nombreProyecto, myObj.estado );
-                //printProyectos(myObj.codProyecto, myObj.nombreProyecto);
-              }
+			  if (respuesta.length>0) {
+				//console.log(respuesta);
+				json = respuesta;
+				var json_array = json.split("-");
+				for (var i = 0; i<json_array.length; i++) {
+				var myObj = JSON.parse(json_array[i]);
+				addProyecto(myObj.codProyecto,myObj.nombreProyecto, myObj.estado );
+				//printProyectos(myObj.codProyecto, myObj.nombreProyecto);
+				}
+			  }
+          	  
           },
           error:function(){
             alert("Ocurrio un error");
@@ -874,7 +880,7 @@ $(document).ready(function(){
         
 	//inicializar la pagina proyectos 
  	inicializarTabla();
- 	cargarProyectos();
+	cargarProyectos(); 
  	initTablaTareas();
 	initTablaMateriales(); 
 	initTablaColaboradores();
