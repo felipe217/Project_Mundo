@@ -23,7 +23,7 @@
 						."codProyecto"
 					.") "
 					."VALUES ( null ,"
-                            ."'".$fecha."',"
+                            ." now() ,"
 							."'".$valor."',"							             
 							."'".$codPatrocinio."',"							
 							."'".$codProyecto."')";
@@ -37,7 +37,7 @@
 				
 			}else
 				//echo "Ocurrió un error, no se pudo registrar.";
-				echo "no se realizaó ningun registro: ".$consulta." y resultado: ".$resultado;
+				echo "no se realizó ningun registro: ".$consulta." y resultado: ".$resultado;
 			break;		
 		
 	}	   

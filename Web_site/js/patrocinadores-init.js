@@ -180,12 +180,39 @@ function initTablaPatrocinadores(){
 			//alert(codPatrocinadorSel);
 			cargarPatrocinadorSeleccionado(codPatrocinadorSel);
 			cargarTablaPatrocinios();
+			cargarDesembolsos();
 		 }
 	});	
 
 }
 
 //funciones para tabla de contribuciones de patrocinadores
+$('#btnGuardarPatrocinio').click(function(){
+	var parametros = 
+	"caso=1"
+	+"&tipoPatrocinio="+$('#selTipoPatrocinio').val()
+	+"&descripcion="+$('#txtDescripcion').val()
+	+"&fecha="+$('#txtFecha').val()
+	+"&valor="+$('#txtValor').val()
+	+"&codPatrocinador="+codPatrocinadorSel;
+	console.log(parametros);
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/registrarPatrocinio.php",
+			data: parametros,
+			method:"POST",
+			success:function(respuesta){
+				alert(respuesta);
+				cargarTablaPatrocinios();
+			},
+			error:function(){
+				alert("Ocurrio un error");
+			}
+		}
+	);  
+	$('#frmNuevoPatrocinio').modal('hide');
+});
+
 function initTablaPatronicios(){
 	//aplicar funciones a tabla cotribuciones
 	dtPatrocinios =
@@ -238,8 +265,7 @@ function cargarTablaPatrocinios(){
 										objPatrocinador.valor,
 										objPatrocinador.descripcion );
 					}
-				}else
-					alert("No hay patrocinadores");
+				} 
 					
 			},
 			error:function(){
@@ -248,7 +274,73 @@ function cargarTablaPatrocinios(){
 		}
 	);  	
 }
+
 //funciones para tabla desembolsos
+$('#btnGuardarDesembolso').click(function(){
+	var parametros = 
+	"caso=1"
+	+"&fecha=null"
+	+"&valor="+$('#txtMontoDesembolso').val()
+	+"&codPatrocinio=1"
+	+"&codProyecto="+$('#selProyectos').val();
+	console.log(parametros);
+	$.ajax( 
+		{
+			url: "../Web_site/controles-php/registrarDesembolso.php",
+			data: parametros,
+			method:"POST",
+			success:function(respuesta){
+				alert(respuesta); 
+				cargarDesembolsos();
+			},
+			error:function(){
+				alert("Ocurrio un error");
+			}
+		}
+	);   
+});
+
+
+function cargarDesembolsos(){
+	dtDesembolsos.clear().draw();
+	var parametros = "caso=4&codPatrocinador="+codPatrocinadorSel;
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/recursosControl.php",
+			data: parametros,
+			method:"POST",
+			dataType:"json",
+			success:function(respuesta){
+				console.log(respuesta);
+				if (respuesta!="null") { 
+					for (var i = 0; i < respuesta.length; i++) {
+						addDesembolso(
+							respuesta[i].codDesembolso,
+							respuesta[i].fecha,
+							respuesta[i].valor,
+							respuesta[i].nombreProyecto
+						); 
+					}
+					// json = respuesta; 
+					// var json_array = json.split('*'); 
+					// for (var i = 0; i<json_array.length; i++) {  
+					// 	var objPatrocinador = JSON.parse(json_array[i]); 
+						 
+					// }
+				} 
+					
+			},
+			error:function(){
+				alert("Ocurrio un error");
+			}
+		}
+	);  		
+}
+
+function addDesembolso(codigo, fecha, monto, proyecto){
+	dtDesembolsos.row.add([codigo, fecha, monto, proyecto]).draw(false);
+}
+
 function initTablaDesembolsos(){
 	//aplicar funciones a tabla desembolsos
 	dtDesembolsos =
@@ -257,12 +349,12 @@ function initTablaDesembolsos(){
 				"scrollY":        "320px",
 				"scrollCollapse": true,
 				"paging":         false,
-				order: [[4, 'asc']],
+				order: [[3, 'asc']],
 				rowGroup: {
-					dataSrc: 4
+					dataSrc: 3
 				}
 			}
-		);
+	);
 
 	$('#tabla-desembolsos tbody').on( 'click', 'tr', function () {
 		if ( $(this).hasClass('selected') ) {
