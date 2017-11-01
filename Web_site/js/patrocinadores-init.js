@@ -5,6 +5,33 @@ var dtPatrocinadores// objeto datatable para los patrocinadores
 var codPatrocinadorSel;
 var patrocinadorTemp;
 
+function cargarProyectosPatrocinados(){ 
+	var parametros = "caso=6&codPatrocinador="+codPatrocinadorSel;
+	$.ajax(
+		{
+			url: "../Web_site/controles-php/recursosControl.php",
+			data: parametros,
+			method:"POST",
+			dataType:"json",
+			success:function(respuesta){
+				console.log(respuesta);
+				if (respuesta!="null") { 
+					$('#selProyectos').html("<option value='0'>Seleccione proyecto</option>");
+					for (var i = 0; i < respuesta.length; i++) {
+						$('#selProyectos').append(
+							'<option value="'+respuesta[i].codProyecto+'">'+respuesta[i].nombreProyecto+'</option>'
+						); 
+					} 
+				}  
+			},
+			error:function(e){
+				alert("Ocurrio un error cargando los proyectos patrocinados");
+				console.log(e);
+			}
+		}
+	);  		
+}
+
 //funciones para patrocinadores
 $('#btnEditar').click(function(){
 	$('#btnGuardarNuevo').addClass("hidden"); 
@@ -181,6 +208,7 @@ function initTablaPatrocinadores(){
 			cargarPatrocinadorSeleccionado(codPatrocinadorSel);
 			cargarTablaPatrocinios();
 			cargarDesembolsos();
+			cargarProyectosPatrocinados();
 		 }
 	});	
 
@@ -310,7 +338,7 @@ function cargarDesembolsos(){
 			data: parametros,
 			method:"POST",
 			dataType:"json",
-			success:function(respuesta){
+			success:function(respuesta){ 
 				console.log(respuesta);
 				if (respuesta!="null") { 
 					for (var i = 0; i < respuesta.length; i++) {
@@ -320,13 +348,7 @@ function cargarDesembolsos(){
 							respuesta[i].valor,
 							respuesta[i].nombreProyecto
 						); 
-					}
-					// json = respuesta; 
-					// var json_array = json.split('*'); 
-					// for (var i = 0; i<json_array.length; i++) {  
-					// 	var objPatrocinador = JSON.parse(json_array[i]); 
-						 
-					// }
+					} 
 				} 
 					
 			},
@@ -373,6 +395,7 @@ $(document).ready( function () {
 	cargarTablaPatrocinadores();
 	initTablaPatronicios();
 	initTablaDesembolsos();
+	
 
 // Fin del documento
 });

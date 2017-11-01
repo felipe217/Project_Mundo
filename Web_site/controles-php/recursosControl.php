@@ -3,16 +3,10 @@
 		 CASOS:
 		 1. carga todos los patrocinadores en el sistema
 		 2. carga todos los patrocinadoresde un proyecto especifico
-		 3. conculta todas las tares de un proyecto
-		 4. consultas de todos los materiales de un proyecto 
-		 5. selecciona los colaboradores del proyecto seleccionado:
-		 6. cargar todos los estados disponibles en la base de datos
-		 7. carga todos los diferentes tipos de proyectos establecidos en la base de datos 
-		 8. carga todos los patrocinadores en el sistema
-		 9. carga todos los patrocinadoresde un proyecto especifico 
-		10. carga los usuarios sin rol asignados a un proyecto
-		11. carga todos los datos de una tarea especifica
-
+		 3. consultar la información de un patrocinador especifico
+		 4. Consulta el desembolso de patrocinador 
+		 5. consulta de los patrocionios
+		 6. consulta los proyectos patrocinador por un patrocinador 
 
 	*/ 
 	 
@@ -27,7 +21,7 @@
 	//$listResponsables = ""; 
 
 	switch ($caso) {
-        //carga todos los patrocinadores en el sistema
+        //1. carga todos los patrocinadores en el sistema
 		case '1':
 			$sqlEstados = "select codPatrocinador, nombre from tblpatrocinadores";
 			$resultado = $miConexion->ejecutarInstruccion($sqlEstados);
@@ -56,7 +50,7 @@
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion(); 
 		    break; 
-		// carga todos los patrocinadores de un proyecto especifico
+		//2. carga todos los patrocinadores de un proyecto especifico
 		case '2':
 			$sqlPatrocinadoresxproyecto = "SELECT A.codPatrocinador, A.CodProyecto, B.nombre from "
 										."tblpatrocinadoresxproyecto A inner join tblpatrocinadores B on A.codPatrocinador = B.codPatrocinador "
@@ -83,7 +77,7 @@
 			$miConexion->cerrarConexion(); 
 			break;
 		
-		//consultar la información de un patrocinador especifico
+		//3. consultar la información de un patrocinador especifico
 		case '3':
 			//consultar la información de un patrocinador especifico:
 			$sqlPatrocinador ="SELECT codPatrocinador, nombre, tipoPatrocinador, lugarProcedencia, 
@@ -118,7 +112,7 @@
 			$miConexion->cerrarConexion(); 
 			break;
   
-		//Consulta el desembolso de patrocinador 
+		//4. Consulta el desembolso de patrocinador 
 		case '4':
 			$sqlEstados = "SELECT A.codDesembolso, A.fecha, A.valor, A.codPatrocinio, A.codProyecto, B.nombreProyecto 
 						   FROM tbldesembolsos A 
@@ -153,7 +147,7 @@
 			$miConexion->cerrarConexion(); 
 			break;
 		
-		//consulta de los patrocionios:
+		//5. consulta de los patrocionios:
 		case '5':
 			$sqlEstados = "SELECT codigo, tipoPatrocinio, descripcion, fecha, valor, codPatrocinador FROM tblpatrocinios
 	 						WHERE codPatrocinador = ".$codigoPatrocinador;
@@ -176,7 +170,33 @@
 
 			$miConexion->liberarResultado($resultado);
 			$miConexion->cerrarConexion();  
-			break;		
+		break;		
+		//6. consulta los proyectos patrocinador por un patrocinador 
+		case '6': 
+			$sqlProyectos = "select a.codigo, a.codProyecto, b.nombreProyecto from tblpatrocinadoresxproyecto a "
+							." inner join tblproyectos b on a.codProyecto = b.codProyecto "
+							." where a.codPatrocinador = ".$codigoPatrocinador; 
+			$resultado = $miConexion->ejecutarInstruccion($sqlProyectos);
+			$cant = $miConexion->cantidadRegistros($resultado); 
+			if ($cant>0) {
+				$proyectosArray = array();
+				$i=0;
+				while ($fila = $miConexion->obtenerFila($resultado)){
+					$proyectosArray[$i]["codProyecto"] = $fila['codProyecto'];
+					$proyectosArray[$i]["nombreProyecto"] = $fila['nombreProyecto']; 			
+					$i++;				
+				}
+				$JSONLine = json_encode($proyectosArray);	
+				if ($cant==1) {
+					echo $JSONLine;
+				}else
+					echo $JSONLine;
+			}else
+				echo "null";
+
+			$miConexion->liberarResultado($resultado);
+			$miConexion->cerrarConexion(); 
+		break;
 		default:
 		# code...
 		break;  

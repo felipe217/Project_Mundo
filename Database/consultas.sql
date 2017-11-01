@@ -82,8 +82,12 @@ VALUES (NULL, 'Economico', NULL, '2017-10-04', '200', '1');
 ALTER TABLE tblbitacora ADD descripcion VARCHAR(150) NOT NULL AFTER codUsuario,
  ADD fecha DATE NOT NULL AFTER descripcion;
 
-cambios el 30 de octubre
+-- cambios el 30 de octubre
  RENAME TABLE `mundo`.`tbltiposproyectos` TO `mundo`.`tiposproyectos`;
  ALTER TABLE `tiposproyectos` CHANGE `codTiposProyectos` `codTiposProyecto` INT(11) NOT NULL;
 
+-- seleciona los proyectos patrocinados por un patrocinador
+select a.codigo, a.codProyecto, b.nombreProyecto from tblpatrocinadoresxproyecto a
+inner join tblproyectos b on a.codProyecto = b.codProyecto
+where a.codPatrocinador = 1
 
