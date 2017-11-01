@@ -4,6 +4,7 @@ var dtPatrocinios; //objeto datatable para los patrocinios
 var dtPatrocinadores// objeto datatable para los patrocinadores 
 var codPatrocinadorSel;
 var patrocinadorTemp;
+var desembolsoMaximo = 0;
 
 function cargarProyectosPatrocinados(){ 
 	var parametros = "caso=6&codPatrocinador="+codPatrocinadorSel;
@@ -285,6 +286,7 @@ function cargarTablaPatrocinios(){
 				if (respuesta!="null") { 
 					json = respuesta; 
 					var json_array = json.split('*'); 
+					$('#contribucionesCount').html(json_array.length);
 					for (var i = 0; i<json_array.length; i++) {  
 						var objPatrocinador = JSON.parse(json_array[i]); 
 						addPatrocinio(	objPatrocinador.codigo,
@@ -292,9 +294,13 @@ function cargarTablaPatrocinios(){
 										objPatrocinador.tipoPatrocinio,
 										objPatrocinador.valor,
 										objPatrocinador.descripcion );
+						desembolsoMaximo = desembolsoMaximo + parseFloat(dtPatrocinios.cell(i,3).data());
 					}
-				} 
 					
+					//calcular el maximo de contribuciones 
+					$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
+				} else
+				$('#contribucionesCount').html("0");
 			},
 			error:function(){
 				alert("Ocurrio un error");
@@ -305,27 +311,35 @@ function cargarTablaPatrocinios(){
 
 //funciones para tabla desembolsos
 $('#btnGuardarDesembolso').click(function(){
-	var parametros = 
-	"caso=1"
-	+"&fecha=null"
-	+"&valor="+$('#txtMontoDesembolso').val()
-	+"&codPatrocinio=1"
-	+"&codProyecto="+$('#selProyectos').val();
-	console.log(parametros);
-	$.ajax( 
-		{
-			url: "../Web_site/controles-php/registrarDesembolso.php",
-			data: parametros,
-			method:"POST",
-			success:function(respuesta){
-				alert(respuesta); 
-				cargarDesembolsos();
-			},
-			error:function(){
-				alert("Ocurrio un error");
+	if ($('#txtMontoDesembolso').val()>desembolsoMaximo) {
+		alert("El valor que intenta desembolsar supera la suma de contribuciones del patrocinador"+
+			  ". Intente una cantidad menor");
+		$('#txtMontoDesembolso').val("");
+		$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
+	} else {
+		var parametros = 
+		"caso=1"
+		+"&fecha=null"
+		+"&valor="+$('#txtMontoDesembolso').val()
+		+"&codPatrocinio=1"
+		+"&codProyecto="+$('#selProyectos').val();
+		console.log(parametros);
+		$.ajax( 
+			{
+				url: "../Web_site/controles-php/registrarDesembolso.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){
+					alert(respuesta); 
+					cargarDesembolsos();
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
 			}
-		}
-	);   
+		);   
+	}
+	
 });
 
 
@@ -340,7 +354,8 @@ function cargarDesembolsos(){
 			dataType:"json",
 			success:function(respuesta){ 
 				console.log(respuesta);
-				if (respuesta!="null") { 
+				if (respuesta!="null" && respuesta != null) { 
+					$('#desembolsosCount').html(respuesta.length);
 					for (var i = 0; i < respuesta.length; i++) {
 						addDesembolso(
 							respuesta[i].codDesembolso,
@@ -349,7 +364,8 @@ function cargarDesembolsos(){
 							respuesta[i].nombreProyecto
 						); 
 					} 
-				} 
+				} else
+				$('#desembolsosCount').html("0");
 					
 			},
 			error:function(){

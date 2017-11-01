@@ -146,12 +146,22 @@
 						<!-- tab 1-->
 							<div class="tab-pane active" id="1"> 
 								<div class="row">
-									<div class="col-sm-3">
-											<div class="btn-toolbar" role="toolbar" aria-label="...">
-												<div class="btn-group" role="group" aria-label="...">
-														<button type="button" id="btnEditar" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador">
-																<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
-															</button>
+									<div class="col-sm-6">
+											<div class="btn-toolbar" role="toolbar"  >
+												<div class="btn-group" role="group"  >
+													<button type="button" id="btnEditar" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador">
+														<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
+													</button>
+												</div>
+												<div class="btn-group" role="group"  >
+													<button class="btn" type="button">
+														Contribuciones <span class="badge" id="contribucionesCount">0</span>
+													</button>
+												</div> 
+												<div class="btn-group" role="group"  >
+													<button class="btn" type="button">
+														Desembolsos <span class="badge" id="desembolsosCount">0</span>
+													</button>
 												</div> 
 											</div> 
 										<br>	<br>
@@ -228,7 +238,7 @@
 										<div class="form-group"> 
 											<div class="input-group">
 												<div class="input-group-addon">L. </div>
-												<input type="text" class="form-control" id="txtMontoDesembolso" placeholder="Monto"> 
+												<input type="text" class="form-control" id="txtMontoDesembolso" placeholder="500 lps máximo"> 
 											</div>
 										</div>
 										<button type="button" id="btnGuardarDesembolso" class="btn btn-success">Agregar</button>
