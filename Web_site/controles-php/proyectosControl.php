@@ -57,7 +57,7 @@
 			$dataProyecto = 
 				"Select A.codProyecto, A.nombreProyecto, A.fechaInicio, A.fechafinal, A.lugar, A.descripcion, A.beneficiario,"
 			    ." A.codTipoProyecto, B.estado, B.codEstado, A.costoEstimado, "
-			    ."C.nombreUsuario, "
+			    ."C.usuario as nombreUsuario, "
 			    ."D.tipoProyecto "
 			."FROM tblProyectos A "
 			."inner join tblestados B on A.codEstado = B.codEstado "
@@ -104,7 +104,7 @@
 				while ($fila = $miConexion->obtenerFila($resultado)){
 						//antes de llenar la tabla debemos identificar a los responsables de las tareas
 						$sqlResponsables = 
-										"select c.nombreUsuario from tblusuarioxtarea a "
+										"select c.usuario as nombreUsuario from tblusuarioxtarea a "
 										."inner join tbltareas b on a.codTarea = b.codTarea "
 										."inner join tblusuarios c on a.codUsuario = c.codUsuario "
 										."where b.codProyecto = ".$codigoProyecto." and a.codTarea = ".$fila['codTarea'];
@@ -198,7 +198,7 @@
 		case '5':
 			$sqlColaboradores = 
 								"select a.codUsuario, "
-									."	a.nombreUsuario, "
+									."	a.usuario as nombreUsuario, "
 									."	c.tipo_usuario, "
 									."	a.departamento, "
 									."	a.cargo, "
@@ -368,7 +368,7 @@
 		case '10':
 			$sqlColaboradores = 
 			"select  "
-				."	a.codUsuario, a.nombreUsuario, "  
+				."	a.codUsuario, a.usuario as nombreUsuario, "  
 				."  b.Rol "
 			."FROM tblusuarios a "
 			."inner join tblusuarioxproyecto b on a.codUsuario = b.codUsuario "
@@ -407,7 +407,7 @@
 				while ($fila = $miConexion->obtenerFila($resultado)){
 						//antes de llenar la tabla debemos identificar a los responsables de las tareas
 						$sqlResponsables = 
-										"select c.nombreUsuario from tblusuarioxtarea a "
+										"select c.usuario as nombreUsuario from tblusuarioxtarea a "
 										."inner join tbltareas b on a.codTarea = b.codTarea "
 										."inner join tblusuarios c on a.codUsuario = c.codUsuario "
 										."where b.codProyecto = ".$codigoProyecto." and a.codTarea = ".$codTarea;

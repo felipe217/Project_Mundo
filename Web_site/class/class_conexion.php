@@ -5,7 +5,7 @@
 		private $usuario="root";
 		private $contrasena="";
 		private $host="localhost";
-		private $baseDatos="administradorproyectos";
+		private $baseDatos="Mundo";
 		private $puerto="3306";
 		private $link;
 

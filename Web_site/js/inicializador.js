@@ -21,9 +21,8 @@ function cargarPatrocinadores(){
 			data: parametros,
 			method: "POST",
 			dataType: "json",
-			success: function(respuesta){ 
-				//console.log(respuesta); 
-				if (respuesta.length>0) {
+			success: function(respuesta){   
+				if (respuesta != null) {
 					todosPatrocinadores = respuesta;
 					var opciones = " "; 		 
 					for(var i=0; i<respuesta.length; i++){
@@ -101,12 +100,14 @@ function cargarEstados(){
 			method: "POST",
 			dataType: "json",
 			success: function(respuesta){ 
-				console.log(respuesta);
-				var opciones = "<option>Selec. un estado</option>";				 
-				for(var i=0; i<respuesta.length; i++){
-					opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].estado+"</option>";
+				if (respuesta!="null" && respuesta != null) {
+					console.log(respuesta);
+					var opciones = "<option>Selec. un estado</option>";				 
+					for(var i=0; i<respuesta.length; i++){
+						opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].estado+"</option>";
+					}
+					$('#selEstados').html(opciones);
 				}
-				$('#selEstados').html(opciones);
 			},
 			error: function(){
 				alert("ocurrió un error cargando los estados.");
@@ -718,6 +719,7 @@ $('#btnGuardarProyecto').click(function(){
 				method:"POST",
 				success:function(respuesta){
 						console.log(respuesta);
+						alert(respuesta);
 						cargarProyectos();
 						//addProyecto(valor, $('#txtNomProyecto').val(), 'proceso');
 				},
@@ -930,11 +932,13 @@ function validarFormularioMaterial(){
 		$('#txtMaterial').addClass('btn-warning'); 
 		errores++;
 	}
-	if (parseInt($('#txtMatUnidades').val())<=0) { 
+	if (!noVacio($('#txtMatUnidades').val())) { 
 		$('#txtMatUnidades').addClass('btn-warning'); 
+		alert("Erroe en uniddades");
 		errores++;
 	}
-	if (parseFloat($('#txtPrecioUnidad').val())<=0) { 
+	if (!noVacio($('#txtPrecioUnidad').val())) { 
+		alert("Error en precio");
 		errores++;
 	} 
 	return errores;

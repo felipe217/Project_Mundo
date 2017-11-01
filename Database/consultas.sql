@@ -85,3 +85,5 @@ ALTER TABLE tblbitacora ADD descripcion VARCHAR(150) NOT NULL AFTER codUsuario,
 cambios el 30 de octubre
  RENAME TABLE `mundo`.`tbltiposproyectos` TO `mundo`.`tiposproyectos`;
  ALTER TABLE `tiposproyectos` CHANGE `codTiposProyectos` `codTiposProyecto` INT(11) NOT NULL;
+
+
