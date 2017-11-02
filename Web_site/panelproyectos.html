@@ -451,7 +451,7 @@
 							    <input type="text" class="form-control" id="txtCode" placeholder="Codigo de proyecto" readonly>
 						  	</div>
 						  	<div class="form-group col-lg-4">
-						    	<label for="exampleInputPassword1">Tipo de proyecto</label>
+						    	<label >Tipo de proyecto</label>
 						    		<select class="form-control" id="selTipoProyecto"> 
 									    <option>Selec. un tipo</option>  
 								 	</select>	
@@ -471,25 +471,25 @@
 					  	</div>
 					  	<div class="row">
 						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Lugar de ejecución</label>
+							    <label >Lugar de ejecución</label>
 							    <input type="text" class="form-control" id="txtLugar" placeholder="Lugar donde se ejecuta">
 						  	</div>
 						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Fecha de inicio</label>
+							    <label>Fecha de inicio</label>
 							    <input type="date" class="form-control" id="txtFechaInicio" placeholder="dd/mm/aaaa">
 						  	</div>
 						  	<div class="form-group col-lg-4">
-							    <label for="exampleInputEmail1">Fecha final</label>
+							    <label>Fecha final</label>
 							    <input type="date" class="form-control" id="txtFechaFinal" placeholder="dd/mm/aaaa">
 						  	</div>
 					  	</div>
 					  	<div class="row">
 						  	<div class="form-group col-lg-6">
-							    <label for="exampleInputEmail1">Responsable de proyecto</label>
+							    <label >Responsable de proyecto</label>
 							    <input type="text" class="form-control" id="txtResponsable" placeholder="Nombre de responsable de proyecto">
 						  	</div>
 						  	<div class="form-group col-lg-6">
-							    <label for="exampleInputEmail1">Beneficiario directo</label>
+							    <label>Beneficiario directo</label>
 							    <input type="text" class="form-control" id="txtBeneficiario" placeholder="Nombre  de beneficiario directo">
 						  	</div>
 					  	</div>
@@ -498,7 +498,7 @@
 		     		<div class="col-lg-4 ">
 					  	<div class="form-group">
 					  		<label>Costo estimando</label>
-						    <label class="sr-only" for="exampleInputAmount">Amount</label>
+						    <label class="sr-only">Amount</label>
 						    <div class="input-group">
 						      	<div class="input-group-addon">L. </div>
 						      	<input type="text" class="form-control" id="txtCosto" placeholder="Cantidad">
@@ -506,16 +506,12 @@
 						 </div>
 					  	<div class="form-group">
 					    	<label  >Patrocinadores:</label>
-					    		<select  class="form-control selectpicker " data-live-search="true" id="selPatrocinadores" multiple>
-									<option value="1">Estado 1</option>
-									<option value="2" >Estado 2</option>
-									<option value="3">Estado 3</option>
-									<option value="4">Estado 4</option>  
+					    		<select  class="form-control selectpicker " data-live-search="true" id="selPatrocinadores" multiple> 
 								</select>	
 					  	</div> 
 					  	<div class="row">
 					  		<div class="form-group col-xs-12">
-							  <label for="comment">Descripción:</label>
+							  <label>Descripción:</label>
 							  <textarea class="form-control" rows="5" id="txtDescripcion" placeholder="Escriba una descripcion o comentario"></textarea>
 							</div>
 					  	</div>
@@ -722,15 +718,15 @@
 						<div class="row">
 							<div class="form-group col-xs-12 col-md-4">
 								<label>Unidades:</label>
-								<input type="text" class="form-control" id="txtMatUnidades" placeholder="Cantidad">
+								<input type="number" class="form-control" id="txtMatUnidades" placeholder="Cantidad">
 							</div>
 							<div class="form-group col-xs-12 col-md-4">
 								<label>Precio unidad:</label>
-								<input type="text" class="form-control" id="txtPrecioUnidad" placeholder="0.00">
+								<input type="number" class="form-control" id="txtPrecioUnidad" placeholder="0.00">
 							</div>
 							<div class="form-group col-xs-12 col-md-4">
 								<label>Total</label>
-								<input type="number"    class="form-control" id="txtMatTotal" placeholder="0.00">
+								<input type="number" class="form-control" id="txtMatTotal" placeholder="0.00">
 							</div>
 						</div>
 					</form>

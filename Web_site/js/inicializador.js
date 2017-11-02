@@ -49,7 +49,7 @@ function cargarTiposProyecto(){
 			dataType: "json",
 			success: function(respuesta){  
 				console.log(respuesta);
-				var opciones = "<option>Selec. un tipo</option>"; 		 
+				var opciones = "<option value='0'>Selec. un tipo</option>"; 		 
 				for(var i=0; i<respuesta.length; i++){
 					opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].tipo+"</option>";
 				}
@@ -102,7 +102,7 @@ function cargarEstados(){
 			success: function(respuesta){ 
 				if (respuesta!="null" && respuesta != null) {
 					console.log(respuesta);
-					var opciones = "<option>Selec. un estado</option>";				 
+					var opciones = "<option value = '0'>Selec. un estado</option>";				 
 					for(var i=0; i<respuesta.length; i++){
 						opciones = opciones + "<option value='"+respuesta[i].codigo+"'>"+respuesta[i].estado+"</option>";
 					}
@@ -177,6 +177,7 @@ function cargarPatrocinadoresSeleccionados(){
 }
 
 function editarProyecto(){ 
+	$('.form-control').removeClass("invalid");
 	if (proyectoTemp != null) {
 		$('#btnGuardarProyecto').addClass("hidden");
 		$('#btnCancelarGuardar').addClass("hidden");
@@ -401,12 +402,13 @@ $('#btnNuevoMaterial').click(function(){
 	$('#txtMatUnidades').val("");
 	$('#txtPrecioUnidad').val("");
 	$('#txtMatTotal').val("");
+	$('.form-control').removeClass('invalid');  
 });
 
 //evento click para registrar un nuevo material
 $('#btnConfirmarMaterial').click(function(){
-	if (validarFormularioMaterial()!=0) {
-		alert("hay errores");
+	if (validarFormularioMaterial()>0) {
+		alert("Algunos datos no estan correctos. Verfique la información");
 	}else{
 		var parametros = 
 		"proveedor="+$('#txtProveedor').val()
@@ -536,8 +538,7 @@ $('#btnNuevaTarea').click(function(){
 function editarTarea(){
 	$('#btnActualizarTarea').removeClass("hidden");
 	$('#btn-guardar-tarea').addClass("hidden");
-
-
+	$('.form-control').removeClass("invalid");
 	//colocar los valores de la tarea seleccionada en las respectivas cajas de texto
 }
 
@@ -676,6 +677,7 @@ function cargarTareas(codigoProyecto){
 //evento click para crar nuevo proyecto
 
 $('#btn-nuevoProyecto').click(function(){
+	$('.form-control').removeClass("invalid");
 	$('#btnCancelarGuardar').removeClass("hidden");
 	$('#btnGuardarProyecto').removeClass("hidden");
 	$('#btnActualizarProyecto').addClass("hidden");
@@ -696,77 +698,84 @@ $('#btn-nuevoProyecto').click(function(){
 
 //Evento click para gregistrar un nuevo proyecto en la base de datos
 $('#btnGuardarProyecto').click(function(){
-	var parametros = 
-	"codigoProyecto=0"
-	+"&nombre="+$('#txtNomProyecto').val()
-	+"&fechaInicio="+$('#txtFechaInicio').val()
-	+"&fechaFinal="+$('#txtFechaFinal').val()
-	+"&lugar="+$('#txtLugar').val()
-	+"&costo="+$('#txtCosto').val()
-	+"&beneficiario="+$('#txtBeneficiario').val()
-	+"&codEstado="+$('#selEstados').val()
-	+"&codTipoProyecto="+$('#selTipoProyecto').val()
-	+"&descripcion="+$('#txtDescripcion').val()
-	+"&codUsuario="+usuarioActual
-	+"&patrocinadores="+$('#selPatrocinadores').val()
-	+"&caso=1";
-	console.log(parametros);
-
-	$.ajax(
-			{
-				url: "../Web_site/controles-php/registrarProyecto.php",
-				data: parametros,
-				method:"POST",
-				success:function(respuesta){
-						console.log(respuesta);
-						alert(respuesta);
-						cargarProyectos();
-						//addProyecto(valor, $('#txtNomProyecto').val(), 'proceso');
-				},
-				error:function(){
-					alert("Ocurrio un error");
+	if (validarFormularioProyecto()>0) {
+		alert("Algunos datos son incorrectos, verifique la información.");
+	}else{
+		var parametros = 
+		"codigoProyecto=0"
+		+"&nombre="+$('#txtNomProyecto').val()
+		+"&fechaInicio="+$('#txtFechaInicio').val()
+		+"&fechaFinal="+$('#txtFechaFinal').val()
+		+"&lugar="+$('#txtLugar').val()
+		+"&costo="+$('#txtCosto').val()
+		+"&beneficiario="+$('#txtBeneficiario').val()
+		+"&codEstado="+$('#selEstados').val()
+		+"&codTipoProyecto="+$('#selTipoProyecto').val()
+		+"&descripcion="+$('#txtDescripcion').val()
+		+"&codUsuario="+usuarioActual
+		+"&patrocinadores="+$('#selPatrocinadores').val()
+		+"&caso=1";
+		console.log(parametros);
+	
+		$.ajax(
+				{
+					url: "../Web_site/controles-php/registrarProyecto.php",
+					data: parametros,
+					method:"POST",
+					success:function(respuesta){
+							console.log(respuesta);
+							alert(respuesta);
+							cargarProyectos();
+							//addProyecto(valor, $('#txtNomProyecto').val(), 'proceso');
+					},
+					error:function(){
+						alert("Ocurrio un error");
+					}
 				}
-			}
-		);   
-	$('#frmNuevoProyecto').modal('hide');
+			);   
+		$('#frmNuevoProyecto').modal('hide');
+	}
 });
 
 // Evento click para actualizar la informacion de un proyecto.
 $('#btnActualizarProyecto').click(function(){
-	var parametros = 
-	"codigoProyecto="+proyectoTemp.codProyecto
-	+"&nombre="+$('#txtNomProyecto').val()
-	+"&fechaInicio="+$('#txtFechaInicio').val()
-	+"&fechaFinal="+$('#txtFechaFinal').val()
-	+"&lugar="+$('#txtLugar').val()
-	+"&costo="+$('#txtCosto').val()
-	+"&beneficiario="+$('#txtBeneficiario').val()
-	+"&codEstado="+$('#selEstados').val()
-	+"&codTipoProyecto="+$('#selTipoProyecto').val()
-	+"&descripcion="+$('#txtDescripcion').val()
-	+"&codUsuario="+usuarioActual
-	+"&patrocinadores="+$('#selPatrocinadores').val()
-	+"&caso=2";
-	//console.log(parametros);
-	$.ajax(
-			{
-				url: "../Web_site/controles-php/registrarProyecto.php",
-				data: parametros,
-				method:"POST",
-				success:function(respuesta){
-					//console.log(respuesta); 
-					alert(respuesta);
-					cargarSeleccionado(proyectoTemp.codProyecto);
-					cargarProyectos();
-					cargarPatrocinadoresxProyecto(proyectoTemp.codProyecto);
-				},
-				error:function(){
-					alert("Ocurrio un error");
+	if (validarFormularioProyecto()>0) {
+		alert("Algunos datos estan incorrectos, verifique la información.");
+	}else{
+		var parametros = 
+		"codigoProyecto="+proyectoTemp.codProyecto
+		+"&nombre="+$('#txtNomProyecto').val()
+		+"&fechaInicio="+$('#txtFechaInicio').val()
+		+"&fechaFinal="+$('#txtFechaFinal').val()
+		+"&lugar="+$('#txtLugar').val()
+		+"&costo="+$('#txtCosto').val()
+		+"&beneficiario="+$('#txtBeneficiario').val()
+		+"&codEstado="+$('#selEstados').val()
+		+"&codTipoProyecto="+$('#selTipoProyecto').val()
+		+"&descripcion="+$('#txtDescripcion').val()
+		+"&codUsuario="+usuarioActual
+		+"&patrocinadores="+$('#selPatrocinadores').val()
+		+"&caso=2";
+		//console.log(parametros);
+		$.ajax(
+				{
+					url: "../Web_site/controles-php/registrarProyecto.php",
+					data: parametros,
+					method:"POST",
+					success:function(respuesta){
+						//console.log(respuesta); 
+						alert(respuesta);
+						cargarSeleccionado(proyectoTemp.codProyecto);
+						cargarProyectos();
+						cargarPatrocinadoresxProyecto(proyectoTemp.codProyecto);
+					},
+					error:function(){
+						alert("Ocurrio un error");
+					}
 				}
-			}
-		);   
-	$('#frmNuevoProyecto').modal('hide');
-
+			);   
+		$('#frmNuevoProyecto').modal('hide');
+	}
 });
 
 
@@ -921,29 +930,94 @@ $(document).ready(function(){
     					);
 });
 
+// validaciones de formularios 
 function validarFormularioMaterial(){
 	var errores = 0;
-
 	if (!noVacio($('#txtProveedor').val())) {
-		$('#txtProveedor').addClass('btn-warning'); 
+		$('#txtProveedor').addClass('invalid'); 
 		errores++;
-	}
+	}else{
+		$('#txtProveedor').removeClass('invalid');  
+	}	
 	if (!noVacio($('#txtMaterial').val())) {
-		$('#txtMaterial').addClass('btn-warning'); 
+		$('#txtMaterial').addClass('invalid'); 
 		errores++;
+	}else{
+		$('#txtMaterial').removeClass('invalid');  
 	}
-	if (!noVacio($('#txtMatUnidades').val())) { 
-		$('#txtMatUnidades').addClass('btn-warning'); 
-		alert("Erroe en uniddades");
+	if (!noVacio($('#txtMatUnidades').val()) && $('#txtMatUnidades').val()<=0) { 
+		$('#txtMatUnidades').addClass('invalid');  
 		errores++;
+	}else{
+		$('#txtMatUnidades').removeClass('invalid');  
 	}
-	if (!noVacio($('#txtPrecioUnidad').val())) { 
-		alert("Error en precio");
+	if (!noVacio($('#txtPrecioUnidad').val()) && $('#txtPrecioUnidad').val()<=0) { 
+		$('#txtPrecioUnidad').addClass('invalid');  
 		errores++;
+	} else{
+		$('#txtPrecioUnidad').removeClass('invalid');  
+	} 
+	if (!noVacio($('#txtMatTotal').val()) && $('#txtMatTotal').val()<=0) { 
+		$('#txtMatTotal').addClass('invalid');  
+		errores++;
+	} else{
+		$('#txtMatTotal').removeClass('invalid');  
 	} 
 	return errores;
 }
 
+function validarFormularioProyecto(){
+	var errores = 0;
+	if ($('#selTipoProyecto').val()<=0) {  
+		$('#selTipoProyecto').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selTipoProyecto').removeClass('invalid');  
+	}
+	if ($('#selEstados').val()<=0) {  
+		$('#selEstados').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selEstados').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtNomProyecto').val())) {
+		$('#txtNomProyecto').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtNomProyecto').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtLugar').val())) {
+		$('#txtLugar').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtLugar').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtResponsable').val())) {
+		$('#txtResponsable').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtResponsable').removeClass('invalid');  
+	}	
+	if (!noVacio($('#txtBeneficiario').val())) {
+		$('#txtBeneficiario').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtBeneficiario').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtDescripcion').val())) {
+		$('#txtDescripcion').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtDescripcion').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtDescripcion').val()) && $('#txtDescripcion').val()<=0) { 
+		$('#txtDescripcion').addClass('invalid');  
+		errores++;
+	} else{
+		$('#txtDescripcion').removeClass('invalid');  
+	} 
+	return errores;
+}
 
 //funciones de validacion 
 function noVacio(valor){
