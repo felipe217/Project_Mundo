@@ -499,40 +499,46 @@ function cargarMateriales(codigoProyecto){
 //****************funciones del panel de proyectos: tabla tareas*****************
 
 $('#btn-guardar-tarea').click(function(){ 
-	var parametros = 
-	"caso=1"
-	+"&nombreTarea="+$('#txtNomTarea').val()
-	+"&descripcion="+$('#txtTareaDesc').val()
-	+"&prioridad="+$('#selPriodidades').val()
-	+"&fechaInicio="+$('#txtTareaInicio').val()
-	+"&fechaEntrega="+$('#txtTareaEntrega').val()
-	+"&cadenaDeUsuarios="+$('#selUsuarios').val()
-	+"&codProyecto="+proyectoTemp.codProyecto;
-	console.log(parametros);
-	$.ajax(
-		{
-			url: "../Web_site/controles-php/registrarTarea.php",
-			data: parametros,
-			method:"POST",
-			success:function(respuesta){
-				alert(respuesta);
-				cargarTareas(proyectoTemp.codProyecto);
-			},
-			error:function(){
-				alert("Ocurrio un error");
+	if (validarFormulariotarea()>0) {
+		alert("Algunos datos estan incorrectos, verifique la información.");
+	}else{
+		var parametros = 
+		"caso=1"
+		+"&nombreTarea="+$('#txtNomTarea').val()
+		+"&descripcion="+$('#txtTareaDesc').val()
+		+"&prioridad="+$('#selPriodidades').val()
+		+"&fechaInicio="+$('#txtTareaInicio').val()
+		+"&fechaEntrega="+$('#txtTareaEntrega').val()
+		+"&cadenaDeUsuarios="+$('#selUsuarios').val()
+		+"&codProyecto="+proyectoTemp.codProyecto;
+		console.log(parametros);
+		$.ajax(
+			{
+				url: "../Web_site/controles-php/registrarTarea.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){
+					alert(respuesta);
+					cargarTareas(proyectoTemp.codProyecto);
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
 			}
-		}
-	);   
-	//agregarTarea(0, $('#txtNomTarea').val(),$('#selPriodidades').val(),$('#txtTareaInicio').val(),$('#txtTareaEntrega').val(), "cualquier");
-	$('#frmNuevaTarea').modal('hide');
+		);   
+		//agregarTarea(0, $('#txtNomTarea').val(),$('#selPriodidades').val(),$('#txtTareaInicio').val(),$('#txtTareaEntrega').val(), "cualquier");
+		$('#frmNuevaTarea').modal('hide');
+	}
 }); 
 
 $('#btnNuevaTarea').click(function(){
-		$('#txtNomTarea').val("");
-            $('#txtTareaDesc').val("");
-            //$('#selPriodidades').val("");
-            $('#txtTareaInicio').val("");
-            $('#txtTareaEntrega').val("");
+	$('#txtNomTarea').val("");
+	$('#txtTareaDesc').val(""); 
+	$('#txtTareaInicio').val("");
+	$('#txtTareaEntrega').val("");
+	$('#btnActualizarTarea').addClass("hidden");
+	$('#btn-guardar-tarea').removeClass("hidden");
+	$('.form-control').removeClass("invalid");
 }) ;
 
 function editarTarea(){
@@ -1010,15 +1016,37 @@ function validarFormularioProyecto(){
 	}else{
 		$('#txtDescripcion').removeClass('invalid');  
 	}
-	if (!noVacio($('#txtDescripcion').val()) && $('#txtDescripcion').val()<=0) { 
-		$('#txtDescripcion').addClass('invalid');  
+	if (!noVacio($('#txtCosto').val()) && $('#txtCosto').val()<=0) { 
+		$('#txtCosto').addClass('invalid');  
 		errores++;
 	} else{
-		$('#txtDescripcion').removeClass('invalid');  
+		$('#txtCosto').removeClass('invalid');  
 	} 
 	return errores;
 }
 
+function validarFormulariotarea() {
+	var errores = 0;
+	if ($('#selPriodidades').val()<=0) {  
+		$('#selPriodidades').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selPriodidades').removeClass('invalid');  
+	}
+	if ($('#selUsuarios').val()<=0) {  
+		$('#selUsuarios').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selUsuarios').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtNomTarea').val())) {
+		$('#txtNomTarea').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtNomTarea').removeClass('invalid');  
+	} 
+	return errores;
+}
 //funciones de validacion 
 function noVacio(valor){
 	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
