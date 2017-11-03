@@ -549,6 +549,9 @@ function editarTarea(){
 }
 
 $('#btnActualizarTarea').click(function(){
+	if (validarFormulariotarea()>0) {
+		alert("Algunos datos pueden estar incorrectos. Verifique la información.");
+	}else{
 		var parametros = 
 		"caso=2"
 		+"&nombreTarea="+$('#txtNomTarea').val()
@@ -577,8 +580,9 @@ $('#btnActualizarTarea').click(function(){
 		);  
 	
 		$('#frmNuevaTarea').modal('hide');
-	$('#btnActualizarTarea').addClass("hidden");
-	$('#btn-guardar-tarea').removeClass("hidden"); 
+		$('#btnActualizarTarea').addClass("hidden");
+		$('#btn-guardar-tarea').removeClass("hidden"); 
+	}
 });
 
 function initTablaTareas(){
@@ -893,8 +897,28 @@ function inicializarTabla(){
 		});	
 }
 
-$(document).ready(function(){  
-        
+function activarCalendarios(){
+	//$( "#txtFechaInicio" ).datepicker({ dateFormat: 'yy-mm-dd' }, { minDate: -0, maxDate: "+1M +10D" }).val(); 
+	$( "#txtFechaInicio" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+	  	minDate: -0, maxDate: "+10Y"
+	});
+	$( "#txtFechaFinal" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+	  	minDate: -0, maxDate: "+10Y"
+	});
+	$( "#txtTareaInicio" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+	  	minDate: -0, maxDate: "+10Y"
+	});
+	$( "#txtTareaEntrega" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+	  	minDate: -0, maxDate: "+10Y"
+	}); 
+}
+
+$(document).ready(function(){   
+	activarCalendarios();
 	//inicializar la pagina proyectos 
  	inicializarTabla();
 	cargarProyectos(); 
@@ -1010,11 +1034,17 @@ function validarFormularioProyecto(){
 	}else{
 		$('#txtBeneficiario').removeClass('invalid');  
 	}
-	if (!noVacio($('#txtDescripcion').val())) {
-		$('#txtDescripcion').addClass('invalid'); 
+	if (!esFecha($('#txtFechaInicio').val())) {
+		$('#txtFechaInicio').addClass('invalid'); 
 		errores++;
 	}else{
-		$('#txtDescripcion').removeClass('invalid');  
+		$('#txtFechaInicio').removeClass('invalid');  
+	}
+	if (!esFecha($('#txtFechaFinal').val())) {
+		$('#txtFechaFinal').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtFechaFinal').removeClass('invalid');  
 	}
 	if (!noVacio($('#txtCosto').val()) && $('#txtCosto').val()<=0) { 
 		$('#txtCosto').addClass('invalid');  
@@ -1022,6 +1052,10 @@ function validarFormularioProyecto(){
 	} else{
 		$('#txtCosto').removeClass('invalid');  
 	} 
+
+	if (errores<=0) {
+		$(".form-control").removeClass("invalid");
+	}
 	return errores;
 }
 
@@ -1044,6 +1078,18 @@ function validarFormulariotarea() {
 		errores++;
 	}else{
 		$('#txtNomTarea').removeClass('invalid');  
+	}  
+	if (!esFecha($('#txtTareaInicio').val())) {
+		$('#txtTareaInicio').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtTareaInicio').removeClass('invalid');  
+	} 
+	if (!esFecha($('#txtTareaEntrega').val())) {
+		$('#txtTareaEntrega').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtTareaEntrega').removeClass('invalid');  
 	} 
 	return errores;
 }
@@ -1052,3 +1098,8 @@ function noVacio(valor){
 	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
 	return isCorrect;
 } 
+
+function esFecha(valor ){
+	var correcto = /^\d{4}-\d{2}-\d{2}$/.test(valor);
+	return correcto;
+}

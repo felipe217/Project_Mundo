@@ -12,6 +12,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css"> 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">	
 
      <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
@@ -466,7 +467,7 @@
 					  	<div class="row">
 						  	<div class="form-group col-xs-12">
 						    	<label for="exampleInputEmail1">Nombre del proyecto</label>
-						    	<input type="text" class="form-control" id="txtNomProyecto" placeholder="Asigne un nombre a su proyecto">
+						    	<input type="text" class="form-control" id="txtNomProyecto" placeholder="Nombre proyecto (25 caracteres max)">
 						  	</div> 
 					  	</div>
 					  	<div class="row">
@@ -476,11 +477,11 @@
 						  	</div>
 						  	<div class="form-group col-lg-4">
 							    <label>Fecha de inicio</label>
-							    <input type="date" class="form-control" id="txtFechaInicio" placeholder="dd/mm/aaaa">
+							    <input type="text" class="form-control" id="txtFechaInicio" placeholder="dd/mm/aaaa" readonly>
 						  	</div>
 						  	<div class="form-group col-lg-4">
 							    <label>Fecha final</label>
-							    <input type="date" class="form-control" id="txtFechaFinal" placeholder="dd/mm/aaaa">
+							    <input type="text" class="form-control" id="txtFechaFinal" placeholder="dd/mm/aaaa" readonly>
 						  	</div>
 					  	</div>
 					  	<div class="row">
@@ -558,7 +559,7 @@
 						<div class="media">
 						  <div class="media-left">
 						    <a href="#">
-						      <img class="media-object small-profile-pic img-circle" src="img/userprofile.jpg" alt="...">
+						      <img class="media-object small-profile-pic img-circle" src="images/profile-pics/jobs.jpg" alt="...">
 						    </a>
 						  </div>
 						  <div class="media-body">
@@ -651,11 +652,11 @@
 		        			</div>
 		        			<div class="form-group col-xs-12 col-md-4">
 		        				<label>Fecha de inicio</label>
-		        				<input type="date" id="txtTareaInicio" class="form-control" placeholder="">
+		        				<input type="text" id="txtTareaInicio" class="form-control" placeholder="Seleccione fecha" readonly>
 		        			</div>
 		        			<div class="form-group col-xs-12 col-md-4">
 		        				<label>Fecha de entrega</label>
-		        				<input type="date" id="txtTareaEntrega" class="form-control" placeholder="">
+		        				<input type="text" id="txtTareaEntrega" class="form-control" placeholder="Seleccione fecha" readonly>
 		        			</div>
 		        		</div>
 		        		<div class="row">
@@ -802,8 +803,8 @@
 	<script src="js/datatables.js"></script>     
     <!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 	<script type="text/javascript" src="js/inicializador.js"></script>	 
-	
 
 </body>
 </html>
