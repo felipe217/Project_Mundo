@@ -1093,13 +1093,4 @@ function validarFormulariotarea() {
 	} 
 	return errores;
 }
-//funciones de validacion 
-function noVacio(valor){
-	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
-	return isCorrect;
-} 
 
-function esFecha(valor ){
-	var correcto = /^\d{4}-\d{2}-\d{2}$/.test(valor);
-	return correcto;
-}

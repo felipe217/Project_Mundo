@@ -173,6 +173,7 @@ function cargarPatrocinadorSeleccionado(codigo){
 			success:function(respuesta){ 	 
 				console.log(respuesta);
 				patrocinadorTemp = JSON.parse(respuesta); 
+				$('#selectedTag').html(patrocinadorTemp.nombre);
 				$('#lblNombrePatrocinador').html(patrocinadorTemp.nombre);
 				$('#lblProcedencia').html(patrocinadorTemp.lugarProcedencia); 
 				$('#lblTipoPatrocinador').html(patrocinadorTemp.tipoPatrocinador);
@@ -287,6 +288,7 @@ function addPatrocinio(codigo, fecha, tipo, valor, descripcion){
 }
 
 function cargarTablaPatrocinios(){
+	desembolsoMaximo=0;
 	dtPatrocinios.clear().draw();
 	var parametros = "caso=5&codPatrocinador="+codPatrocinadorSel;
 	$.ajax(
@@ -324,35 +326,36 @@ function cargarTablaPatrocinios(){
 
 //funciones para tabla desembolsos
 $('#btnGuardarDesembolso').click(function(){
-	if ($('#txtMontoDesembolso').val()>desembolsoMaximo) {
-		alert("El valor que intenta desembolsar supera la suma de contribuciones del patrocinador"+
-			  ". Intente una cantidad menor");
-		$('#txtMontoDesembolso').val("");
-		$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
-	} else {
-		var parametros = 
-		"caso=1"
-		+"&fecha=null"
-		+"&valor="+$('#txtMontoDesembolso').val()
-		+"&codPatrocinio=1"
-		+"&codProyecto="+$('#selProyectos').val();
-		console.log(parametros);
-		$.ajax( 
-			{
-				url: "../Web_site/controles-php/registrarDesembolso.php",
-				data: parametros,
-				method:"POST",
-				success:function(respuesta){
-					alert(respuesta); 
-					cargarDesembolsos();
-				},
-				error:function(){
-					alert("Ocurrio un error");
+	if (validarDesembolso()<0) {
+		if ($('#txtMontoDesembolso').val()>desembolsoMaximo) {
+			alert("El valor que intenta desembolsar supera la suma de contribuciones del patrocinador"+
+				  ". Intente una cantidad menor");
+			$('#txtMontoDesembolso').val("");
+			$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
+		} else {
+			var parametros = 
+			"caso=1"
+			+"&fecha=null"
+			+"&valor="+$('#txtMontoDesembolso').val()
+			+"&codPatrocinio=1"
+			+"&codProyecto="+$('#selProyectos').val();
+			console.log(parametros);
+			$.ajax( 
+				{
+					url: "../Web_site/controles-php/registrarDesembolso.php",
+					data: parametros,
+					method:"POST",
+					success:function(respuesta){
+						alert(respuesta); 
+						cargarDesembolsos();
+					},
+					error:function(){
+						alert("Ocurrio un error");
+					}
 				}
-			}
-		);   
-	}
-	
+			);   
+		}	
+	}	
 });
 
 
@@ -420,20 +423,7 @@ function initTablaDesembolsos(){
 }
 
 //funciones de validacion 
-function noVacio(valor){
-	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
-	return isCorrect;
-}
 
-function esCorreo(valor){
-	var isCorrect = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valor);
-	return isCorrect;
-}
-
-function esTelefono(valor){
-	var isCorrect = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(valor);
-	return isCorrect;
-}
 // funciones de validaciones
 function validarFormularioPatrocinador(){
 	var errores = 0;
@@ -479,6 +469,23 @@ function validarFormularioPatrocinador(){
 	}else{
 		$('#txtTelefono').removeClass('invalid');  
 	}   
+	return errores;
+}
+
+function validarDesembolso(){
+	var errores =0;
+	if (!noVacio($('#txtMontoDesembolso').val()) && $('#txtMontoDesembolso').val()<=0) { 
+		$('#txtMontoDesembolso').addClass('invalid');  
+		errores++;
+	} else{
+		$('#txtMontoDesembolso').removeClass('invalid');  
+	}
+	if ($('#selProyectos').val()<=0) {  
+		$('#selProyectos').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selProyectos').removeClass('invalid');  
+	}
 	return errores;
 }
 

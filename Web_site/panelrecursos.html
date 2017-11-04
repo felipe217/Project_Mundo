@@ -92,7 +92,7 @@
 					  <div class="panel-body">
 					  	<div id="operaciones-patrocinadores">
 					  		<div class="btn-group" role="group" aria-label="...">
-							  <button id="btnNuevoPatrocinador" type="button" class="btn btn-default" data-toggle="modal" data-target="#frmNuevoPatrocinador"> 
+							  <button id="btnNuevoPatrocinador" type="button" class="btn btn-success" data-toggle="modal" data-target="#frmNuevoPatrocinador"> 
 							  	 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
 							  </button> 
 							</div>
@@ -133,7 +133,7 @@
 					  <div class="panel-heading">
 					  	<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
   						<ul class="nav nav-tabs">
-  							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="padding: 10px;"></span> Patrocinador: Nombre del patrocinador &nbsp;&nbsp;&nbsp;&nbsp;</li>
+  							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="padding: 10px;"></span> <label id="selectedTag">Nombre de patrocinador seleccionado</label>&nbsp;&nbsp;</li>
 							<li class="active"><a  href="#1" data-toggle="tab">Información general</a></li>
 							<li><a href="#2" data-toggle="tab">Contribuciones</a></li>
 							<li><a href="#3" data-toggle="tab">Desembolsos</a></li>
@@ -375,7 +375,7 @@
 					 </div>
 					 <div class="form-group">
 					    <div class="col-sm-12">
-					      <textarea id="txtDescripcion" class="form-control" rows="4" cols="20"> </textarea> 
+					      <textarea id="txtDescripcion" class="form-control" rows="4" cols="20"></textarea> 
 					    </div>
 					 </div>
 	     		</form>
@@ -443,7 +443,8 @@
 	<script src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script> 
 	<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.0.0/js/dataTables.rowGroup.min.js"></script>
- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
+	<script src="js/validacion.js"></script>
 	<script type="text/javascript" src="js/patrocinadores-init.js"></script>
 
 </body>
