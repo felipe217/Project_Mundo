@@ -28,7 +28,7 @@
 					."VALUES ( null ,"
 							."'".$tipoPatrocinio."',"
 							."'".$descripcion."'," 
-							."'".$fecha."',"
+							." NOW() ,"
 							."'".$valor."',"							             
 							."'".$codPatrocinador."')";
 

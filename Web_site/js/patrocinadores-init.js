@@ -35,6 +35,7 @@ function cargarProyectosPatrocinados(){
 
 //funciones para patrocinadores
 $('#btnEditar').click(function(){
+	$('.form-control').removeClass("invalid");
 	$('#btnGuardarNuevo').addClass("hidden"); 
 	$('#btnConfirmarEdit').removeClass("hidden"); 
 	$('#txtNombrePatrocinador').val($('#lblNombrePatrocinador').html());
@@ -44,11 +45,10 @@ $('#btnEditar').click(function(){
 	$('#txtCorreoContacto').val($('#lblCorreo').html());
 	$('#txtTelefono').val($('#lblTelefono').html());
 	$('#selTipoPatrocinador').val($('#lblTipoPatrocinador').html());
-
-	
 });
 
 $('#btnNuevoPatrocinador').click(function(){
+	$('.form-control').removeClass("invalid");
 	$('#btnGuardarNuevo').removeClass("hidden"); 
 	$('#btnConfirmarEdit').addClass("hidden");
 	limpiarCampos();
@@ -69,61 +69,66 @@ function limpiarCampos(){
 }
 
 $('#btnGuardarNuevo').click(function(){
-	var parametros = 
-	"caso=1"
-	+"&nombre="+$('#txtNombrePatrocinador').val()
-	+"&lugarProcedencia="+$('#txtProcedencia').val()
-	+"&direccion="+$('#txtUbicacion').val()
-	+"&nombreContacto="+$('#txtPersonaContacto').val()
-	+"&correoElectronico="+$('#txtCorreoContacto').val()
-	+"&telefonoContacto="+$('#txtTelefono').val()
-	+"&tipoPatrocinador="+$('#selTipoPatrocinador').val();
-	console.log(parametros);
-	$.ajax(
-		{
-			url: "../Web_site/controles-php/registrarPatrocinador.php",
-			data: parametros,
-			method:"POST",
-			success:function(respuesta){
-				alert(respuesta);
-				cargarTablaPatrocinadores(codPatrocinadorSel);
-			},
-			error:function(){
-				alert("Ocurrio un error");
+	if (validarFormularioPatrocinador()<=0) { 
+		var parametros = 
+		"caso=1"
+		+"&nombre="+$('#txtNombrePatrocinador').val()
+		+"&lugarProcedencia="+$('#txtProcedencia').val()
+		+"&direccion="+$('#txtUbicacion').val()
+		+"&nombreContacto="+$('#txtPersonaContacto').val()
+		+"&correoElectronico="+$('#txtCorreoContacto').val()
+		+"&telefonoContacto="+$('#txtTelefono').val()
+		+"&tipoPatrocinador="+$('#selTipoPatrocinador').val();
+		console.log(parametros);
+		$.ajax(
+			{
+				url: "../Web_site/controles-php/registrarPatrocinador.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){
+					alert(respuesta);
+					cargarTablaPatrocinadores(codPatrocinadorSel);
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
 			}
-		}
-	);   
-	//agregarTarea(0, $('#txtNomTarea').val(),$('#selPriodidades').val(),$('#txtTareaInicio').val(),$('#txtTareaEntrega').val(), "cualquier");
-	$('#frmNuevoPatrocinador').modal('hide');
+		);   
+		//agregarTarea(0, $('#txtNomTarea').val(),$('#selPriodidades').val(),$('#txtTareaInicio').val(),$('#txtTareaEntrega').val(), "cualquier");
+		$('#frmNuevoPatrocinador').modal('hide');
+	}
+	
 });
 
 $('#btnConfirmarEdit').click(function(){
-	var parametros = 
-	"caso=2&codPatrocinador="+codPatrocinadorSel
-	+"&nombre="+$('#txtNombrePatrocinador').val()
-	+"&lugarProcedencia="+$('#txtProcedencia').val()
-	+"&direccion="+$('#txtUbicacion').val()
-	+"&nombreContacto="+$('#txtPersonaContacto').val()
-	+"&correoElectronico="+$('#txtCorreoContacto').val()
-	+"&telefonoContacto="+$('#txtTelefono').val()
-	+"&tipoPatrocinador="+$('#selTipoPatrocinador').val();
-	console.log(parametros);
-	$.ajax(
-		{
-			url: "../Web_site/controles-php/registrarPatrocinador.php",
-			data: parametros,
-			method:"POST",
-			success:function(respuesta){
-				alert(respuesta);
-				cargarTablaPatrocinadores(codPatrocinadorSel); 
-				cargarPatrocinadorSeleccionado(codPatrocinadorSel);
-			},
-			error:function(){
-				alert("Ocurrio un error");
+	if (validarFormularioPatrocinador()<=0) {
+		var parametros = 
+		"caso=2&codPatrocinador="+codPatrocinadorSel
+		+"&nombre="+$('#txtNombrePatrocinador').val()
+		+"&lugarProcedencia="+$('#txtProcedencia').val()
+		+"&direccion="+$('#txtUbicacion').val()
+		+"&nombreContacto="+$('#txtPersonaContacto').val()
+		+"&correoElectronico="+$('#txtCorreoContacto').val()
+		+"&telefonoContacto="+$('#txtTelefono').val()
+		+"&tipoPatrocinador="+$('#selTipoPatrocinador').val();
+		console.log(parametros);
+		$.ajax(
+			{
+				url: "../Web_site/controles-php/registrarPatrocinador.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){
+					alert(respuesta);
+					cargarTablaPatrocinadores(codPatrocinadorSel); 
+					cargarPatrocinadorSeleccionado(codPatrocinadorSel);
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
 			}
-		}
-	);   
-	$('#frmNuevoPatrocinador').modal('hide');
+		);   
+		$('#frmNuevoPatrocinador').modal('hide');
+	}
 });
 
 function cargarTablaPatrocinadores(){
@@ -217,29 +222,37 @@ function initTablaPatrocinadores(){
 
 //funciones para tabla de contribuciones de patrocinadores
 $('#btnGuardarPatrocinio').click(function(){
-	var parametros = 
-	"caso=1"
-	+"&tipoPatrocinio="+$('#selTipoPatrocinio').val()
-	+"&descripcion="+$('#txtDescripcion').val()
-	+"&fecha="+$('#txtFecha').val()
-	+"&valor="+$('#txtValor').val()
-	+"&codPatrocinador="+codPatrocinadorSel;
-	console.log(parametros);
-	$.ajax(
-		{
-			url: "../Web_site/controles-php/registrarPatrocinio.php",
-			data: parametros,
-			method:"POST",
-			success:function(respuesta){
-				alert(respuesta);
-				cargarTablaPatrocinios();
-			},
-			error:function(){
-				alert("Ocurrio un error");
+	if (validarFormularioPatrocinio()>0) {
+		alert("Algunos datos están erroneos. Verifique la información.");
+	}else{
+		var parametros = 
+		"caso=1"
+		+"&tipoPatrocinio="+$('#selTipoPatrocinio').val()
+		+"&descripcion="+$('#txtDescripcion').val()
+		+"&fecha="+$('#txtFecha').val()
+		+"&valor="+$('#txtValor').val()
+		+"&codPatrocinador="+codPatrocinadorSel;
+		console.log(parametros);
+		$.ajax(
+			{
+				url: "../Web_site/controles-php/registrarPatrocinio.php",
+				data: parametros,
+				method:"POST",
+				success:function(respuesta){
+					alert(respuesta);
+					cargarTablaPatrocinios();
+				},
+				error:function(){
+					alert("Ocurrio un error");
+				}
 			}
-		}
-	);  
-	$('#frmNuevoPatrocinio').modal('hide');
+		);  
+		$('#frmNuevoPatrocinio').modal('hide');
+		$('.form-control').removeClass("invalid");
+		$('#txtDescripcion').val("");
+		$('#txtValor').val("");
+	}
+
 });
 
 function initTablaPatronicios(){
@@ -406,12 +419,96 @@ function initTablaDesembolsos(){
 	});
 }
 
+//funciones de validacion 
+function noVacio(valor){
+	var isCorrect = /^[A-Za-z\'\s\.\,]+$/.test(valor);
+	return isCorrect;
+}
+
+function esCorreo(valor){
+	var isCorrect = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valor);
+	return isCorrect;
+}
+
+function esTelefono(valor){
+	var isCorrect = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(valor);
+	return isCorrect;
+}
+// funciones de validaciones
+function validarFormularioPatrocinador(){
+	var errores = 0;
+	if ($('#selTipoPatrocinador').val()<=0) {  
+		$('#selTipoPatrocinador').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selTipoPatrocinador').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtNombrePatrocinador').val())) {
+		$('#txtNombrePatrocinador').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtNombrePatrocinador').removeClass('invalid');  
+	} 
+	if (!noVacio($('#txtProcedencia').val())) {
+		$('#txtProcedencia').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtProcedencia').removeClass('invalid');  
+	}  
+	if (!noVacio($('#txtUbicacion').val())) {
+		$('#txtUbicacion').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtUbicacion').removeClass('invalid');  
+	} 
+	if (!noVacio($('#txtPersonaContacto').val())) {
+		$('#txtPersonaContacto').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtPersonaContacto').removeClass('invalid');  
+	} 
+	if (!esCorreo($('#txtCorreoContacto').val())) {
+		$('#txtCorreoContacto').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtCorreoContacto').removeClass('invalid');  
+	}  
+	if (!esTelefono($('#txtTelefono').val())) {
+		$('#txtTelefono').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtTelefono').removeClass('invalid');  
+	}   
+	return errores;
+}
+
+function validarFormularioPatrocinio(){
+	var errores = 0;
+	if ($('#selTipoPatrocinio').val()<=0) {  
+		$('#selTipoPatrocinio').addClass('invalid');  
+		errores++;
+	}else{
+		$('#selTipoPatrocinio').removeClass('invalid');  
+	}
+	if (!noVacio($('#txtDescripcion').val())) {
+		$('#txtDescripcion').addClass('invalid'); 
+		errores++;
+	}else{
+		$('#txtDescripcion').removeClass('invalid');  
+	} 
+	if (!noVacio($('#txtValor').val()) && $('#txtValor').val()<=0) { 
+		$('#txtValor').addClass('invalid');  
+		errores++;
+	} else{
+		$('#txtValor').removeClass('invalid');  
+	} 
+	return errores;
+}
+
 $(document).ready( function () {
 	initTablaPatrocinadores();
 	cargarTablaPatrocinadores();
 	initTablaPatronicios();
-	initTablaDesembolsos();
-	
-
+	initTablaDesembolsos(); 
 // Fin del documento
 });

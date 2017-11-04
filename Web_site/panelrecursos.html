@@ -294,6 +294,7 @@
 										<label class="col-sm-4 control-label">Tipo de patrocinador: </label>
 										<div class="col-sm-7">
 											<select id="selTipoPatrocinador" class="form-control">
+												<option value="0">Seleccione un tipo</option>
 												<option value="Organizacion no gubernamental">Organizacion no gubernamental</option>
 												<option value="Empresa Socialmente Responsable">Empresa socialmente responsable</option>
 											</select>
@@ -346,7 +347,7 @@
 	     	</div>
 	     	<div class="modal-body">
 	     		<form class="panel-formularios form-horizontal">
-	     			<div class="form-group">
+	     			<div class="form-group hidden">
 					    <label class="col-sm-3 control-label">Fecha</label>
 					    <div class="col-sm-9">
 					      <input type="date" class="form-control" id="txtFecha" placeholder="dd/mm/aaaa" >
@@ -356,6 +357,7 @@
 					    <label class="col-sm-3 control-label">Tipo:</label>
 					    <div class="col-sm-9">
 					      	<select class="form-control" id="selTipoPatrocinio">
+										<option value="0">Seleccione un tipo</option>
 					      		<option value="Economico">Economico</option>
 					      		<option value="Material">Material</option>
 					      		<option value="Otro">Otro</option> 
