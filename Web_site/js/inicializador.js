@@ -820,7 +820,6 @@ function cargarSeleccionado(code){
           }
         }
       );  
-
 }
 //funcion para consultar todos los proyectos 
 function cargarProyectos(){
