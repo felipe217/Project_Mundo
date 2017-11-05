@@ -210,12 +210,12 @@ if(isset($_POST['save_user']))
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    	<ul class="nav navbar-nav">
-		        <li  >
+		        <!-- <li  >
 		        	<a href="tablero.html">
 		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
 					 Tablero
 					</a>
-				</li>
+				</li> -->
 		        <li class="menu-activo">
 		        	<a href="panelusuarios.php">
 		        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>

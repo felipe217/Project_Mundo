@@ -2,6 +2,7 @@
 /* casos   
     1. consultar la informacion de perfil de usuarios
     2. actualizar la informacion de un usuario
+    3. consultar la actividad registrada por un usuario (tblBitacora)
 */
     include_once("../class/class_conexion.php");
     $caso = $_POST['caso'];
@@ -35,6 +36,7 @@
             $miConexion->liberarResultado($resultado);
             $miConexion->cerrarConexion(); 
         break;
+        //2. actualizar la informacion de un usuario
         case '2':
             //capturando los datos del usuario
             $usuario = $_POST['usuario'];
@@ -51,6 +53,33 @@
                 //echo "Ocurrió un error, no se pudo registrar.";
                 echo "No se pudo actualizar: ".$updateSQL."y resultado: ".$resultado;
         break; 
+        // 3. consultar la actividad registrada por un usuario (tblBitacora)
+        case '3':
+            $sqlPerfil = "SELECT codOperacion, Operacion, codUsuario, descripcion, fecha FROM tblbitacora WHERE codUsuario = ".$_POST['codigo'];
+            $resultado = $miConexion->ejecutarInstruccion($sqlPerfil);
+            $cant = $miConexion->cantidadRegistros($resultado); 
+            if ($cant>0) {
+                $estadosArray = array();
+                $i=0;
+                while ($fila = $miConexion->obtenerFila($resultado)){
+                    $estadosArray[$i]["codOperacion"] = $fila['codOperacion']; 
+                    $estadosArray[$i]["Operacion"] = $fila['Operacion']; 
+                    $estadosArray[$i]["descripcion"] = $fila['descripcion'];
+                    $estadosArray[$i]["fecha"] = $fila['fecha']; 		
+                    $i++;				
+                }
+                $JSONLine = json_encode($estadosArray);	
+                if ($cant==1) {
+                    echo $JSONLine;
+                }else
+                    echo $JSONLine;
+            }else
+                echo "null";
+            
+            $miConexion->liberarResultado($resultado);
+            $miConexion->cerrarConexion(); 
+        break;
+
     }
 
 ?>

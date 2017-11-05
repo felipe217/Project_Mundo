@@ -18,6 +18,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>Perfil</title>
+	<link rel="stylesheet" type="text/css" href="css/datatables.css">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css"> 
@@ -28,7 +29,7 @@
 <body> 
 	<!--Contenido de la pagina-->
 		 <!-- Inicio de contenido-->
-	<label id="receptor" ><?php echo $loggedUser; ?></label>
+	<label id="receptor" class="hidden" ><?php echo $loggedUser; ?></label>
 	<div class="container"> 
 		<div class="row">
 			<br>
@@ -37,9 +38,8 @@
 					  	<div class="panel-heading">
 
 					  		<!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Proyecto: Nombre de proyecto-->
-					  		<center>	
-									<br>
-									<img src="images/steve-jobs.jpg" class="img-circle" width="140px" height="140px">			  		
+					  		<center>	  
+									<!-- <img src="images/steve-jobs.jpg" class="img-circle" width="140px" height="140px">			  		 -->
 									<br>
 									<h3 id="userTag"></h3>
 									<br>
@@ -116,31 +116,14 @@
 								<!--Tab4-->
 								<div class="tab-pane" id="2">
 									<table class="table table-striped"  id="tabla-actividad">
-							    		<thead>
-								    		<tr>
-								    			<th>#</th>
-								    			<th>Fecha</th>
-								    			<th>Nombre_usuario</th>
-								    			<th>Proyecto</th>
-								    			<th>Actividad</th>
-								    		</tr>
+							    		<thead> 
+											<th>codigo</th>
+											<th>fecha</th> 
+											<th>Operacion</th>
+											<th>Actividad</th> 
 								    	</thead>
 								    	<tbody>
-								    		<tr>
-								    			<td>1</td>
-								    			<td>dd/mm/aaaa</td>
-								    			<td>Usuario x</td>
-								    			<td>Proyecto x</td>
-								    			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</td>
-								    		</tr>
-								    		<tr>
-								    			<td>1</td>
-								    			<td>dd/mm/aaaa</td>
-								    			<td>Usuario x</td>
-								    			<td>Proyecto x</td>
-								    			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</td>
-								    		</tr>
-								    		
+								    	 
 								    	</tbody>
 							    	</table>
 								</div>
@@ -154,6 +137,7 @@
 		  
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/datatables.js"></script>    
 	<script src="js/perfil-ctrl.js"></script>
 
 </body>

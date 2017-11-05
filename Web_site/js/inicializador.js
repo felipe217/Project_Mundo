@@ -800,7 +800,8 @@ function cargarSeleccionado(code){
           	console.log(respuesta);
             proyectoTemp = JSON.parse(respuesta); 	
             //proyectoTemp = proyecto;
-            //console.log(proyecto);
+			//console.log(proyecto);
+			$('#projectTag').html(proyectoTemp.nombreProyecto);
             $('#lblCodProyecto').html(proyectoTemp.codProyecto);
             $('#lblNomProyecto').html(proyectoTemp.nombreProyecto);
             $('#lblInicioProy').html(proyectoTemp.fechaInicio);

@@ -30,5 +30,6 @@ ALTER TABLE `tblusuarioxproyecto` ADD `rol` VARCHAR(25) NOT NULL AFTER `codProye
 RENAME TABLE `mundo`.`tblpatrocinadoresxproyectos` TO `mundo`.`tblpatrocinadoresxproyecto`;
 
 
--- agregar campo en tabla de desembolsos
+-- agregar campo en tabla de desembolsos y tabla bitacora
 ALTER TABLE `tbldesembolsos` ADD `codPatrocinador` INT(15) NOT NULL AFTER `codProyecto`;
+ALTER TABLE `tblbitacora` ADD `descripcion` TEXT NOT NULL AFTER `codUsuario`, ADD `fecha` DATE NOT NULL AFTER `descripcion`;
