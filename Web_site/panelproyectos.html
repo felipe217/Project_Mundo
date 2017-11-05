@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-	<title>Panel de administración de proyectos</title>
-
+	<title>Panel de administración de proyectos</title> 
 	<link rel="stylesheet" type="text/css" href="css/datatables.css">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/miEstilo.css"> 
@@ -69,7 +68,7 @@
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="perfil.php">Configurar cuenta</a></li>
+	            <li><a href="perfil.php?id=1">Configurar cuenta</a></li>
 	            <li role="separator" class="divider"></li>
 	            <li><a href="#">Acerca de</a></li>
 	            <li role="separator" class="divider"></li>
@@ -225,9 +224,9 @@
 									  <button type="button" onclick="editarTarea();" class="btn btn-default" data-toggle="modal" data-target="#frmNuevaTarea">
 									  	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar
 									  </button>
-									  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmComentarios">
+									  <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmComentarios">
 								    	<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comentar</button>
-								      </button>
+								      </button> -->
 									</div>
 							  	</div>
 								<br>
@@ -431,7 +430,6 @@
 		</div>
 	</div>
 		
-
 	<!--VENTANAS MODALES -->
 	<!-- Large modal ventana frmNuevoProyecto, es el formulario para registrar un nuevo proyecto-->
 	<div id="frmNuevoProyecto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false">

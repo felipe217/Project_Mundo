@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 
+<?php
+	//felipe, no se realmente como esta manejando lo de los accessos. 
+	//pero para este caso, el archibo necesita recibir el codigo de usuario como parametro
+	//get, para poder buscar la informacion del usuario en la base de datos. Por lo demás despreocupese, 
+	//solo asegurese de que debe recibir el codigo de usuario logeado, como debería suceder en las demas paginas. 
+	//variable que almacena el codigo del usuario
+	$loggedUser = $_GET['id'];
+	
+?>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -17,7 +27,8 @@
 </head>
 <body> 
 	<!--Contenido de la pagina-->
-	 	<!-- Inicio de contenido-->
+		 <!-- Inicio de contenido-->
+	<label id="receptor" ><?php echo $loggedUser; ?></label>
 	<div class="container"> 
 		<div class="row">
 			<br>
@@ -30,7 +41,7 @@
 									<br>
 									<img src="images/steve-jobs.jpg" class="img-circle" width="140px" height="140px">			  		
 									<br>
-									<h3>Nombre del usuario</h3>
+									<h3 id="userTag"></h3>
 									<br>
 									<ul class="nav nav-tabs">
 										<li style="margin-right: 5px;"><a href="panelproyectos.html" type="button" class="btn btn-primary" aria-label="Right Align">
@@ -77,20 +88,27 @@
 													<input type="text" class="form-control" id="txtCargo" readonly placeholder="Cargo">
 												</div>
 											</div>
-											<div class="form-group">
+											<div class="form-group hiddengroup hidden">
 												<label  class="col-sm-4 control-label">Contraseña: </label>
 												<div class="col-sm-8">
-													<input type="password" class="form-control" id="txtContrasena" readonly placeholder="Contraseña">
+													<input type="password" class="form-control" id="txtContrasena" placeholder="Contraseña">
 												</div>
 											</div>
-											<div class="form-group hidden" id="confirmGroup">
+											<div class="form-group hiddengroup hidden" >
 												<label  class="col-sm-4 control-label">Confirmar Contraseña: </label>
 												<div class="col-sm-8">
-													<input type="password" class="form-control" id="txtContrasenaConfirm" readonly placeholder="Contraseña">
+													<input type="password" class="form-control" id="txtContrasenaConfirm" placeholder="Contraseña">
 												</div>
 											</div>
 											<div class="form-group pull-right">
-												<button type="button" id="btnGuardarCambios" class="btn btn-success hidden">Guardar cambios</button>
+												<div class="btn-toolbar" role="toolbar">
+													<div class="btn-group" role="group" aria-label="...">
+														<button type="button" id="btnCancelarGuardar" class="btn btn-default hiddengroup hidden">Cancelar</button>
+													</div>
+													<div class="btn-group" role="group" >
+														<button type="button" id="btnGuardarCambios" class="btn btn-success hidden">Guardar cambios</button>
+													</div> 
+												</div> 
 											</div>
 										</form> 
 									</div> 
