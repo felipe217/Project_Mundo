@@ -114,12 +114,10 @@
   
 		//4. Consulta el desembolso de patrocinador 
 		case '4':
-			$sqlEstados = "SELECT A.codDesembolso, A.fecha, A.valor, A.codPatrocinio, A.codProyecto, B.nombreProyecto 
-						   FROM tbldesembolsos A 
-						   INNER JOIN tblproyectos B ON A.codProyecto = B.codProyecto 
-						   INNER JOIN tblpatrocinios C ON A.codPatrocinio = C.codigo 
-						   INNER JOIN tblpatrocinadores D ON C.codPatrocinador = D.codPatrocinador 
-						   WHERE D.codPatrocinador = ".$codigoPatrocinador;
+			$sqlEstados = "select a.codDesembolso, a.fecha, a.valor, a.codProyecto, a.codPatrocinador, b.nombreProyecto
+							from tbldesembolsos a 
+							inner join tblproyectos b on a.codProyecto = b.codProyecto
+							where a.codPatrocinador = ".$codigoPatrocinador;
 							//echo $sqlEstados;
 			$resultado = $miConexion->ejecutarInstruccion($sqlEstados);
 			$cant = $miConexion->cantidadRegistros($resultado); 
@@ -129,8 +127,7 @@
 				while ($fila = $miConexion->obtenerFila($resultado)){
 					$estadosArray[$i]["codDesembolso"] = $fila['codDesembolso'];
 					$estadosArray[$i]["fecha"] = $fila['fecha'];
-					$estadosArray[$i]["valor"] = $fila['valor'];
-					$estadosArray[$i]["codPatrocinio"] = $fila['codPatrocinio'];
+					$estadosArray[$i]["valor"] = $fila['valor']; 
 					$estadosArray[$i]["codProyecto"] = $fila['codProyecto'];
 					$estadosArray[$i]["nombreProyecto"] = $fila['nombreProyecto'];			
 					$i++;				

@@ -6,7 +6,7 @@
     $valor = $_POST['valor'];
 	$codPatrocinio = $_POST['codPatrocinio'];		
 	$codProyecto = $_POST['codProyecto'];             
-
+	$codPatrocinador = $_POST['codPatrocinador'];     
    	$caso = $_POST['caso'];
 	
 	include_once("../class/class_conexion.php");	
@@ -20,13 +20,14 @@
                         ."fecha, "
 						."valor, "
 						."codPatrocinio, "											                     
-						."codProyecto"
+						."codProyecto, codPatrocinador"
 					.") "
 					."VALUES ( null ,"
                             ." now() ,"
 							."'".$valor."',"							             
-							."'".$codPatrocinio."',"							
-							."'".$codProyecto."')";
+							."'".$codPatrocinio."',"	
+							."'".$codProyecto."', "						
+							."'".$codPatrocinador."')";
 
  				//Linea para prueba del registro de datos 
                 //caso=1&fecha=2015-10-23&valor=45660&codPatrocinio=2&codProyecto=3           

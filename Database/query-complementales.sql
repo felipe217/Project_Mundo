@@ -28,3 +28,7 @@ ALTER TABLE `tblusuarioxproyecto` ADD `rol` VARCHAR(25) NOT NULL AFTER `codProye
 
 -- renombrar tabla patrocinadoresxproyecto
 RENAME TABLE `mundo`.`tblpatrocinadoresxproyectos` TO `mundo`.`tblpatrocinadoresxproyecto`;
+
+
+-- agregar campo en tabla de desembolsos
+ALTER TABLE `tbldesembolsos` ADD `codPatrocinador` INT(15) NOT NULL AFTER `codProyecto`;

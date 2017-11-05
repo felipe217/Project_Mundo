@@ -4,7 +4,9 @@ var dtPatrocinios; //objeto datatable para los patrocinios
 var dtPatrocinadores// objeto datatable para los patrocinadores 
 var codPatrocinadorSel;
 var patrocinadorTemp;
-var desembolsoMaximo = 0;
+var desembolsoMaximo = 0; //la cantidad maxima de dinero que se puede asignar a un proyecto
+var sumaPatrocinios =0; // cantidad total de aportaciones realizadas por un patrocinador
+var sumaDesembolsos =0; // cantidad total de desembolsos asignados a un proyectos, provenientes de un patrocinador
 
 function cargarProyectosPatrocinados(){ 
 	var parametros = "caso=6&codPatrocinador="+codPatrocinadorSel;
@@ -215,11 +217,12 @@ function initTablaPatrocinadores(){
 			cargarPatrocinadorSeleccionado(codPatrocinadorSel);
 			cargarTablaPatrocinios();
 			cargarDesembolsos();
-			cargarProyectosPatrocinados();
+			cargarProyectosPatrocinados();   
 		 }
 	});	
 
 }
+ 
 
 //funciones para tabla de contribuciones de patrocinadores
 $('#btnGuardarPatrocinio').click(function(){
@@ -288,7 +291,7 @@ function addPatrocinio(codigo, fecha, tipo, valor, descripcion){
 }
 
 function cargarTablaPatrocinios(){
-	desembolsoMaximo=0;
+	sumaPatrocinios=0;
 	dtPatrocinios.clear().draw();
 	var parametros = "caso=5&codPatrocinador="+codPatrocinadorSel;
 	$.ajax(
@@ -301,7 +304,6 @@ function cargarTablaPatrocinios(){
 				if (respuesta!="null") { 
 					json = respuesta; 
 					var json_array = json.split('*'); 
-					$('#contribucionesCount').html(json_array.length);
 					for (var i = 0; i<json_array.length; i++) {  
 						var objPatrocinador = JSON.parse(json_array[i]); 
 						addPatrocinio(	objPatrocinador.codigo,
@@ -309,11 +311,12 @@ function cargarTablaPatrocinios(){
 										objPatrocinador.tipoPatrocinio,
 										objPatrocinador.valor,
 										objPatrocinador.descripcion );
-						desembolsoMaximo = desembolsoMaximo + parseFloat(dtPatrocinios.cell(i,3).data());
+						sumaPatrocinios = sumaPatrocinios + parseFloat(objPatrocinador.valor);
+						$('#contribucionesCount').html(sumaPatrocinios);
 					}
 					
-					//calcular el maximo de contribuciones 
-					$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
+					// //calcular el maximo de contribuciones 
+					// $('#txtMontoDesembolso').attr("placeholder", "maximo "+sumaPatrocinios+" lps");
 				} else
 				$('#contribucionesCount').html("0");
 			},
@@ -325,20 +328,23 @@ function cargarTablaPatrocinios(){
 }
 
 //funciones para tabla desembolsos
-$('#btnGuardarDesembolso').click(function(){
-	if (validarDesembolso()<0) {
+$('#btnGuardarDesembolso').click(function(){  
+	
+	if (validarDesembolso()<=0) { 
 		if ($('#txtMontoDesembolso').val()>desembolsoMaximo) {
 			alert("El valor que intenta desembolsar supera la suma de contribuciones del patrocinador"+
 				  ". Intente una cantidad menor");
 			$('#txtMontoDesembolso').val("");
 			$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
 		} else {
+			alert("entro");
 			var parametros = 
 			"caso=1"
 			+"&fecha=null"
 			+"&valor="+$('#txtMontoDesembolso').val()
 			+"&codPatrocinio=1"
-			+"&codProyecto="+$('#selProyectos').val();
+			+"&codProyecto="+$('#selProyectos').val()
+			+"&codPatrocinador="+codPatrocinadorSel;
 			console.log(parametros);
 			$.ajax( 
 				{
@@ -347,7 +353,7 @@ $('#btnGuardarDesembolso').click(function(){
 					method:"POST",
 					success:function(respuesta){
 						alert(respuesta); 
-						cargarDesembolsos();
+						cargarDesembolsos(); 
 					},
 					error:function(){
 						alert("Ocurrio un error");
@@ -360,6 +366,7 @@ $('#btnGuardarDesembolso').click(function(){
 
 
 function cargarDesembolsos(){
+	sumaDesembolsos =0;
 	dtDesembolsos.clear().draw();
 	var parametros = "caso=4&codPatrocinador="+codPatrocinadorSel;
 	$.ajax(
@@ -371,7 +378,6 @@ function cargarDesembolsos(){
 			success:function(respuesta){ 
 				console.log(respuesta);
 				if (respuesta!="null" && respuesta != null) { 
-					$('#desembolsosCount').html(respuesta.length);
 					for (var i = 0; i < respuesta.length; i++) {
 						addDesembolso(
 							respuesta[i].codDesembolso,
@@ -379,10 +385,18 @@ function cargarDesembolsos(){
 							respuesta[i].valor,
 							respuesta[i].nombreProyecto
 						); 
-					} 
-				} else
-				$('#desembolsosCount').html("0");
-					
+						sumaDesembolsos = sumaDesembolsos + parseFloat(respuesta[i].valor);
+						$('#desembolsosCount').html(sumaDesembolsos);
+					}  
+				} else{
+					$('#desembolsosCount').html("0");
+					$("#disponible").html("0");	
+				}
+				
+				$("#disponible").html(sumaPatrocinios-sumaDesembolsos);
+				desembolsoMaximo = sumaPatrocinios-sumaDesembolsos;
+				$('#txtMontoDesembolso').attr("placeholder", "maximo "+desembolsoMaximo+" lps");
+				
 			},
 			error:function(){
 				alert("Ocurrio un error");
