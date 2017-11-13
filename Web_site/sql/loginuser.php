@@ -6,6 +6,7 @@ class loginuser{
     public $username;
     public $password;
     public $mensaje;
+    public $tipoUsuario;
 
     public function login(){
 
@@ -36,7 +37,7 @@ class loginuser{
                   header('location: panelusuarios.php');
             		}
                 else{
-                  header('location: perfil.html');
+                  header('location: perfil.php?id='.$fila['codUsuario']);
                 }
             }
     }

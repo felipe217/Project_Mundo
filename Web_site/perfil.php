@@ -44,7 +44,7 @@
 									<h3 id="userTag"></h3>
 									<br>
 									<ul class="nav nav-tabs">
-										<li style="margin-right: 5px;"><a href="panelproyectos.html" type="button" class="btn btn-primary" aria-label="Right Align">
+										<li style="margin-right: 5px;"><a href="panelproyectos.php" type="button" class="btn btn-primary" aria-label="Right Align">
 										<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver a mis proyectos 
 										</a>
 										</li>

@@ -1,4 +1,25 @@
 <!DOCTYPE html>
+<?php 
+session_start();
+if($_SESSION['login'] == true){
+	$username = $_SESSION['username'];
+	$name = $_SESSION['name'];
+	$lastname = $_SESSION['lastname'];
+}
+else{
+	session_unset();
+  	session_destroy();
+ 	 header('location: index.php');
+}
+
+if(isset($_POST['cerrar_sesion']))
+{
+session_start();
+session_destroy();
+header('location: index.php');
+}
+
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -42,19 +63,19 @@
 					</a>
 				</li>
 				<li >
-					<a href="panelproyectos.html">
+					<a href="panelproyectos.php">
 					<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 						Proyectos  
 					</a>
 				</li>
 				<li class="menu-activo">
-					<a href="panelrecursos.html">
+					<a href="panelrecursos.php">
 					<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
 						Recursos 
 					</a>
 				</li>
 				<li >
-					<a href="documentos.html">
+					<a href="documentos.php">
 					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
 						Documentos  
 					</a>
@@ -65,11 +86,11 @@
 	        
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
+	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> <?php echo $name ." ". $lastname; ?> <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	            <li><a href="perfil.php?id=1">Configurar cuenta</a></li>
 	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Cerrar sesión</a></li>
+	            <li><a data-toggle="modal" data-target="#exit" >Cerrar sesión</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -444,6 +465,27 @@
 		  </div>
 		</div>
 	</div>
+
+	<div id="exit" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">Informacion</h4>
+						</div>
+						<div class="modal-body">
+							<h3>¿Cerrar sesion?</h3>
+						</div>
+						<div class="modal-footer">
+							<form class="navbar-form navbar-right" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+			            <input type="hidden" name="cerrar_sesion">
+									<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+			            <button type="submit" class="btn btn-primary">Si</button>
+			        </form>
+						</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
 	<script src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script> 

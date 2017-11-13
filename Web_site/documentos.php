@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 
-<!--
-	LA IDEA DE ESTA PLANTILLA ES QUE UTILICEMOS UN ESTANDAR, QUE LA BARRA DE TAREAS SEA LA MISMA
-	EN TODA LAS PAGINAS. 
--->
+<?php 
+session_start();
+if($_SESSION['login'] == true){
+	$username = $_SESSION['username'];
+	$name = $_SESSION['name'];
+	$lastname = $_SESSION['lastname'];
+}
+else{
+	session_unset();
+  	session_destroy();
+ 	 header('location: index.php');
+}
+
+if(isset($_POST['cerrar_sesion']))
+{
+session_start();
+session_destroy();
+header('location: index.php');
+}
+?>
 
 <html>
 <head>
@@ -42,25 +58,25 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 							<li>
-								<a href="panelusuarios.html">
+								<a href="panelusuarios.php">
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 						 Usuarios 
 						</a>
 					</li>
 					<li >
-								<a href="panelproyectos.html">
+								<a href="panelproyectos.php">
 								<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 							Proyectos  
 						</a>
 					</li>
 					<li>
-								<a href="panelrecursos.html">
+								<a href="panelrecursos.php">
 								<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
 							Recursos 
 						</a>
 					</li>
 							<li class="menu-activo">
-								<a href="documentos.html">
+								<a href="documentos.php">
 						<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
 						 Documentos  
 						</a>
@@ -71,11 +87,11 @@
 	        
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	           <img class="small-profile-pic img-circle" src="img/userprofile.jpg"> Mi nombre <span class="caret"></span></a>
+						<img class="small-profile-pic img-circle" src="img/userprofile.jpg"> <?php echo $name ." ". $lastname; ?> <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	            <li><a href="#">Configurar cuenta</a></li>
 	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Cerrar sesión</a></li>
+							<li><a data-toggle="modal" data-target="#exit" >Cerrar sesión</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -186,9 +202,30 @@
 			</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
+	<div id="exit" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">Informacion</h4>
+						</div>
+						<div class="modal-body">
+							<h3>¿Cerrar sesion?</h3>
+						</div>
+						<div class="modal-footer">
+							<form class="navbar-form navbar-right" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+			            <input type="hidden" name="cerrar_sesion">
+									<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+			            <button type="submit" class="btn btn-primary">Si</button>
+			        </form>
+						</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>	
 	<script type="text/javascript" src="js/datatables.js"></script> 
+	<script src="js/bootstrap.min.js"></script>	
 	<script src="js/documentos-ctrl.js"></script>
 	<script>
 		

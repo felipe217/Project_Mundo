@@ -108,8 +108,7 @@ function iniciarTabla(){
 $(document).ready(function(){
     code = $("#receptor").html();
     buscarInfo($("#receptor").html());
-    cargarActividadRegistrada();
-    alert(code);
+    cargarActividadRegistrada(); 
     iniciarTabla();
 
 });

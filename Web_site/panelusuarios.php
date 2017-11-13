@@ -217,19 +217,19 @@ if(isset($_POST['save_user']))
 				</a>
 			</li>
 			<li >
-				<a href="panelproyectos.html">
+				<a href="panelproyectos.php">
 				<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 					Proyectos  
 				</a>
 			</li>
 			<li>
-				<a href="panelrecursos.html">
+				<a href="panelrecursos.php">
 				<span class="glyphicon glyphicon-eur" aria-hidden="true"></span>
 					Recursos 
 				</a>
 			</li>
 			<li >
-				<a href="documentos.html">
+				<a href="documentos.php">
 				<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
 					Documentos  
 				</a>

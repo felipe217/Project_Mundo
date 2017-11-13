@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2017 a las 06:24:09
+-- Tiempo de generación: 13-11-2017 a las 06:33:17
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 5.6.25
 
@@ -29,8 +29,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `tblbitacora` (
   `codOperacion` int(10) NOT NULL,
   `Operacion` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `codUsuario` int(10) NOT NULL
+  `codUsuario` int(10) NOT NULL,
+  `descripcion` text NOT NULL,
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tblbitacora`
+--
+
+INSERT INTO `tblbitacora` (`codOperacion`, `Operacion`, `codUsuario`, `descripcion`, `fecha`) VALUES
+(1, 'Operacion de prueba', 1, 'Esta es una operacion de prueba', '2017-11-01');
 
 -- --------------------------------------------------------
 
@@ -57,15 +66,49 @@ CREATE TABLE `tbldesembolsos` (
   `fecha` date NOT NULL,
   `valor` double NOT NULL,
   `codPatrocinio` int(10) NOT NULL,
-  `codProyecto` int(10) NOT NULL
+  `codProyecto` int(10) NOT NULL,
+  `codPatrocinador` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tbldesembolsos`
 --
 
-INSERT INTO `tbldesembolsos` (`codDesembolso`, `fecha`, `valor`, `codPatrocinio`, `codProyecto`) VALUES
-(4, '2017-10-31', 400, 1, 3);
+INSERT INTO `tbldesembolsos` (`codDesembolso`, `fecha`, `valor`, `codPatrocinio`, `codProyecto`, `codPatrocinador`) VALUES
+(4, '2017-10-31', 400, 1, 3, 1),
+(5, '2017-11-04', 566, 1, 3, 1),
+(6, '2017-11-04', 3400, 1, 3, 1),
+(7, '2017-11-04', 500, 1, 3, 1),
+(8, '2017-11-04', 25600, 1, 3, 3),
+(12, '2017-11-04', 1000, 1, 3, 3),
+(13, '2017-11-04', 1252, 1, 3, 2),
+(14, '2017-11-04', 2500, 1, 3, 3),
+(17, '2017-11-04', 6000, 1, 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbldocumentos`
+--
+
+CREATE TABLE `tbldocumentos` (
+  `codDocumento` int(15) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
+  `url` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `codProyecto` int(15) NOT NULL,
+  `codUsuario` int(15) NOT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tbldocumentos`
+--
+
+INSERT INTO `tbldocumentos` (`codDocumento`, `nombre`, `descripcion`, `url`, `codProyecto`, `codUsuario`, `fecha`) VALUES
+(1, 'Documento de prueba', 'Documento para prueba', 'docs/doc1.pdf', 3, 1, '2017-11-01'),
+(2, 'Documento de prueba 2', 'Docuemtno de prueba 2', 'docs/doc.pdf', 3, 1, '2017-10-19'),
+(6, 'Archivo 41', 'ninguna', 'docs/archivo4.pdf', 3, 1, '2017-11-06');
 
 -- --------------------------------------------------------
 
@@ -149,8 +192,9 @@ CREATE TABLE `tblpatrocinadores` (
 --
 
 INSERT INTO `tblpatrocinadores` (`codPatrocinador`, `nombre`, `tipoPatrocinador`, `lugarProcedencia`, `correoElectronico`, `nombreContacto`, `telefonoContacto`, `direccion`) VALUES
-(1, 'ONG internacional', 'Organizacion no gubernamental', 'Estados Unidos', 'juana@gmail.com', 'Juana Maria Rivera', '2233-7788', 'Colonia lomas del guijarro casa 1239'),
-(2, 'World vision Honduras', 'Organizacion no gubernamental', 'Europa', 'sergi.pena@gmail.com', 'Sergio peÃ±a', '9988-7766', 'Colonia Loma linda, San Pedro Sula');
+(1, 'ONG internacional', 'Organizacion no gubernamental', 'Europa ', 'juana@gmail.com', 'Juana Maria Rivera', '504 22345678', 'Colonia Palmira calle principal'),
+(2, 'World vision Honduras', 'Organizacion no gubernamental', 'Europa', 'sergi.pena@gmail.com', 'Sergio peÃ±a', '9988-7766', 'Colonia Loma linda, San Pedro Sula'),
+(3, 'UNFPA', 'Organizacion no gubernamental', 'Estados Unidos', 'marc.ryan@gmail.com', 'Marc Ryan', '504 98781234', ' Colonia palmira calle principal');
 
 -- --------------------------------------------------------
 
@@ -169,8 +213,10 @@ CREATE TABLE `tblpatrocinadoresxproyecto` (
 --
 
 INSERT INTO `tblpatrocinadoresxproyecto` (`codigo`, `codPatrocinador`, `codProyecto`) VALUES
-(3, 1, 3),
-(4, 2, 3);
+(11, 1, 3),
+(14, 1, 4),
+(12, 2, 3),
+(13, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -193,7 +239,10 @@ CREATE TABLE `tblpatrocinios` (
 
 INSERT INTO `tblpatrocinios` (`codigo`, `tipoPatrocinio`, `descripcion`, `fecha`, `valor`, `codPatrocinador`) VALUES
 (1, 'Economico', ' Contribucion en cuenta', '2017-10-05', 5000, 1),
-(2, 'Economico', ' Deposito en cuenta', '2017-10-04', 1200.5, 1);
+(2, 'Economico', ' Deposito en cuenta', '2017-10-04', 1200.5, 1),
+(3, 'Economico', 'Donacion anual ', '2017-11-03', 150000, 2),
+(4, 'Material', 'Automovil mazda ', '2017-11-03', 250000, 3),
+(5, 'Economico', 'Deposito bancario', '2017-11-04', 2500, 3);
 
 -- --------------------------------------------------------
 
@@ -220,7 +269,8 @@ CREATE TABLE `tblproyectos` (
 --
 
 INSERT INTO `tblproyectos` (`codProyecto`, `nombreProyecto`, `fechaInicio`, `fechaFinal`, `lugar`, `descripcion`, `codTipoProyecto`, `codEstado`, `codUsuario`, `costoEstimado`, `beneficiario`) VALUES
-(3, 'Proyecto de mochilas', '2017-09-01', '2017-09-15', 'Distrito Central', 'Escribir una pequeÃ±a descripcion del proyecto en cuestion', 4, 1, 1, 20800, 'Escuela Honduras');
+(3, 'Proyecto de mochilas', '2017-09-01', '2017-09-15', 'Distrito Central', 'Escribir una pequeÃ±a descripcion del proyecto en cuestion', 4, 1, 1, 20800, 'Escuela Honduras'),
+(4, 'Reparacion de cuneta', '2017-11-12', '2017-11-18', 'Colonia  Los pinos', '', 2, 1, 1, 5800, 'Habitantes los pinos');
 
 -- --------------------------------------------------------
 
@@ -243,7 +293,8 @@ CREATE TABLE `tbltareas` (
 --
 
 INSERT INTO `tbltareas` (`codTarea`, `nombreTarea`, `descripcion`, `prioridad`, `fechaInicio`, `fechaEntrega`, `codProyecto`) VALUES
-(1, 'Cotizacion de materiales', 'Cotizar todos los materiales que iran en cada mochila', 'ALTA', '2017-09-01', '2017-09-05', 3);
+(1, 'Cotizacion de materiales', 'Cotizar todos los materiales que iran en cada mochila', 'ALTA', '2017-09-01', '2017-09-05', 3),
+(2, 'Tarea de prueba', 'Descripcion breve', 'MEDIA', '2017-11-01', '2017-11-15', 3);
 
 -- --------------------------------------------------------
 
@@ -292,8 +343,8 @@ CREATE TABLE `tblusuarios` (
 --
 
 INSERT INTO `tblusuarios` (`codUsuario`, `identificacion`, `nombres`, `apellidos`, `nacimiento`, `domicilio`, `pais`, `cargo`, `usuario`, `contrasena`, `codTipoUsuario`, `estado`, `departamento`) VALUES
-(1, '', 'Administrador', '', '2017-10-01', '', '', '', 'Administrador', 'admin.123', 1, 1, ''),
-(2, '0801-1990-12345', 'Maria Juana', 'Cruz Perez', '1990-04-06', '', '', 'Gerente', 'MJCruz', '123', 3, 1, 'Proyectos');
+(1, '', 'Administrador', '', '2017-10-01', '', '', '', 'Administrador', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 1, 1, ''),
+(2, '0801-1990-12345', 'Maria Juana', 'Cruz Perez', '1990-04-06', '', '', 'Gerente', 'MJCruz', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3, 1, 'Proyectos');
 
 -- --------------------------------------------------------
 
@@ -313,7 +364,8 @@ CREATE TABLE `tblusuarioxproyecto` (
 --
 
 INSERT INTO `tblusuarioxproyecto` (`codUsuarioxProyecto`, `codUsuario`, `codProyecto`, `rol`) VALUES
-(1, 2, 3, 'Manager');
+(1, 2, 3, 'Manager'),
+(2, 2, 4, 'Manager');
 
 -- --------------------------------------------------------
 
@@ -332,7 +384,8 @@ CREATE TABLE `tblusuarioxtarea` (
 --
 
 INSERT INTO `tblusuarioxtarea` (`codigo`, `codTarea`, `codUsuario`) VALUES
-(2, 1, 2);
+(4, 1, 2),
+(5, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -382,6 +435,12 @@ ALTER TABLE `tbldesembolsos`
   ADD PRIMARY KEY (`codDesembolso`),
   ADD KEY `codPatrocinio` (`codPatrocinio`,`codProyecto`),
   ADD KEY `tblDesembolsos_ibfk_2` (`codProyecto`);
+
+--
+-- Indices de la tabla `tbldocumentos`
+--
+ALTER TABLE `tbldocumentos`
+  ADD PRIMARY KEY (`codDocumento`);
 
 --
 -- Indices de la tabla `tblestados`
@@ -476,7 +535,7 @@ ALTER TABLE `tiposproyectos`
 -- AUTO_INCREMENT de la tabla `tblbitacora`
 --
 ALTER TABLE `tblbitacora`
-  MODIFY `codOperacion` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `codOperacion` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tblcomentarios`
 --
@@ -486,7 +545,12 @@ ALTER TABLE `tblcomentarios`
 -- AUTO_INCREMENT de la tabla `tbldesembolsos`
 --
 ALTER TABLE `tbldesembolsos`
-  MODIFY `codDesembolso` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codDesembolso` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT de la tabla `tbldocumentos`
+--
+ALTER TABLE `tbldocumentos`
+  MODIFY `codDocumento` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tblestados`
 --
@@ -501,27 +565,27 @@ ALTER TABLE `tblmateriales`
 -- AUTO_INCREMENT de la tabla `tblpatrocinadores`
 --
 ALTER TABLE `tblpatrocinadores`
-  MODIFY `codPatrocinador` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codPatrocinador` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tblpatrocinadoresxproyecto`
 --
 ALTER TABLE `tblpatrocinadoresxproyecto`
-  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `tblpatrocinios`
 --
 ALTER TABLE `tblpatrocinios`
-  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tblproyectos`
 --
 ALTER TABLE `tblproyectos`
-  MODIFY `codProyecto` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codProyecto` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tbltareas`
 --
 ALTER TABLE `tbltareas`
-  MODIFY `codTarea` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codTarea` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tbltipousuario`
 --
@@ -536,12 +600,12 @@ ALTER TABLE `tblusuarios`
 -- AUTO_INCREMENT de la tabla `tblusuarioxproyecto`
 --
 ALTER TABLE `tblusuarioxproyecto`
-  MODIFY `codUsuarioxProyecto` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codUsuarioxProyecto` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tblusuarioxtarea`
 --
 ALTER TABLE `tblusuarioxtarea`
-  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tiposproyectos`
 --

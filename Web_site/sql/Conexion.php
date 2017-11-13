@@ -5,8 +5,8 @@ class Conexion{
     public function conectar(){
              
     $usuario = 'root';
-    $password = 'Turingenigma2017';
-    //$password = '';
+    //$password = 'Turingenigma2017';
+    $password = '';
     $host = 'localhost';
     $db = 'Mundo';
     

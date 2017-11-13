@@ -36,7 +36,7 @@ class Insertar_usuario{
         $consulta->execute(); 
 
         // Redireccionando despues de la insercion
-        header('location: perfil.html');     
+        header('location: panelproyectos.php');     
     }
 }
 
